@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "35e5f311-a992-4954-9221-539b26e71e0c": {
+      "ProjectGuid": "35e5f311-a992-4954-9221-539b26e71e0c",
+      "DisplayName": "Hello World",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
