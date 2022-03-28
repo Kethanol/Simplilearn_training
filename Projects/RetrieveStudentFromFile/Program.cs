@@ -16,10 +16,10 @@ namespace RetrieveStudentFromFile
 
         static void Main(string[] args)
         {
-            var path = $"{Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.FullName}\\assets\\student_data.txt";
+            var path = $"{Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.FullName}{Constants.File.PATH}";
 
             if (path == null || !File.Exists(path)) {
-                throw new FileNotFoundException("The item assets/student_data.txt inside the active directory is unavailable, unaccessible or the path is incorrect!");
+                throw new FileNotFoundException(Constants.File.ERROR);
             }
 
             ReadAndProcessText(path);
