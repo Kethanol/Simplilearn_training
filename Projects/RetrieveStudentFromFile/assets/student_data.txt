@@ -1,0 +1,4 @@
+Dragomir Denis-Alexandru, "Economic Informatics"
+Aterezean Marius-Ionut, "E-Business"
+Cremolian Cristian, "Databases",
+Riferentu Vasile Artean, "Java and Basic OOP Principles"
