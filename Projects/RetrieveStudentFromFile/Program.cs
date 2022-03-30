@@ -18,7 +18,7 @@ namespace RetrieveStudentFromFile
         {
             var path = $"{Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.FullName}{Constants.File.PATH}";
 
-            if (path == null || !File.Exists(path)) {
+            if (!File.Exists(path)) {
                 throw new FileNotFoundException(Constants.File.ERROR);
             }
 
