@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetrieveStudentFromFileWith
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogicTier", "BusinessLogicTier", "{8D4DC802-78C2-42F7-93EF-9E1F1847DBFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{E183588F-6004-4F3B-9ADE-F6C9F8C5A438}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic1\BusinessLogic.csproj", "{1E7DF145-F49A-4B6C-ABAC-34BE46A2FD5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,16 +19,16 @@ Global
 		{B890EDA4-9968-4CAD-8D52-609C75350328}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B890EDA4-9968-4CAD-8D52-609C75350328}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B890EDA4-9968-4CAD-8D52-609C75350328}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E183588F-6004-4F3B-9ADE-F6C9F8C5A438}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E183588F-6004-4F3B-9ADE-F6C9F8C5A438}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E183588F-6004-4F3B-9ADE-F6C9F8C5A438}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E183588F-6004-4F3B-9ADE-F6C9F8C5A438}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E7DF145-F49A-4B6C-ABAC-34BE46A2FD5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E7DF145-F49A-4B6C-ABAC-34BE46A2FD5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E7DF145-F49A-4B6C-ABAC-34BE46A2FD5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E7DF145-F49A-4B6C-ABAC-34BE46A2FD5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E183588F-6004-4F3B-9ADE-F6C9F8C5A438} = {8D4DC802-78C2-42F7-93EF-9E1F1847DBFA}
+		{1E7DF145-F49A-4B6C-ABAC-34BE46A2FD5B} = {8D4DC802-78C2-42F7-93EF-9E1F1847DBFA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {80C5F467-366E-45D8-9818-C13B38A6B089}

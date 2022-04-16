@@ -1,4 +1,6 @@
-﻿namespace BusinessLogic.Sorting_and_Searching
+﻿using System.Collections.Generic;
+
+namespace BusinessLogic.SortingAndSearching
 {
     public class Sorting<T> where T : class
     {
