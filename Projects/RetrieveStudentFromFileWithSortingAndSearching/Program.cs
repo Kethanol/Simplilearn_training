@@ -7,18 +7,20 @@ namespace RetrieveStudentFromFile
 {
     internal class Program
     {
-        static IEnumerable<string> SortStudents(string[] students) {
-
-            var studentSorter = new Sorting<string>(new List<string>(students));
+        static IEnumerable<string> SortStudents(string[] students)
+        {
+            var studentSorter = new Sorting(students);
             studentSorter.DoBubble();
 
             return studentSorter.Inner;
         }
 
-        static void ReadAndProcessText(string path) {
-            var students = File.ReadAllLines(path);
+        static void ReadAndProcessText(string path)
+        {
+            var students = SortStudents(File.ReadAllLines(path));
 
-            foreach (var student in students) {
+            foreach (var student in students)
+            {
                 var studentData = student.Split(',');
                 Console.WriteLine($"The student's name is {studentData[0]}, they are {studentData[1]} years old and they are attending {studentData[2]}");
             }
@@ -28,7 +30,8 @@ namespace RetrieveStudentFromFile
         {
             var path = $"{Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.FullName}{Constants.File.PATH}";
 
-            if (!File.Exists(path)) {
+            if (!File.Exists(path))
+            {
                 throw new FileNotFoundException(Constants.File.ERROR);
             }
 
