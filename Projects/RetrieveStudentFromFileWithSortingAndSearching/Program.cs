@@ -1,11 +1,20 @@
 ﻿using BusinessLogic.SortingAndSearching;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace RetrieveStudentFromFile
 {
     internal class Program
     {
+        static IEnumerable<string> SortStudents(string[] students) {
+
+            var studentSorter = new Sorting<string>(new List<string>(students));
+            studentSorter.DoBubble();
+
+            return studentSorter.Inner;
+        }
+
         static void ReadAndProcessText(string path) {
             var students = File.ReadAllLines(path);
 

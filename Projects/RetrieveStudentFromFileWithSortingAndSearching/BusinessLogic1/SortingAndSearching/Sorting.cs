@@ -2,16 +2,16 @@
 
 namespace BusinessLogic.SortingAndSearching
 {
-    public class Sorting<T> where T : class
+    public class Sorting<T>
     {
-        public List<T> List { get; set; }
+        public IEnumerable<T> Inner { get; set; }
 
-        public Sorting(List<T> list)
+        public Sorting(IEnumerable<T> inner)
         {
-            List = list;
+            Inner = inner;
         }
 
-        public void Bubble() { 
+        public void DoBubble() { 
 
         }
     }
