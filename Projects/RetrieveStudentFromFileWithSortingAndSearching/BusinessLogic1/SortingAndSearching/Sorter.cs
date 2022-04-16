@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace BusinessLogic.SortingAndSearching
+﻿namespace BusinessLogic.SortingAndSearching
 {
     public class Sorter
     {
