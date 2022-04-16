@@ -23,13 +23,13 @@ namespace BusinessLogic.SortingAndSearching
                 var studentData = student.Split(',');
                 var name = studentData[0];
 
-                if (NaiveStringSearch(name.ToLowerInvariant(), item.ToLowerInvariant())) result.Add(student);
+                if (ContainsNaive(name.ToLowerInvariant(), item.ToLowerInvariant())) result.Add(student);
             }
 
             return result;
         }
 
-        private bool NaiveStringSearch(string toFindIn, string pattern)
+        private bool ContainsNaive(string toFindIn, string pattern)
         {
             bool patternIsContained = false;
 
