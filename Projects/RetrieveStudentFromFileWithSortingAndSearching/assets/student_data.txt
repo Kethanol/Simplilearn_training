@@ -1,0 +1,4 @@
+Dragomir Denis-Alexandru,24,Economic Informatics
+Aterezean Marius-Ionut,23,E-Business
+Cremolian Cristian,23,Databases,
+Riferentu Vasile Artean,22,Java and Basic OOP Principles
