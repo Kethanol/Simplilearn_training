@@ -2,11 +2,11 @@
 
 namespace BusinessLogic.SortingAndSearching
 {
-    public class Sorting
+    public class Sorter
     {
         public string[] Inner { get; set; }
 
-        public Sorting(string[] inner)
+        public Sorter(string[] inner)
         {
             Inner = inner;
         }

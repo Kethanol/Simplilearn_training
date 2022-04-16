@@ -7,9 +7,9 @@ namespace RetrieveStudentFromFile
 {
     internal class Program
     {
-        static IEnumerable<string> SortStudents(string[] students)
+        static IEnumerable<string> SortAndReturnStudents(string[] students)
         {
-            var studentSorter = new Sorting(students);
+            var studentSorter = new Sorter(students);
             studentSorter.DoBubble();
 
             return studentSorter.Inner;
@@ -17,7 +17,7 @@ namespace RetrieveStudentFromFile
 
         static void ReadAndProcessText(string path)
         {
-            var students = SortStudents(File.ReadAllLines(path));
+            var students = SortAndReturnStudents(File.ReadAllLines(path));
 
             foreach (var student in students)
             {
