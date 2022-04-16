@@ -15,15 +15,64 @@ namespace RetrieveStudentFromFile
             return studentSorter.Inner;
         }
 
-        static void ReadAndProcessText(string path)
+        static void DisplayStudents(IEnumerable<string> students)
         {
-            var students = SortAndReturnStudents(File.ReadAllLines(path));
-
             foreach (var student in students)
             {
                 var studentData = student.Split(',');
                 Console.WriteLine($"The student's name is {studentData[0]}, they are {studentData[1]} years old and they are attending {studentData[2]}");
             }
+        }
+
+        // TODO -- better logic organization
+        // TODO -- replace funny values
+        // TODO -- selection enum
+        // TODO -- after submitting -- generic logic
+
+        static void ReadAndProcessText(string path)
+        {
+            var students = File.ReadAllLines(path);
+            var sortedStudents = SortAndReturnStudents(students);
+
+            DisplayStudents(sortedStudents);
+
+            bool inMenu = true;
+
+            while (inMenu)
+            {
+                Console.WriteLine("\nSelect an option:");
+                Console.WriteLine("\n1. Search a student by name");
+                Console.WriteLine("2. Show all");
+                Console.WriteLine("3. Exit");
+
+                var option = Console.ReadLine();
+
+                switch (option)
+                {
+                    case "1":
+                        var studentSearcher = new Searcher(students);
+
+                        Console.WriteLine("\nEnter the name:");
+                        var name = Console.ReadLine();
+
+                        var foundStudents = studentSearcher.DoBy(name);
+                        DisplayStudents(foundStudents);
+                        break;
+
+                    case "2":
+                        DisplayStudents(sortedStudents);
+                        break;
+
+                    case"3":
+                        inMenu = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid choice!");
+                        break;
+                }
+            }
+
         }
 
         static void Main(string[] args)
@@ -36,6 +85,7 @@ namespace RetrieveStudentFromFile
             }
 
             ReadAndProcessText(path);
+
         }
     }
 }
