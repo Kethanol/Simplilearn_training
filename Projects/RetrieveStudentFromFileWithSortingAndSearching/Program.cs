@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.SortingAndSearching;
+using BusinessLogic.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,20 +8,19 @@ namespace RetrieveStudentFromFile
 {
     internal class Program
     {
-        static IEnumerable<string> SortAndReturnStudents(string[] students)
+        static IEnumerable<Student> SortAndReturn(List<Student> students)
         {
-            var studentSorter = new Sorter(students);
+            var studentSorter = new StudentSorter(students);
             studentSorter.DoBubble();
 
             return studentSorter.Inner;
         }
 
-        static void DisplayStudents(IEnumerable<string> students)
+        static void DisplayStudents(IEnumerable<Student> students)
         {
             foreach (var student in students)
             {
-                var studentData = student.Split(',');
-                Console.WriteLine($"The student's name is {studentData[0]}, they are {studentData[1]} years old and they are attending {studentData[2]}");
+                Console.WriteLine($"The student's name is {student.Name}, they are {student.Age} years old and they are attending {student.Class}");
             }
         }
 
@@ -29,13 +29,26 @@ namespace RetrieveStudentFromFile
         // TODO -- selection enum
         // TODO -- after submitting -- generic logic
 
-        static void ReadAndProcessText(string path)
+        static IEnumerable<Student> ReadAndProcessText(string path)
         {
             var students = File.ReadAllLines(path);
-            var sortedStudents = SortAndReturnStudents(students);
+            List<Student> studentList = new List<Student>();
+
+            foreach (var student in students)
+            {
+                var studentData = student.Split(',');
+                studentList.Add(new Student { Name = studentData[0], Age = Convert.ToInt32(studentData[1]), Class = studentData[2] });
+            }
+
+            var sortedStudents = SortAndReturn(studentList);
 
             DisplayStudents(sortedStudents);
 
+            return sortedStudents;
+        }
+
+        static void ShowMenu(IEnumerable<Student> studentList)
+        {
             bool inMenu = true;
 
             while (inMenu)
@@ -50,7 +63,7 @@ namespace RetrieveStudentFromFile
                 switch (option)
                 {
                     case "1":
-                        var studentSearcher = new Searcher(students);
+                        var studentSearcher = new StudentSearcher(studentList);
 
                         Console.WriteLine("\nEnter the name:");
                         var name = Console.ReadLine();
@@ -60,7 +73,7 @@ namespace RetrieveStudentFromFile
                         break;
 
                     case "2":
-                        DisplayStudents(sortedStudents);
+                        DisplayStudents(studentList);
                         break;
 
                     case "3":
@@ -72,7 +85,6 @@ namespace RetrieveStudentFromFile
                         break;
                 }
             }
-
         }
 
         static void Main(string[] args)
@@ -84,8 +96,8 @@ namespace RetrieveStudentFromFile
                 throw new FileNotFoundException(Constants.File.ERROR);
             }
 
-            ReadAndProcessText(path);
-
+            var students = ReadAndProcessText(path);
+            ShowMenu(students);
         }
     }
 }

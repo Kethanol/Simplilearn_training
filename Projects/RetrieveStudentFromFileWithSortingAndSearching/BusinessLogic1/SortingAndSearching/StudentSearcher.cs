@@ -1,28 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using BusinessLogic.Entities;
+using System.Collections.Generic;
 
 namespace BusinessLogic.SortingAndSearching
 {
-    public class Searcher
+    public class StudentSearcher
     {
-        public string[] Inner { get; set; }
+        public List<Student> Inner { get; set; }
 
-        public Searcher(string[] studentList)
+        public StudentSearcher(IEnumerable<Student> inner)
         {
-            Inner = studentList;
+            Inner = (List<Student>)inner;
         }
 
-        public IEnumerable<string> DoBy(string item)
+        public IEnumerable<Student> DoBy(string item)
         {
-
-            List<string> result = new List<string>();
+            List<Student> result = new List<Student>();
 
             foreach (var student in Inner)
             {
-
-                var studentData = student.Split(',');
-                var name = studentData[0];
-
-                if (ContainsNaive(name.ToLowerInvariant(), item.ToLowerInvariant())) result.Add(student);
+                if (ContainsNaive(student.Name.ToLowerInvariant(), item.ToLowerInvariant())) result.Add(student);
             }
 
             return result;
