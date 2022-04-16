@@ -63,7 +63,7 @@ namespace RetrieveStudentFromFile
                         DisplayStudents(sortedStudents);
                         break;
 
-                    case"3":
+                    case "3":
                         inMenu = false;
                         break;
 
