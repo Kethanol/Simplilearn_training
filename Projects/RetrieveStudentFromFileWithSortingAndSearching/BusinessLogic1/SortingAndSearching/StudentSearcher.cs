@@ -12,13 +12,13 @@ namespace BusinessLogic.SortingAndSearching
             Inner = (List<Student>)inner;
         }
 
-        public IEnumerable<Student> DoBy(string item)
+        public IEnumerable<Student> DoByName(string pattern)
         {
             List<Student> result = new List<Student>();
 
             foreach (var student in Inner)
             {
-                if (ContainsNaive(student.Name.ToLowerInvariant(), item.ToLowerInvariant())) result.Add(student);
+                if (ContainsNaive(student.Name.ToLowerInvariant(), pattern.ToLowerInvariant())) result.Add(student);
             }
 
             return result;

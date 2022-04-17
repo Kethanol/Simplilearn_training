@@ -67,7 +67,7 @@ namespace Common
                         Console.WriteLine(Constants.Menu.NAME_ENTER);
                         var name = Console.ReadLine();
 
-                        var foundStudents = studentSearcher.DoBy(name);
+                        var foundStudents = studentSearcher.DoByName(name);
                         DisplayStudents(foundStudents);
                         break;
 
