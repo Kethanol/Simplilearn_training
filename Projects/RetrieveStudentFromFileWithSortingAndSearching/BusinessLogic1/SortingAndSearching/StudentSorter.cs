@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Entities;
+﻿using Entities;
 using System.Collections.Generic;
 
 namespace BusinessLogic.SortingAndSearching
