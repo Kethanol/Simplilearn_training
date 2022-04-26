@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1E7DF145-F49A-4B6C-ABAC-34BE46A2FD5B}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BusinessLogic1</RootNamespace>
-    <AssemblyName>BusinessLogic1</AssemblyName>
+    <ProjectGuid>{B890EDA4-9968-4CAD-8D52-609C75350328}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>RetrieveStudentFromFile</RootNamespace>
+    <AssemblyName>RetrieveStudentFromFile</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,12 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SortingAndSearching\StudentSearcher.cs" />
-    <Compile Include="SortingAndSearching\StudentSorter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entities\Entities.csproj">
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Common\Common.csproj">
+      <Project>{3B60D69C-49CF-4C71-9C34-577A62CC46CF}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="Entities\Entities.csproj">
       <Project>{2D4F55E1-610A-49E5-8867-09E1103F82CF}</Project>
       <Name>Entities</Name>
     </ProjectReference>

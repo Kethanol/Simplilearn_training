@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetrieveStudentFromFileWithSortingAndSearching", "RetrieveStudentFromFileWithSortingAndSearching.csproj", "{B890EDA4-9968-4CAD-8D52-609C75350328}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManager", "DataManager.csproj", "{B890EDA4-9968-4CAD-8D52-609C75350328}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogicTier", "BusinessLogicTier", "{8D4DC802-78C2-42F7-93EF-9E1F1847DBFA}"
 EndProject
