@@ -1,4 +1,4 @@
-﻿namespace RetrieveStudentFromFile
+﻿namespace DataManager
 {
     internal class Program
     {
