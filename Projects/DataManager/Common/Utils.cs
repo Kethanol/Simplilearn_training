@@ -30,7 +30,7 @@ namespace Common
             var studentEight = new Student { Name = "Nicoleta Dragomir", AttendingClass = subjectFour };
             var studentNine = new Student { Name = "Daniela Retezat", AttendingClass = subjectFive };
             var studentTen = new Student { Name = "Ruxandra Duta", AttendingClass = subjectFive };
-            var studentEleven = new Student { Name = "Stefan Balea", AttendingClass = subjectSix };
+            var studentEleven = new Student { Name = "Dragos Draghiciu", AttendingClass = subjectSix };
             var studentTwelve = new Student { Name = "Adrian Dragomir", AttendingClass = subjectSix };
 
 
