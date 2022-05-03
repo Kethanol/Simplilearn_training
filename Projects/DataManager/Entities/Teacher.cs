@@ -25,6 +25,8 @@ namespace Entities
                     subject.Expose();
                 }
             }
+
+            Console.WriteLine();
         }
     }
 }
