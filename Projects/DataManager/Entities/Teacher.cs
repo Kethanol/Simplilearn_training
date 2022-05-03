@@ -14,12 +14,16 @@ namespace Entities
             return this;
         }
 
-        public void Expose()
+        public void Expose(bool withSubjects)
         {
+            Console.WriteLine($"The following subjects are teached by {Name}:");
             foreach (var subject in TeachedSubjects)
             {
-                Console.WriteLine($"{subject.Name} is teached by {subject.Teacher.Name} and has the following students: ");
-                subject.Expose();
+                Console.WriteLine($"{subject.Name}");
+                if (withSubjects) {
+                    Console.WriteLine("The students that are attending are:");
+                    subject.Expose();
+                }
             }
         }
     }

@@ -9,7 +9,7 @@ namespace DataManager
         static void Main()
         {
             var teachers = Utils.GetSampleData();
-            Utils.ExposeTeachers(teachers);
+            Utils.ExposeTeachers(teachers, true);
         }
     }
 }

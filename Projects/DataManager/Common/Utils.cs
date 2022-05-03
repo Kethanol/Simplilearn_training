@@ -47,9 +47,9 @@ namespace Common
             return new List<Teacher> {teacherOne, teacherTwo};
         }
 
-        public static void ExposeTeachers(List<Teacher> teacherList) {
+        public static void ExposeTeachers(List<Teacher> teacherList, bool withSubjects = false) {
             foreach (Teacher teacher in teacherList) {
-                teacher.Expose();
+                teacher.Expose(withSubjects);
             }
         }
     }
