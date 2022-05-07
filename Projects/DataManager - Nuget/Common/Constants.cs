@@ -5,7 +5,7 @@
         public static class Entity
         {
             public const string STUDENT = "Student";
-            public const string PROFESSOR = "Professor";
+            public const string TEACHER = "Teacher";
             public const string SUBJECT = "Subject";
         }
 
