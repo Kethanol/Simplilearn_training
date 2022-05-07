@@ -3,7 +3,7 @@ using BusinessLogic.DataManipulation.Concrete;
 using Common;
 using System;
 
-namespace Entities.DataManipulation
+namespace BusinessLogic.DataManipulation
 {
     public abstract class Operation
     {

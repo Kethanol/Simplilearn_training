@@ -1,6 +1,5 @@
 ﻿using BusinessLogic.DataManipulation.Abstract;
 using Common;
-using Entities.DataManipulation;
 using System;
 
 namespace BusinessLogic.DataManipulation
