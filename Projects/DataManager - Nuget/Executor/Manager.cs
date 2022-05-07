@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Executor
 {
-    public class Executor
+    public class Manager
     {
 
     }

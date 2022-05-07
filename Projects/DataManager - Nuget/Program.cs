@@ -1,5 +1,6 @@
 ﻿using Common;
 using Entities;
+using Executor;
 using System;
 
 namespace DataManager
@@ -8,7 +9,8 @@ namespace DataManager
     {
         static void Main()
         {
-            
+            Manager manager = new Manager();
+            // manager.Execute();
         }
     }
 }

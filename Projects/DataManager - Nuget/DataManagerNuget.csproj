@@ -58,6 +58,10 @@
       <Project>{2D4F55E1-610A-49E5-8867-09E1103F82CF}</Project>
       <Name>Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="Executor\Executor.csproj">
+      <Project>{8F392A88-A39C-4409-A5C6-C15383A0BA85}</Project>
+      <Name>Executor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
