@@ -1,11 +1,8 @@
-﻿using Entities.Abstractions;
-
-namespace Entities
+﻿namespace Entities
 {
-    public struct Teacher : IEntityType
+    public struct Teacher
     {
         public string Name { get; set; }
         public string ClassAndSection { get; set; }
-        public EntityType EntityType { get; set; }
     }
 }
