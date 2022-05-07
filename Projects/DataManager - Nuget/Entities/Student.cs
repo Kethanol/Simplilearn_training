@@ -1,7 +1,8 @@
 ﻿namespace Entities
 {
-    public class Student
+    public struct Student
     {
-        
+        public string Name { get; set; }
+        public string ClassAndSection { get; set; }
     }
 }
