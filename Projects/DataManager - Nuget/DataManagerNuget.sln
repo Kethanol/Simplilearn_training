@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{1E7DF145-F49A-4B6C-ABAC-34BE46A2FD5B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NugetPackage", "NugetPackage", "{433EF445-A106-4A53-8C30-D22C7454EF69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Executor", "Executor\Executor.csproj", "{8F392A88-A39C-4409-A5C6-C15383A0BA85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{1E7DF145-F49A-4B6C-ABAC-34BE46A2FD5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E7DF145-F49A-4B6C-ABAC-34BE46A2FD5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E7DF145-F49A-4B6C-ABAC-34BE46A2FD5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F392A88-A39C-4409-A5C6-C15383A0BA85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F392A88-A39C-4409-A5C6-C15383A0BA85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F392A88-A39C-4409-A5C6-C15383A0BA85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F392A88-A39C-4409-A5C6-C15383A0BA85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +55,7 @@ Global
 		{2D4F55E1-610A-49E5-8867-09E1103F82CF} = {B9FE8334-D889-494A-8755-ED16265B5FA4}
 		{3B60D69C-49CF-4C71-9C34-577A62CC46CF} = {DFD46F2E-37A5-49CF-9128-6769565ACE49}
 		{1E7DF145-F49A-4B6C-ABAC-34BE46A2FD5B} = {8D4DC802-78C2-42F7-93EF-9E1F1847DBFA}
+		{8F392A88-A39C-4409-A5C6-C15383A0BA85} = {433EF445-A106-4A53-8C30-D22C7454EF69}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {80C5F467-366E-45D8-9818-C13B38A6B089}
