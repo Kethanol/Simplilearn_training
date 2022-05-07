@@ -38,7 +38,7 @@ namespace BusinessLogic.DataManipulation.Concrete
         public void Retrieve()
         {
             foreach (var subject in Subjects)
-                Console.WriteLine($"The subject's name is {subject.Name} and the code is {subject.Code}");
+                Console.WriteLine($"The subject's name is {subject.Name} and its code is {subject.Code}");
         }
     }
 }
