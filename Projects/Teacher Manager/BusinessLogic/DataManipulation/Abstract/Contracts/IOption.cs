@@ -1,8 +1,10 @@
-﻿namespace BusinessLogic.DataManipulation.Abstract
+﻿using System.Threading.Tasks;
+
+namespace BusinessLogic.DataManipulation.Abstract
 {
     public interface IOption
     {
-        void Add();
+        Task Add();
         void Retrieve();
         void RetrieveById(int id);
     }

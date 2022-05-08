@@ -2,6 +2,7 @@
 using BusinessLogic.DataManipulation.Abstract;
 using Common;
 using System;
+using System.IO;
 
 namespace Executor
 {
@@ -48,7 +49,19 @@ namespace Executor
                         break;
                 }
 
-                if (abstractOperation != null) abstractOperation.Run();
+                if (abstractOperation != null)
+                {
+                    var directoryPath = $"{Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.FullName}{Constants.File.DIRECTORY}";
+                    Directory.CreateDirectory(directoryPath);
+
+                    var filePath = $"{directoryPath}{Constants.File.NAME}";
+
+                    if (!File.Exists(filePath)) { 
+                        File.Create(filePath).Close();
+                    }
+
+                    abstractOperation.Run();
+                }
             }
         }
     }

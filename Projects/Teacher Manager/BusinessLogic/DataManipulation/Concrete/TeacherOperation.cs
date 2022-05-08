@@ -4,7 +4,9 @@ using Common;
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.DataManipulation.Concrete
 {
@@ -20,7 +22,7 @@ namespace BusinessLogic.DataManipulation.Concrete
             return _instance;
         }
 
-        public void Add()
+        public async Task Add()
         {
             Console.WriteLine(Constants.DataInsert.NAME);
 
@@ -32,18 +34,23 @@ namespace BusinessLogic.DataManipulation.Concrete
             var teacherClass = Console.ReadLine();
             Console.WriteLine();
 
-            WriteToFile("", new Teacher() { Name = teacherName, ClassAndSection = teacherClass });
+            var path = $"{Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.FullName}{Constants.File.DIRECTORY}{Constants.File.NAME}";
+            await WriteToFile(path, new Teacher() { Name = teacherName, ClassAndSection = teacherClass });
         }
 
         public void Retrieve()
         {
-            var teachers = ReadFromFile("");
+            var path = $"{Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.FullName}{Constants.File.DIRECTORY}{Constants.File.NAME}";
+
+            var teachers = ReadFromFile(path);
             ExposeAll(teachers);
         }
 
         public void RetrieveById(int id)
         {
-            var teachers = ReadFromFile("");
+            var path = $"{Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.FullName}{Constants.File.DIRECTORY}{Constants.File.NAME}";
+
+            var teachers = ReadFromFile(path);
             var teacher = teachers.FirstOrDefault(t => t.ID == id);
 
             if (teacher == null)
@@ -58,12 +65,29 @@ namespace BusinessLogic.DataManipulation.Concrete
 
         public List<Teacher> ReadFromFile(string path)
         {
-            throw new NotImplementedException();
+            var data = File.ReadAllLines(path);
+            var result = new List<Teacher>();
+
+            foreach (var line in data)
+            {
+                var teacherData = line.Split(',');
+                result.Add(new Teacher() { ID = Convert.ToInt32(teacherData[0]), Name = teacherData[1], ClassAndSection = teacherData[2] });
+            }
+
+            return result;
         }
 
-        public void WriteToFile(string path, Teacher entity)
+        public async Task WriteToFile(string path, Teacher entity)
         {
-            throw new NotImplementedException();
+            var existingData = ReadFromFile(path);
+            var maxId = !existingData.Any() ? 0 : existingData.Max(t => t.ID);
+
+            var line = $"{maxId + 1},{entity.Name},{entity.ClassAndSection}";
+
+            using (StreamWriter sw = new StreamWriter(path, append: true))
+            {
+                await sw.WriteLineAsync(line);
+            }
         }
     }
 }

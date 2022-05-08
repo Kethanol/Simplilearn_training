@@ -2,11 +2,10 @@
 {
     public static class Constants
     {
-        public static class Entity
+        public static class File
         {
-            public const string STUDENT = "Student";
-            public const string TEACHER = "Teacher";
-            public const string SUBJECT = "Subject";
+            public const string DIRECTORY = "\\assets\\";
+            public const string NAME = "teacher_data.txt";
         }
 
         public static class Menu
