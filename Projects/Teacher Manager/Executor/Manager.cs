@@ -8,9 +8,6 @@ namespace Executor
 {
     public class Manager
     {
-        // TODO -- Maybe some refactoring
-        // Maybe I will pass the path directly from the initialization, not get it every time in the methods
-
         private IAbstractOperation abstractOperation;
 
         public void Execute()
@@ -63,7 +60,7 @@ namespace Executor
                         File.Create(filePath).Close();
                     }
 
-                    abstractOperation.Run();
+                    abstractOperation.Run(filePath);
                 }
             }
         }

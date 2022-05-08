@@ -12,13 +12,18 @@ namespace BusinessLogic.DataManipulation.Concrete
 {
     public sealed class TeacherOperation : IConcreteOperation, IExposer<Teacher>, IFileOperation<Teacher>
     {
-        private TeacherOperation() { }
+        private readonly string _path;
+
+        private TeacherOperation(string path) 
+        { 
+            _path = path;
+        }
 
         private static TeacherOperation _instance = null;
 
-        public static TeacherOperation GetInstance()
+        public static TeacherOperation GetInstance(string path)
         {
-            if (_instance == null) _instance = new TeacherOperation();
+            if (_instance == null) _instance = new TeacherOperation(path);
             return _instance;
         }
 
@@ -34,15 +39,12 @@ namespace BusinessLogic.DataManipulation.Concrete
             var teacherClass = Console.ReadLine();
             Console.WriteLine();
 
-            var path = $"{Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.FullName}{Constants.File.DIRECTORY}{Constants.File.NAME}";
-            await WriteToFile(path, new Teacher() { Name = teacherName, ClassAndSection = teacherClass });
+            await WriteToFile(_path, new Teacher() { Name = teacherName, ClassAndSection = teacherClass });
         }
 
         public void Retrieve()
         {
-            var path = $"{Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.FullName}{Constants.File.DIRECTORY}{Constants.File.NAME}";
-
-            var teachers = ReadFromFile(path);
+            var teachers = ReadFromFile(_path);
 
             if (!teachers.Any())
                 Console.Write("No teachers were found!\n");
@@ -52,9 +54,7 @@ namespace BusinessLogic.DataManipulation.Concrete
 
         public void RetrieveById(int id)
         {
-            var path = $"{Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.FullName}{Constants.File.DIRECTORY}{Constants.File.NAME}";
-
-            var teachers = ReadFromFile(path);
+            var teachers = ReadFromFile(_path);
             var teacher = teachers.FirstOrDefault(t => t.ID == id);
 
             if (teacher == null)

@@ -9,12 +9,12 @@ namespace BusinessLogic.DataManipulation
 
         public abstract void ExecuteOperation(IConcreteOperation concreteOperation);
 
-        public void Run()
+        public void Run(string path)
         {
             // Here we can write some general logic before choosing the instance that we use
             // We have just the Teacher entity for now, other entities may appear in the future
 
-            _concreteOperation = TeacherOperation.GetInstance();
+            _concreteOperation = TeacherOperation.GetInstance(path);
 
             ExecuteOperation(_concreteOperation);
         }

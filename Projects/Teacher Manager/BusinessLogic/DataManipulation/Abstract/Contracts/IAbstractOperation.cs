@@ -2,6 +2,6 @@
 {
     public interface IAbstractOperation
     {
-        void Run();
+        void Run(string path);
     }
 }
