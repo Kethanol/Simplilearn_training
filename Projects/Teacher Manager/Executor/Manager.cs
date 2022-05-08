@@ -8,6 +8,8 @@ namespace Executor
 {
     public class Manager
     {
+        // TODO -- Maybe some refactoring
+
         private IAbstractOperation abstractOperation;
 
         public void Execute()
