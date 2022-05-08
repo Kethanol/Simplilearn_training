@@ -16,8 +16,7 @@
             public static readonly string RETRIEVE_BY_ID = "3. Retrieve a teacher by ID";
             public static readonly string EXIT = "4. Exit\n";
             public static readonly string INVALID = "Invalid choice!";
-            public static readonly string ENTITY_SELECT = "Select an entity:\n";
-            public static readonly string ADDED = "Entity added!";
+            public static readonly string ADDED = "Teacher added!";
         }
 
         public static class MenuChoices

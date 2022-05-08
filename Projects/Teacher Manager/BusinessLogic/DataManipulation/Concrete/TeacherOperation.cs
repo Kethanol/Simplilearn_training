@@ -43,7 +43,11 @@ namespace BusinessLogic.DataManipulation.Concrete
             var path = $"{Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.FullName}{Constants.File.DIRECTORY}{Constants.File.NAME}";
 
             var teachers = ReadFromFile(path);
-            ExposeAll(teachers);
+
+            if (!teachers.Any())
+                Console.Write("No teachers were found!\n");
+            else
+                ExposeAll(teachers);
         }
 
         public void RetrieveById(int id)
