@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace BusinessLogic.DataManipulation.Concrete
 {
-    public class TeacherOperation : IOption, IExposer<Teacher>, IFileOperation<Teacher>
+    public sealed class TeacherOperation : IOption, IExposer<Teacher>, IFileOperation<Teacher>
     {
         private TeacherOperation() { }
 
