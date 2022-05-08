@@ -66,7 +66,7 @@ namespace BusinessLogic.DataManipulation.Concrete
         public void ExposeSingle(Teacher entity)
         {
             if (entity != null)
-                Console.WriteLine($"The teacher's name is {entity.Name} and they are teaching {entity.ClassAndSection}");
+                Console.WriteLine($"The teacher with the ID {entity.ID} has the name {entity.Name} and they are teaching {entity.ClassAndSection}");
             else
                 throw new ArgumentNullException(nameof(entity));
          }
