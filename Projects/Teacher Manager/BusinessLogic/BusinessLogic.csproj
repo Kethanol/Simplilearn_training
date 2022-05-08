@@ -44,6 +44,7 @@
     <Compile Include="DataManipulation\Abstract\Contracts\IAbstractOperation.cs" />
     <Compile Include="DataManipulation\Abstract\Contracts\IConcreteOperation.cs" />
     <Compile Include="DataManipulation\Abstract\Adder.cs" />
+    <Compile Include="DataManipulation\Abstract\Contracts\IExposer.cs" />
     <Compile Include="DataManipulation\Abstract\Operation.cs" />
     <Compile Include="DataManipulation\Concrete\TeacherOperation.cs" />
     <Compile Include="DataManipulation\Abstract\Retriever.cs" />
