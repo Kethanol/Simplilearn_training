@@ -6,7 +6,7 @@ namespace BusinessLogic.DataManipulation
 {
     public class RetrieverById : Operation, IAbstractOperation
     {
-        public override void ExecuteOperation(IOption concreteOperation)
+        public override void ExecuteOperation(IConcreteOperation concreteOperation)
         {
             Console.WriteLine(Constants.DataInsert.ID);   
 

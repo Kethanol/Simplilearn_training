@@ -5,9 +5,9 @@ namespace BusinessLogic.DataManipulation
 {
     public abstract class Operation
     {
-        private IOption _concreteOperation;
+        private IConcreteOperation _concreteOperation;
 
-        public abstract void ExecuteOperation(IOption concreteOperation);
+        public abstract void ExecuteOperation(IConcreteOperation concreteOperation);
 
         public void Run()
         {

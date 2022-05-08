@@ -2,7 +2,7 @@
 
 namespace BusinessLogic.DataManipulation.Abstract
 {
-    public interface IOption
+    public interface IConcreteOperation
     {
         Task Add();
         void Retrieve();

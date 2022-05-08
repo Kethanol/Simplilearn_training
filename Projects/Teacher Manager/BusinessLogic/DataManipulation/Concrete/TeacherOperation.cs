@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.DataManipulation.Concrete
 {
-    public sealed class TeacherOperation : IOption, IExposer<Teacher>, IFileOperation<Teacher>
+    public sealed class TeacherOperation : IConcreteOperation, IExposer<Teacher>, IFileOperation<Teacher>
     {
         private TeacherOperation() { }
 

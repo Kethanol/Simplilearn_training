@@ -9,6 +9,7 @@ namespace Executor
     public class Manager
     {
         // TODO -- Maybe some refactoring
+        // Maybe I will pass the path directly from the initialization, not get it every time in the methods
 
         private IAbstractOperation abstractOperation;
 

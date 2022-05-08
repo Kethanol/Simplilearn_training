@@ -4,7 +4,7 @@ namespace BusinessLogic.DataManipulation
 {
     public class Retriever : Operation, IAbstractOperation
     {
-        public override void ExecuteOperation(IOption concreteOperation)
+        public override void ExecuteOperation(IConcreteOperation concreteOperation)
         {
             concreteOperation.Retrieve();
         }
