@@ -3,6 +3,7 @@ using Common;
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogic.DataManipulation.Concrete
 {
@@ -33,20 +34,29 @@ namespace BusinessLogic.DataManipulation.Concrete
             Console.WriteLine();
 
             Teachers.Add(new Teacher() { Name = professorName, ClassAndSection = professorClass });
+
+            // File writer logic
         }
 
         public void Retrieve()
         {
-            foreach (var teacher in Teachers)
+            // File reader logic
+
+            ExposeAll();
+        }
+
+        public void RetrieveById(int id)
+        {
+            var teacher = Teachers.FirstOrDefault(t => t.ID == id);
+
+            if (teacher == null)
+                Console.Write($"No teacher with the ID {id} was found!\n");
+            else
                 Expose(teacher);
         }
 
-        public void RetrieveById(int id) 
-        {
-            var teacher = Teachers[id];
-            Expose(teacher);
-        }
-
         private void Expose(Teacher teacher) => Console.WriteLine($"The teacher's name is {teacher.Name} and they are teaching {teacher.ClassAndSection}");
+
+        private void ExposeAll() => Teachers.ForEach(t => Expose(t));
     }
 }

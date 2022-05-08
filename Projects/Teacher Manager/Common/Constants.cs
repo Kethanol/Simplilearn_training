@@ -33,7 +33,6 @@
         {
             public const string NAME = "Enter the name:";
             public const string CLASS_SECTION = "Enter the class and section:";
-            public const string CODE = "Enter the code:";
         }
     }
 }
