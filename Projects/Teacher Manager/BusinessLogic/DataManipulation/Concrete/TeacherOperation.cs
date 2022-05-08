@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.DataManipulation.Abstract;
+using BusinessLogic.DataManipulation.Abstract.Contracts;
 using Common;
 using Entities;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 
 namespace BusinessLogic.DataManipulation.Concrete
 {
-    public class TeacherOperation : IConcreteOperation
+    public class TeacherOperation : IConcreteOperation, IExposer<Teacher>
     {
         private TeacherOperation() { }
 
@@ -42,7 +43,7 @@ namespace BusinessLogic.DataManipulation.Concrete
         {
             // File reader logic
 
-            ExposeAll();
+            ExposeAll(Teachers);
         }
 
         public void RetrieveById(int id)
@@ -52,11 +53,11 @@ namespace BusinessLogic.DataManipulation.Concrete
             if (teacher == null)
                 Console.Write($"No teacher with the ID {id} was found!\n");
             else
-                Expose(teacher);
+                ExposeSingle(teacher);
         }
 
-        private void Expose(Teacher teacher) => Console.WriteLine($"The teacher's name is {teacher.Name} and they are teaching {teacher.ClassAndSection}");
+        public void ExposeSingle(Teacher entity) => Console.WriteLine($"The teacher's name is {entity.Name} and they are teaching {entity.ClassAndSection}");
 
-        private void ExposeAll() => Teachers.ForEach(t => Expose(t));
+        public void ExposeAll(List<Teacher> entities) => entities.ForEach(t => ExposeSingle(t));
     }
 }
