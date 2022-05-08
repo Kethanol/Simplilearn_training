@@ -63,7 +63,13 @@ namespace BusinessLogic.DataManipulation.Concrete
                 ExposeSingle(teacher);
         }
 
-        public void ExposeSingle(Teacher entity) => Console.WriteLine($"The teacher's name is {entity.Name} and they are teaching {entity.ClassAndSection}");
+        public void ExposeSingle(Teacher entity)
+        {
+            if (entity != null)
+                Console.WriteLine($"The teacher's name is {entity.Name} and they are teaching {entity.ClassAndSection}");
+            else
+                throw new ArgumentNullException(nameof(entity));
+         }
 
         public void ExposeAll(List<Teacher> entities) => entities.ForEach(t => ExposeSingle(t));
 
