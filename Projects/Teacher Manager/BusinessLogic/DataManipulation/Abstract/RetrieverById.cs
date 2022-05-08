@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.DataManipulation.Abstract;
+using Common;
 using System;
 
 namespace BusinessLogic.DataManipulation
@@ -7,6 +8,8 @@ namespace BusinessLogic.DataManipulation
     {
         public override void ExecuteOperation(IOption concreteOperation)
         {
+            Console.WriteLine(Constants.DataInsert.ID);   
+
             var option = Console.ReadLine();
 
             if (!int.TryParse(option, out var id))

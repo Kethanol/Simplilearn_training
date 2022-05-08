@@ -32,6 +32,7 @@
         {
             public const string NAME = "Enter the name:";
             public const string CLASS_SECTION = "Enter the class and section:";
+            public const string ID = "Please enter the desired ID:";
         }
     }
 }
