@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic.DataManipulation.Abstract
 {
-    public interface IConcreteOperation
+    public interface IOption
     {
         void Add();
         void Retrieve();

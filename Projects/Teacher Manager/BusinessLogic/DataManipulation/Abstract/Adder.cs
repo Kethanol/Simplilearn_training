@@ -6,7 +6,7 @@ namespace BusinessLogic.DataManipulation
 {
     public class Adder : Operation, IAbstractOperation
     {
-        public override void ExecuteOperation(IConcreteOperation concreteOperation)
+        public override void ExecuteOperation(IOption concreteOperation)
         {
             concreteOperation.Add();
 

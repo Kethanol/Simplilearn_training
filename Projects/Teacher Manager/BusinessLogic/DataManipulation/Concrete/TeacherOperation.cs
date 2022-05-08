@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace BusinessLogic.DataManipulation.Concrete
 {
-    public class TeacherOperation : IConcreteOperation, IExposer<Teacher>
+    public class TeacherOperation : IOption, IExposer<Teacher>, IFileOperation<Teacher>
     {
         private TeacherOperation() { }
 
@@ -20,35 +20,31 @@ namespace BusinessLogic.DataManipulation.Concrete
             return _instance;
         }
 
-        public List<Teacher> Teachers { get; set; } = new List<Teacher>();
-
         public void Add()
         {
             Console.WriteLine(Constants.DataInsert.NAME);
 
-            var professorName = Console.ReadLine();
+            var teacherName = Console.ReadLine();
             Console.WriteLine();
 
             Console.WriteLine(Constants.DataInsert.CLASS_SECTION);
 
-            var professorClass = Console.ReadLine();
+            var teacherClass = Console.ReadLine();
             Console.WriteLine();
 
-            Teachers.Add(new Teacher() { Name = professorName, ClassAndSection = professorClass });
-
-            // File writer logic
+            WriteToFile("", new Teacher() { Name = teacherName, ClassAndSection = teacherClass });
         }
 
         public void Retrieve()
         {
-            // File reader logic
-
-            ExposeAll(Teachers);
+            var teachers = ReadFromFile("");
+            ExposeAll(teachers);
         }
 
         public void RetrieveById(int id)
         {
-            var teacher = Teachers.FirstOrDefault(t => t.ID == id);
+            var teachers = ReadFromFile("");
+            var teacher = teachers.FirstOrDefault(t => t.ID == id);
 
             if (teacher == null)
                 Console.Write($"No teacher with the ID {id} was found!\n");
@@ -59,5 +55,15 @@ namespace BusinessLogic.DataManipulation.Concrete
         public void ExposeSingle(Teacher entity) => Console.WriteLine($"The teacher's name is {entity.Name} and they are teaching {entity.ClassAndSection}");
 
         public void ExposeAll(List<Teacher> entities) => entities.ForEach(t => ExposeSingle(t));
+
+        public List<Teacher> ReadFromFile(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WriteToFile(string path, Teacher entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
