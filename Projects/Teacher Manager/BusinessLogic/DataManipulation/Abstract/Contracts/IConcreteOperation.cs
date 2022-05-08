@@ -4,5 +4,6 @@
     {
         void Add();
         void Retrieve();
+        void RetrieveById(int id);
     }
 }

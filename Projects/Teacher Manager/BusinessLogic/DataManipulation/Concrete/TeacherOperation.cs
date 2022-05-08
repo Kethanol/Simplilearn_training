@@ -38,7 +38,15 @@ namespace BusinessLogic.DataManipulation.Concrete
         public void Retrieve()
         {
             foreach (var teacher in Teachers)
-                Console.WriteLine($"The teacher's name is {teacher.Name} and they are teaching {teacher.ClassAndSection}");
+                Expose(teacher);
         }
+
+        public void RetrieveById(int id) 
+        {
+            var teacher = Teachers[id];
+            Expose(teacher);
+        }
+
+        private void Expose(Teacher teacher) => Console.WriteLine($"The teacher's name is {teacher.Name} and they are teaching {teacher.ClassAndSection}");
     }
 }

@@ -44,11 +44,10 @@
     <Compile Include="DataManipulation\Abstract\Contracts\IAbstractOperation.cs" />
     <Compile Include="DataManipulation\Abstract\Contracts\IConcreteOperation.cs" />
     <Compile Include="DataManipulation\Abstract\Adder.cs" />
-    <Compile Include="DataManipulation\Concrete\StudentOperation.cs" />
-    <Compile Include="DataManipulation\Concrete\SubjectOperation.cs" />
     <Compile Include="DataManipulation\Abstract\Operation.cs" />
     <Compile Include="DataManipulation\Concrete\TeacherOperation.cs" />
     <Compile Include="DataManipulation\Abstract\Retriever.cs" />
+    <Compile Include="DataManipulation\RetrieverById.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{1E7DF145-F49A-4B6C-ABAC-34BE46A2FD5B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NugetPackage", "NugetPackage", "{433EF445-A106-4A53-8C30-D22C7454EF69}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Executor", "Executor", "{433EF445-A106-4A53-8C30-D22C7454EF69}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Executor", "Executor\Executor.csproj", "{8F392A88-A39C-4409-A5C6-C15383A0BA85}"
 EndProject

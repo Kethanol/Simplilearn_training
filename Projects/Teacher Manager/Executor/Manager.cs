@@ -17,7 +17,8 @@ namespace Executor
             {
                 Console.WriteLine(Constants.Menu.OPTION_SELECT);
                 Console.WriteLine(Constants.Menu.ADD);
-                Console.WriteLine(Constants.Menu.RETRIEVE);
+                Console.WriteLine(Constants.Menu.RETRIEVE_ALL);
+                Console.WriteLine(Constants.Menu.RETRIEVE_BY_ID);
                 Console.WriteLine(Constants.Menu.EXIT);
 
                 var option = Console.ReadLine();
@@ -29,8 +30,12 @@ namespace Executor
                         abstractOperation = new Adder();
                         break;
 
-                    case Constants.MenuChoices.RETRIEVE:
+                    case Constants.MenuChoices.RETRIEVE_ALL:
                         abstractOperation = new Retriever();
+                        break;
+
+                    case Constants.MenuChoices.RETRIEVE_BY_ID:
+                        abstractOperation = new RetrieverById();
                         break;
 
                     case Constants.MenuChoices.EXIT:
