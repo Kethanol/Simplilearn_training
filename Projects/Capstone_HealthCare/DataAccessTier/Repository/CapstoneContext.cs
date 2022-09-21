@@ -7,6 +7,8 @@ namespace Repository
     {
         public CapstoneContext() {}
 
+        public CapstoneContext(DbContextOptions<CapstoneContext> options): base(options) {}
+
         #region Tables
         public virtual DbSet<Medicine>? Medicines { get; set; }
         public virtual DbSet<Cart>? Carts { get; set; }
