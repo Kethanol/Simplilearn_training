@@ -12,6 +12,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccessLayer", "DataAccessLayer", "{6417D8B9-9EDA-442E-A71E-1072D98B6ECA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{AEEB7629-491F-403C-BE78-B4230371DBB3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EFB486A-36C1-450F-B13E-E9BF63799445} = {3EFB486A-36C1-450F-B13E-E9BF63799445}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntitiesTier", "EntitiesTier", "{8EB793A3-F3ED-4507-9449-7ACEA7588557}"
 EndProject
