@@ -2,8 +2,8 @@
 {
     public class Cart
     {
-        public int Id { get; init; }
-        public User? Owner { get; init; }
-        public List<Medicine>? MedicineList { get; init; }
+        public int Id { get; set; }
+        public User? Owner { get; set; }
+        public List<CartXMedicine>? CartXMedicines { get; set; }
     }
 }

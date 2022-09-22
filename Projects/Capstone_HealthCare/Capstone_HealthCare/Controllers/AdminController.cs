@@ -32,7 +32,7 @@ namespace Capstone_Project.Controllers
         }
 
         [HttpGet]
-        [Route("get-medicine/{medicineId}")]
+        [Route("get-medicine")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -7,7 +7,6 @@ namespace Repository.Concrete.Mapper
     public class Mapper : IMapper
     {
         // This will be responsible with the DTO to entity mapping
-        // I will not make it generic since I only have 3 entities and 3 DTOs
 
         public ENT.Medicine MapMedicine(MOD.Medicine? source)
         {
@@ -18,7 +17,8 @@ namespace Repository.Concrete.Mapper
                 Description = source.Description,
                 SchemaOfTreatment = source.SchemaOfTreatment,
                 MinimumAge = source.MinimumAge,
-                Price = source.Price
+                Price = source.Price,
+                CartXMedicines = MapCartXMedicines(source.CartXMedicines),
             };
         }
 
@@ -36,17 +36,29 @@ namespace Repository.Concrete.Mapper
             return source == null ? new ENT.Cart() : new ENT.Cart()
             {
                 Id = source.Id,
-                //MedicineList = MapMedicines(source.MedicineList),
+                CartXMedicines = MapCartXMedicines(source.CartXMedicines),
                 Owner = MapUser(source.Owner)
             };
 
         }
 
-        public List<ENT.Medicine> MapMedicines(List<MOD.Medicine> source)
+        public ENT.CartXMedicine MapCartXMedicine(MOD.CartXMedicine? source)
         {
-            return source == null ? new List<ENT.Medicine>() : source.Select(medicine =>
+            return source == null ? new ENT.CartXMedicine() : new ENT.CartXMedicine()
+            {
+                CartId = source.CartId,
+                MedicineId= source.MedicineId,
+                Cart = MapCart(source.Cart),
+                Medicine = MapMedicine(source.Medicine)
+            };
+
+        }
+
+        public List<ENT.CartXMedicine> MapCartXMedicines(List<MOD.CartXMedicine> source)
+        {
+            return source == null ? new List<ENT.CartXMedicine>() : source.Select(cxm =>
              {
-                 return MapMedicine(medicine);
+                 return MapCartXMedicine(cxm);
              }).ToList();
         }
     }
