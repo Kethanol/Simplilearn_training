@@ -36,7 +36,7 @@ namespace Repository.Concrete.Mapper
             return source == null ? new ENT.Cart() : new ENT.Cart()
             {
                 Id = source.Id,
-                MedicineList = MapMedicines(source.MedicineList),
+                //MedicineList = MapMedicines(source.MedicineList),
                 Owner = MapUser(source.Owner)
             };
 

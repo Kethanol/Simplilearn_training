@@ -21,14 +21,14 @@ namespace BusinessLogicTier.Concrete
 
         public async Task AddMedicineToCart(Medicine medicine, int cartId)
         {
-            var cart = await _unitOfWork.CartRepository.GetAsync(cartId);
-            cart.MedicineList ??= new List<Medicine>(); // TODO -- exception handling
+            //var cart = await _unitOfWork.CartRepository.GetAsync(cartId);
+            //cart.MedicineList ??= new List<Medicine>(); // TODO -- exception handling
 
-            cart.MedicineList.Add(medicine);
+            //cart.MedicineList.Add(medicine);
 
-            _unitOfWork.CartRepository.Update(cart);
+            //_unitOfWork.CartRepository.Update(cart);
 
-            await _unitOfWork.SaveChangesAsync();
+            //await _unitOfWork.SaveChangesAsync();
         }
 
 

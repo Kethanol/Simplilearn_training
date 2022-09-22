@@ -13,6 +13,7 @@ namespace Repository
         public virtual DbSet<Medicine>? Medicines { get; set; }
         public virtual DbSet<Cart>? Carts { get; set; }
         public virtual DbSet<User>? Users { get; set; }
+        public virtual DbSet<CartXMedicine>? CartXMedicines { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
@@ -44,6 +45,22 @@ namespace Repository
                 .HasMaxLength(16);
 
                 medicine.ToTable("Medicine");
+            });
+
+            modelBuilder.Entity<CartXMedicine>(entity =>
+            {
+                entity.HasKey(x => new {x.CartId, x.MedicineId});
+
+                entity.HasOne(x => x.Cart).WithMany(x => x.CartXMedicines).HasForeignKey(x => x.CartId);
+                entity.HasOne(x => x.Medicine).WithMany(x => x.CartXMedicines).HasForeignKey(x => x.MedicineId);
+
+                entity.ToTable("CartXMedicine");
+            });
+
+            modelBuilder.Entity<Cart>(cart =>
+            {
+                cart.HasKey(x => x.Id);
+                cart.ToTable("Cart");
             });
         }
     }
