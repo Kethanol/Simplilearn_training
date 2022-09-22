@@ -3,6 +3,8 @@
     public class Medicine
     {
         public int Id { get; init; }
+        public string? Name { get; set; }
+
         public string? Description { get; init; }
         public string? SchemaOfTreatment { get; init; }
         public int MinimumAge { get; init; }

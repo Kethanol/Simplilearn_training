@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BusinessLogicTier\BusinessLogicTier\BusinessLogicTier.csproj" />
     <ProjectReference Include="..\DataAccessTier\Repository\Repository.csproj" />
   </ItemGroup>
 

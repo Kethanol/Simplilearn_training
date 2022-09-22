@@ -8,6 +8,6 @@ namespace Repository.Contracts.Mapper
         ENT.Medicine MapMedicine(MOD.Medicine? source);
         ENT.Cart MapCart(MOD.Cart? source);
         ENT.User MapUser(MOD.User? source);
-        IEnumerable<ENT.Medicine?> MapMedicines(IEnumerable<MOD.Medicine>? source);
+        List<ENT.Medicine?> MapMedicines(List<MOD.Medicine>? source);
     }
 }

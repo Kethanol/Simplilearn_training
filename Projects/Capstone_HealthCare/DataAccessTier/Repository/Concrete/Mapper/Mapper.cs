@@ -14,6 +14,7 @@ namespace Repository.Concrete.Mapper
             return source == null ? new ENT.Medicine() : new ENT.Medicine()
             {
                 Id = source.Id,
+                Name = source.Name,
                 Description = source.Description,
                 SchemaOfTreatment = source.SchemaOfTreatment,
                 MinimumAge = source.MinimumAge,
@@ -41,13 +42,12 @@ namespace Repository.Concrete.Mapper
 
         }
 
-        public IEnumerable<ENT.Medicine> MapMedicines(IEnumerable<MOD.Medicine>? source)
+        public List<ENT.Medicine> MapMedicines(List<MOD.Medicine> source)
         {
             return source == null ? new List<ENT.Medicine>() : source.Select(medicine =>
              {
-                    return MapMedicine(medicine);
-             });
-
+                 return MapMedicine(medicine);
+             }).ToList();
         }
     }
 }

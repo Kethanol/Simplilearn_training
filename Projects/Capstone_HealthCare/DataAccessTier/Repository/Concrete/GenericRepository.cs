@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository.Contracts;
+using System.Linq.Expressions;
 
 namespace Repository.Concrete
 {
@@ -24,12 +25,18 @@ namespace Repository.Concrete
             return await _set.FindAsync(id);
         }
 
+        public async Task<TEntity?> GetByAsync(Expression<Func<TEntity, bool>> condition)
+        {
+            var item = await _set.Where(condition).FirstOrDefaultAsync();
+            return item;
+        }
+
         public async Task InsertAsync(TEntity model)
         {
             await _set.AddAsync(model);
         }
 
-        public void UpdateAsync(TEntity model)
+        public void Update(TEntity model)
         {
             _set.Update(model);
         }

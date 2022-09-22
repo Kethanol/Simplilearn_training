@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLogicTier.Contracts;
+using Entities.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Capstone_Project.Controllers
 {
@@ -7,24 +9,33 @@ namespace Capstone_Project.Controllers
     // This will require authorization in order to make the API secure
     public class CartController : Controller
     {
+        private readonly ICartService _cartService;
+
+        public CartController(ICartService cartService)
+        {
+            _cartService = cartService;
+        }
+
         [HttpGet]
-        [Route("get-by-user-id")]
+        [Route("get-by-user/{userId}")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetUserCart([FromQuery] int id)
+        public async Task<IActionResult> GetUserCart([FromQuery] int userId)
         {
-            return Ok(id);
+            var cart = await _cartService.GetUserCart(userId);
+            return Ok(cart);
         }
 
         [HttpPost]
-        [Route("add-medicine")]
+        [Route("{cartId}/add-medicine")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult AddMedicineToCart()
+        public async Task<IActionResult> AddMedicineToCart([FromBody] Medicine medicine, [FromQuery] int cartId)
         {
+            await _cartService.AddMedicineToCart(medicine, cartId);
             return Ok();
         }
 
@@ -33,8 +44,9 @@ namespace Capstone_Project.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult PlaceOrder()
+        public async Task<IActionResult> PlaceOrder([FromBody] Cart cart)
         {
+            await _cartService.PlaceOrder(cart);
             return Ok();
         }
     }

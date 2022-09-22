@@ -1,3 +1,5 @@
+using BusinessLogicTier.Concrete;
+using BusinessLogicTier.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Concrete;
@@ -16,11 +18,12 @@ static void ConfigureServices(WebApplicationBuilder builder)
         opts.LowercaseUrls = true;
     });
 
-    var connectionString = builder.Configuration.GetConnectionString("sample");
+    var connectionString = builder.Configuration.GetConnectionString("Capstone");
     services.AddDbContext<CapstoneContext>(opts => opts.UseSqlServer(connectionString));
 
     services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
     services.AddScoped<IUnitOfWork, UnitOfWork>();
+    services.AddScoped<IMedicineService, MedicineService>();
     services.AddSingleton<IMapper, Mapper>();
 
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
