@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Repository.Models;
+﻿using Entities.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -15,6 +15,36 @@ namespace Repository
         public virtual DbSet<User>? Users { get; set; }
         #endregion
 
-        // Insert here some code first table creation?
+        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        {
+            modelBuilder.HasDefaultSchema("dbo");
+
+            modelBuilder.Entity<Medicine>(medicine =>
+            {
+                medicine.HasKey(x => x.Id);
+
+                medicine.Property(x => x.Name)
+                .HasMaxLength(30)
+                .HasColumnName("Name");
+
+                medicine.Property(x => x.Description)
+                .HasMaxLength(120)
+                .HasColumnName("Description");
+
+                medicine.Property(x => x.SchemaOfTreatment)
+                .HasMaxLength(50)
+                .HasColumnName("SchemaOfTreatment");
+
+                medicine.Property(x => x.MinimumAge)
+                .HasColumnName("MinimumAge");
+
+                medicine.Property(x => x.Price)
+                .HasColumnName("Price")
+                .HasPrecision(2)
+                .HasMaxLength(16);
+
+                medicine.ToTable("Medicine");
+            });
+        }
     }
 }
