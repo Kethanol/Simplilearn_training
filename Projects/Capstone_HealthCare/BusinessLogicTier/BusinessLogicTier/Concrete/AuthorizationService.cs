@@ -17,6 +17,11 @@ namespace BusinessLogicTier.Concrete
             _configuration = configuration;
         }
 
+        public User Authenticate(UserLogin loginInformation)
+        {
+            throw new NotImplementedException();
+        }
+
         public string GenerateToken(User user)
         {
             var key = _configuration["JWT:Key"];
