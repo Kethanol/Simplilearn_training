@@ -6,7 +6,7 @@ namespace Capstone_HealthCare.Extensions
 {
     public static class ExceptionMiddleware
     {
-        public class ExceptionDetails 
+        public class ExceptionDetails
         {
             public int StatusCode { get; set; }
             public string? Message { get; set; }
@@ -17,7 +17,7 @@ namespace Capstone_HealthCare.Extensions
             }
         }
 
-        public static void ConfigureExceptionHandler(this WebApplication app) 
+        public static void ConfigureExceptionHandler(this WebApplication app)
         {
             app.UseExceptionHandler(exceptionRunner =>
             {
@@ -36,8 +36,7 @@ namespace Capstone_HealthCare.Extensions
                             StatusCode = exceptionContext.Response.StatusCode,
                             Message = $"Internal Server error: {contextFeature.Error}"
 
-                        }.ToString()) ;
-
+                        }.ToString());
                     }
                 });
             });
