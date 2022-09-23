@@ -63,7 +63,7 @@ namespace Capstone_Project.Controllers
         }
 
         [HttpDelete]
-        [Route("delete-medicine/{medicineId}")]
+        [Route("delete-medicine")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

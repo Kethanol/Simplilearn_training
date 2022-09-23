@@ -17,7 +17,7 @@ namespace Capstone_Project.Controllers
         }
 
         [HttpGet]
-        [Route("get-by-user/{userId}")]
+        [Route("get-by-user")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
