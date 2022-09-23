@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using System.Linq.Expressions;
 
 namespace Repository.Contracts
 {
@@ -10,5 +11,6 @@ namespace Repository.Contracts
         Task InsertAsync(TEntity model);
         void Update(TEntity model);
         Task DeleteAsync(int id);
+        Task<List<TEntity>> GetByWithInclude(Expression<Func<TEntity, bool>>? where, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include);
     }
 }

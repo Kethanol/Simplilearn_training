@@ -24,6 +24,7 @@ static void ConfigureServices(WebApplicationBuilder builder)
     services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
     services.AddScoped<IUnitOfWork, UnitOfWork>();
     services.AddScoped<IMedicineService, MedicineService>();
+    services.AddScoped<ICartService, CartService>();
     services.AddSingleton<IMapper, Mapper>();
 
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

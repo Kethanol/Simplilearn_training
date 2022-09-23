@@ -30,7 +30,6 @@ IF (NOT EXISTS (SELECT *
                  AND  TABLE_NAME = 'CartXMedicine'))
 BEGIN
     CREATE TABLE [dbo].[CartXMedicine] (
-	Id INT IDENTITY(1,1) PRIMARY KEY,
 	CartId INT FOREIGN KEY References dbo.Cart(Id),
 	MedicineId INT FOREIGN KEY References dbo.Medicine(Id),
 	)

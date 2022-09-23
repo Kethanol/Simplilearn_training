@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using Repository.Contracts;
 using System.Linq.Expressions;
 
@@ -52,6 +53,19 @@ namespace Repository.Concrete
 
                 _set.Remove(toDelete);
             }
+        }
+
+        public async Task<List<TEntity>> GetByWithInclude(Expression<Func<TEntity, bool>>? where, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object?>>? include)
+        {
+            IQueryable<TEntity> query = _set;
+
+            if(where != null)
+                query = query.Where(where);
+
+            if (include != null)
+                query = include(query);
+
+            return await query.ToListAsync();
         }
     }
 }

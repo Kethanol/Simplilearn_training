@@ -15,20 +15,20 @@ namespace BusinessLogicTier.Concrete
 
         public async Task<Cart> GetUserCart(int userId)
         {
-            var cart = await _unitOfWork.CartRepository.GetByAsync(cart => cart.Owner != null && cart.Owner.Id == userId);
+            var cart = await _unitOfWork.CartRepository.GetByAsync(cart => cart.User != null && cart.User.Id == userId);
             return cart;
         }
 
-        public async Task AddMedicineToCart(Medicine medicine, int cartId)
+        public async Task AddMedicineToCart(int medicineId, int cartId)
         {
-            //var cart = await _unitOfWork.CartRepository.GetAsync(cartId);
-            //cart.MedicineList ??= new List<Medicine>(); // TODO -- exception handling
+            var cartMedicine = new CartXMedicine()
+            {
+                CartId = cartId,
+                MedicineId = medicineId
+            };
 
-            //cart.MedicineList.Add(medicine);
-
-            //_unitOfWork.CartRepository.Update(cart);
-
-            //await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.CartMedicineRepository.InsertAsync(cartMedicine);
+            await _unitOfWork.SaveChangesAsync();
         }
 
 

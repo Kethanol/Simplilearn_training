@@ -37,7 +37,7 @@ namespace Repository.Concrete.Mapper
             {
                 Id = source.Id,
                 CartXMedicines = MapCartXMedicines(source.CartXMedicines),
-                Owner = MapUser(source.Owner)
+                User = MapUser(source.User)
             };
 
         }

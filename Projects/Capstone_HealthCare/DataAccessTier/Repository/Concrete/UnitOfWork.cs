@@ -10,6 +10,7 @@ namespace Repository.Concrete
         private GenericRepository<Medicine>? _medicineRepository;
         private GenericRepository<Cart>? _cartRepository;
         private GenericRepository<User>? _userRepository;
+        private GenericRepository<CartXMedicine>? _cartMedicineRepository;
 
         public UnitOfWork(CapstoneContext context)
         {
@@ -40,6 +41,15 @@ namespace Repository.Concrete
             {
                 _userRepository ??= new GenericRepository<User>(_context);
                 return _userRepository;
+            }
+        }
+
+        public GenericRepository<CartXMedicine> CartMedicineRepository 
+        {
+            get
+            {
+                _cartMedicineRepository ??= new GenericRepository<CartXMedicine>(_context);
+                return _cartMedicineRepository;
             }
         }
 

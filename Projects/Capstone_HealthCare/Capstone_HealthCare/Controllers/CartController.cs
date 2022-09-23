@@ -29,13 +29,13 @@ namespace Capstone_Project.Controllers
         }
 
         [HttpPost]
-        [Route("{cartId}/add-medicine")]
+        [Route("add-medicine")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> AddMedicineToCart([FromBody] Medicine medicine, [FromQuery] int cartId)
+        public async Task<IActionResult> AddMedicineToCart([FromQuery] int medicineId, int cartId)
         {
-            await _cartService.AddMedicineToCart(medicine, cartId);
+            await _cartService.AddMedicineToCart(medicineId, cartId);
             return Ok();
         }
 

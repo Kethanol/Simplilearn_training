@@ -9,5 +9,6 @@ namespace Repository.Contracts
         GenericRepository<Medicine> MedicineRepository { get; }
         GenericRepository<User> UserRepository { get; }
         GenericRepository<Cart> CartRepository { get; }
+        GenericRepository<CartXMedicine> CartMedicineRepository { get; }
     }
 }
