@@ -10,7 +10,6 @@ namespace Capstone_Project.Controllers
     public class AdminController : Controller
     {
         // TODO -- EXCEPTION HANDLING
-        // TODO -- MAPPING
 
         private readonly IMedicineService _medicineService;
 
