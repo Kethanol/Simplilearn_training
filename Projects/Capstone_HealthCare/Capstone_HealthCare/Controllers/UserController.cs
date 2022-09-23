@@ -1,14 +1,11 @@
-﻿using BC = BusinessLogicTier.Contracts;
-using Entities.Entities;
-using Microsoft.AspNetCore.Authorization;
+﻿using Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
-using BusinessLogicTier.Contracts;
+using BC = BusinessLogicTier.Contracts;
 
 namespace Capstone_Project.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
-    [Authorize]
     public class UserController : Controller
     {
         private readonly BC.IAuthorizationService _authorizationService;

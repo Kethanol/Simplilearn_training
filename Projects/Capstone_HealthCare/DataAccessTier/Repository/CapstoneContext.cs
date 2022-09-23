@@ -5,9 +5,9 @@ namespace Repository
 {
     public class CapstoneContext : DbContext
     {
-        public CapstoneContext() {}
+        public CapstoneContext() { }
 
-        public CapstoneContext(DbContextOptions<CapstoneContext> options): base(options) {}
+        public CapstoneContext(DbContextOptions<CapstoneContext> options) : base(options) { }
 
         #region Tables
         public virtual DbSet<Medicine>? Medicines { get; set; }
@@ -16,7 +16,7 @@ namespace Repository
         public virtual DbSet<CartXMedicine>? CartXMedicines { get; set; }
         #endregion
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("dbo");
 
@@ -49,7 +49,7 @@ namespace Repository
 
             modelBuilder.Entity<CartXMedicine>(entity =>
             {
-                entity.HasKey(x => new {x.CartId, x.MedicineId});
+                entity.HasKey(x => new { x.CartId, x.MedicineId });
 
                 entity.HasOne(x => x.Cart).WithMany(x => x.CartXMedicines).HasForeignKey(x => x.CartId);
                 entity.HasOne(x => x.Medicine).WithMany(x => x.CartXMedicines).HasForeignKey(x => x.MedicineId);

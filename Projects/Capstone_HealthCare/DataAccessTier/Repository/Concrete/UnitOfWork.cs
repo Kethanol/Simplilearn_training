@@ -3,7 +3,7 @@ using Repository.Contracts;
 
 namespace Repository.Concrete
 {
-    public class UnitOfWork: IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly CapstoneContext _context;
 
@@ -17,9 +17,9 @@ namespace Repository.Concrete
             _context = context;
         }
 
-        public GenericRepository<Medicine> MedicineRepository 
+        public GenericRepository<Medicine> MedicineRepository
         {
-            get 
+            get
             {
                 _medicineRepository ??= new GenericRepository<Medicine>(_context);
                 return _medicineRepository;
@@ -44,7 +44,7 @@ namespace Repository.Concrete
             }
         }
 
-        public GenericRepository<CartXMedicine> CartMedicineRepository 
+        public GenericRepository<CartXMedicine> CartMedicineRepository
         {
             get
             {

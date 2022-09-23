@@ -31,7 +31,7 @@ namespace BusinessLogicTier.Concrete
                 new Claim(ClaimTypes.Email, "denis.alexandru97@gmail.com"),
                 new Claim(ClaimTypes.GivenName, "Denis"),
                 new Claim(ClaimTypes.Surname, "Denis"),
-                new Claim(ClaimTypes.Role, "admin")
+                new Claim(ClaimTypes.Role, "Administrator")
             };
 
             var issuer = _configuration["JWT:Issuer"];

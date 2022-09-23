@@ -59,7 +59,7 @@ namespace Repository.Concrete
         {
             IQueryable<TEntity> query = _set;
 
-            if(where != null)
+            if (where != null)
                 query = query.Where(where);
 
             if (include != null)
