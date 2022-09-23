@@ -1,9 +1,12 @@
 using BusinessLogicTier.Concrete;
 using BusinessLogicTier.Contracts;
+using Capstone_HealthCare.Extensions;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Concrete;
 using Repository.Contracts;
+using static System.Net.Mime.MediaTypeNames;
 
 static void ConfigureServices(WebApplicationBuilder builder)
 {
@@ -41,6 +44,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// This one should be used only on non-development environments
+// I will use it here for now, then move it if I deploy the application
+app.ConfigureExceptionHandler();
 
 app.UseHttpsRedirection();
 

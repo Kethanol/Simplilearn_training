@@ -9,8 +9,6 @@ namespace Capstone_Project.Controllers
     // This will require administrator privileges, besides the basic authorization
     public class AdminController : Controller
     {
-        // TODO -- EXCEPTION HANDLING
-
         private readonly IMedicineService _medicineService;
 
         public AdminController(IMedicineService medicineService)
