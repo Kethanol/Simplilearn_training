@@ -3,9 +3,7 @@ using BusinessLogicTier.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Concrete;
-using Repository.Concrete.Mapper;
 using Repository.Contracts;
-using Repository.Contracts.Mapper;
 
 static void ConfigureServices(WebApplicationBuilder builder)
 {
@@ -25,7 +23,6 @@ static void ConfigureServices(WebApplicationBuilder builder)
     services.AddScoped<IUnitOfWork, UnitOfWork>();
     services.AddScoped<IMedicineService, MedicineService>();
     services.AddScoped<ICartService, CartService>();
-    services.AddSingleton<IMapper, Mapper>();
 
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     services.AddEndpointsApiExplorer();

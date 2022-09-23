@@ -1,7 +1,6 @@
 ﻿using BusinessLogicTier.Contracts;
 using Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Repository.Contracts.Mapper;
 
 namespace Capstone_Project.Controllers
 {
@@ -14,12 +13,10 @@ namespace Capstone_Project.Controllers
         // TODO -- MAPPING
 
         private readonly IMedicineService _medicineService;
-        private readonly IMapper _mapper;
 
-        public AdminController(IMedicineService medicineService, IMapper mapper)
+        public AdminController(IMedicineService medicineService)
         {
             _medicineService = medicineService;
-            _mapper = mapper;
         }
 
         [HttpGet]
