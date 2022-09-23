@@ -15,7 +15,7 @@ namespace BusinessLogicTier.Concrete
 
         public async Task<Cart> GetUserCart(int userId)
         {
-            var cart = await _unitOfWork.CartRepository.GetByAsync(cart => cart.User != null && cart.User.Id == userId);
+            var cart = await _unitOfWork.CartRepository.GetSingleByAsync(cart => cart.User != null && cart.User.Id == userId);
             return cart;
         }
 

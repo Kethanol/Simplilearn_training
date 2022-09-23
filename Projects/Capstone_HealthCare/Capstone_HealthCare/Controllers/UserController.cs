@@ -1,6 +1,6 @@
 ﻿using Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
-using BC = BusinessLogicTier.Contracts;
+using BusinessLogicTier.Contracts;
 
 namespace Capstone_Project.Controllers
 {
@@ -8,11 +8,11 @@ namespace Capstone_Project.Controllers
     [Route("/api/[controller]")]
     public class UserController : Controller
     {
-        private readonly BC.IAuthorizationService _authorizationService;
+        private readonly IUserService _userService;
 
-        public UserController(BC.IAuthorizationService authorizationService)
+        public UserController(IUserService userService)
         {
-            _authorizationService = authorizationService;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -20,10 +20,10 @@ namespace Capstone_Project.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult SignUp()
+        public async Task<IActionResult> SignUp([FromBody] User user)
         {
-            var token = _authorizationService.GenerateToken(new User()); // Mock
-            return Ok(token);
+            await _userService.SignUp(user);
+            return Ok();
         }
 
         [HttpPost]
@@ -31,9 +31,10 @@ namespace Capstone_Project.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult SignIn()
+        public IActionResult SignIn([FromBody] UserLogin loginInformation)
         {
-            return Ok();
+            var token = _userService.SignIn(loginInformation);
+            return Ok(token);
         }
     }
 }

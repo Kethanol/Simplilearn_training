@@ -16,11 +16,27 @@ END
 IF (NOT EXISTS (SELECT * 
                  FROM INFORMATION_SCHEMA.TABLES 
                  WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'User'))
+BEGIN
+    CREATE TABLE [dbo].[User] (
+	Id INT IDENTITY(1,1) PRIMARY KEY,
+	[Username] VARCHAR(30),
+	[Password] VARCHAR(30),
+	[Email] VARCHAR(50),
+	[FirstName] VARCHAR(30),
+	[LastName] VARCHAR(30),
+	[Role] VARCHAR(30)
+	)
+END
+
+IF (NOT EXISTS (SELECT * 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
                  AND  TABLE_NAME = 'Cart'))
 BEGIN
     CREATE TABLE [dbo].[Cart] (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
-	UserId INT
+	UserId INT FOREIGN KEY References [dbo.User](Id),
 	)
 END
 

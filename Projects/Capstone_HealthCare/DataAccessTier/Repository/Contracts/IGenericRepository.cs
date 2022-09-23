@@ -7,7 +7,8 @@ namespace Repository.Contracts
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity?> GetAsync(int id);
-        Task<TEntity?> GetByAsync(Expression<Func<TEntity, bool>> condition);
+        Task<TEntity?> GetSingleByAsync(Expression<Func<TEntity, bool>> condition);
+        Task<IEnumerable<TEntity?>> GetManyByAsync(Expression<Func<TEntity, bool>> condition);
         Task InsertAsync(TEntity model);
         void Update(TEntity model);
         Task DeleteAsync(int id);

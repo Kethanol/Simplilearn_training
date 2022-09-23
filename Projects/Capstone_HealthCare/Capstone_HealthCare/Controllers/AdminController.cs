@@ -35,9 +35,9 @@ namespace Capstone_Project.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetMedicine([FromQuery] int medicineId)
+        public async Task<IActionResult> GetMedicine([FromQuery] string medicineName)
         {
-            var medicine = await _medicineService.GetAsync(medicineId);
+            var medicine = await _medicineService.GetAsync(medicineName);
             return Ok(medicine);
         }
 

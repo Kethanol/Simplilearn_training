@@ -17,12 +17,7 @@ namespace BusinessLogicTier.Concrete
             _configuration = configuration;
         }
 
-        public User Authenticate(UserLogin loginInformation)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GenerateToken(User user)
+        public string GenerateToken(User? user)
         {
             var key = _configuration["JWT:Key"];
 
@@ -31,12 +26,11 @@ namespace BusinessLogicTier.Concrete
 
             var claims = new List<Claim>()
             {
-                // Test data
-                new Claim(ClaimTypes.NameIdentifier, "Denis"),
-                new Claim(ClaimTypes.Email, "denis.alexandru97@gmail.com"),
-                new Claim(ClaimTypes.GivenName, "Denis"),
-                new Claim(ClaimTypes.Surname, "Denis"),
-                new Claim(ClaimTypes.Role, "Administrator")
+                new Claim(ClaimTypes.NameIdentifier, user.Username!),
+                new Claim(ClaimTypes.Email, user.E_mail!),
+                new Claim(ClaimTypes.GivenName, user.FirstName!),
+                new Claim(ClaimTypes.Surname, user.LastName!),
+                new Claim(ClaimTypes.Role, user.Role!)
             };
 
             var issuer = _configuration["JWT:Issuer"];

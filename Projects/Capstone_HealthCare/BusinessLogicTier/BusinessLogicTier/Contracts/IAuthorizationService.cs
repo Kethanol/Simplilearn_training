@@ -4,7 +4,6 @@ namespace BusinessLogicTier.Contracts
 {
     public interface IAuthorizationService
     {
-        string GenerateToken(User user);
-        User Authenticate(UserLogin loginInformation);
+        string GenerateToken(User? user);
     }
 }

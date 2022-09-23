@@ -26,10 +26,16 @@ namespace Repository.Concrete
             return await _set.FindAsync(id);
         }
 
-        public async Task<TEntity?> GetByAsync(Expression<Func<TEntity, bool>> condition)
+        public async Task<TEntity?> GetSingleByAsync(Expression<Func<TEntity, bool>> condition)
         {
             var item = await _set.Where(condition).FirstOrDefaultAsync();
             return item;
+        }
+
+        public async Task<IEnumerable<TEntity?>> GetManyByAsync(Expression<Func<TEntity, bool>> condition)
+        {
+            var items = await _set.Where(condition).ToListAsync();
+            return items;
         }
 
         public async Task InsertAsync(TEntity model)

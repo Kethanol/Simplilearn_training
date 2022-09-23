@@ -1,5 +1,6 @@
 ﻿using BusinessLogicTier.Contracts;
 using Entities.Entities;
+using Microsoft.EntityFrameworkCore;
 using Repository.Contracts;
 
 namespace BusinessLogicTier.Concrete
@@ -18,11 +19,10 @@ namespace BusinessLogicTier.Concrete
             return await _unitOfWork.MedicineRepository.GetAllAsync();
         }
 
-        public async Task<Medicine> GetAsync(int id)
+        public async Task<IEnumerable<Medicine?>> GetAsync(string medicineName)
         {
-            var medicine = await _unitOfWork.MedicineRepository.GetAsync(id);
-            return medicine ?? new Medicine(); // Exception handling -- TO DO
-            // TO DO -- A GET BY MEDICINE NAME
+            var medicines = await _unitOfWork.MedicineRepository.GetManyByAsync(m => m.Name != null && EF.Functions.Like(m.Name.ToUpper(), medicineName.ToUpper()));
+            return medicines ?? new List<Medicine?>();
         }
 
         public async Task AddMedicine(Medicine medicine)

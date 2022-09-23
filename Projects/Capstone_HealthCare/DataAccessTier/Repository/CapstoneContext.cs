@@ -41,8 +41,8 @@ namespace Repository
 
                 medicine.Property(x => x.Price)
                 .HasColumnName("Price")
-                .HasPrecision(2)
-                .HasMaxLength(16);
+                .HasMaxLength(16)
+                .HasPrecision(2);
 
                 medicine.ToTable("Medicine");
             });
@@ -61,6 +61,37 @@ namespace Repository
             {
                 cart.HasKey(x => x.Id);
                 cart.ToTable("Cart");
+            });
+
+            modelBuilder.Entity<User>(user =>
+            {
+                user.HasKey(x => x.Id);
+
+                user.Property(x => x.Username)
+                .HasMaxLength(30)
+                .HasColumnName("Username");
+
+                user.Property(x => x.Password)
+                .HasMaxLength(30)
+                .HasColumnName("Password");
+
+                user.Property(x => x.E_mail)
+                .HasMaxLength(50)
+                .HasColumnName("Email");
+
+                user.Property(x => x.FirstName)
+                .HasMaxLength(30)
+                .HasColumnName("FirstName");
+
+                user.Property(x => x.LastName)
+                .HasMaxLength(30)
+                .HasColumnName("LastName");
+
+                user.Property(x => x.Role)
+                .HasMaxLength(30)
+                .HasColumnName("Role");
+
+                user.ToTable("User");
             });
         }
     }
