@@ -1,12 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BC = BusinessLogicTier.Contracts;
+using Entities.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using BusinessLogicTier.Contracts;
 
 namespace Capstone_Project.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
-    // This will require authorization in order to make the API secure
+    [Authorize]
     public class UserController : Controller
     {
+        private readonly BC.IAuthorizationService _authorizationService;
+
+        public UserController(BC.IAuthorizationService authorizationService)
+        {
+            _authorizationService = authorizationService;
+        }
+
         [HttpPost]
         [Route("sign-up")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -14,7 +25,8 @@ namespace Capstone_Project.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult SignUp()
         {
-            return Ok();
+            var token = _authorizationService.GenerateToken(new User()); // Mock
+            return Ok(token);
         }
 
         [HttpPost]

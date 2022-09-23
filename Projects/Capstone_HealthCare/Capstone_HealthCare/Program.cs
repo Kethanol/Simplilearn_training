@@ -19,6 +19,8 @@ static void ConfigureServices(WebApplicationBuilder builder)
         opts.LowercaseUrls = true;
     });
 
+    services.UseJWTConfiguration(builder.Configuration);
+
     var connectionString = builder.Configuration.GetConnectionString("Capstone");
     services.AddDbContext<CapstoneContext>(opts => opts.UseSqlServer(connectionString));
 
@@ -26,6 +28,7 @@ static void ConfigureServices(WebApplicationBuilder builder)
     services.AddScoped<IUnitOfWork, UnitOfWork>();
     services.AddScoped<IMedicineService, MedicineService>();
     services.AddScoped<ICartService, CartService>();
+    services.AddSingleton<IAuthorizationService, AuthorizationService>();
 
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     services.AddEndpointsApiExplorer();
@@ -51,6 +54,7 @@ app.ConfigureExceptionHandler();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

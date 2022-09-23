@@ -1,12 +1,13 @@
 ﻿using BusinessLogicTier.Contracts;
 using Entities.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Capstone_Project.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
-    // This will require authorization in order to make the API secure
+    [Authorize]
     public class CartController : Controller
     {
         private readonly ICartService _cartService;
