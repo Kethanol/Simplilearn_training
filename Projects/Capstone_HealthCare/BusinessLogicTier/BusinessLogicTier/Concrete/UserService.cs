@@ -28,7 +28,7 @@ namespace BusinessLogicTier.Concrete
             var hashedPassword = _validationService.Hash(loginInformation.Password!);
 
             var existingUser = await _unitOfWork.UserRepository.GetSingleByAsync(u => (u.Username == loginInformation.UsernameOrEmail || u.E_mail == loginInformation.UsernameOrEmail)
-            && loginInformation.Password == hashedPassword);
+            && u.Password == hashedPassword);
 
             if (existingUser != null)
             {

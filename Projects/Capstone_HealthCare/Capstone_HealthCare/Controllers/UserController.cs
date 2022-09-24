@@ -31,10 +31,10 @@ namespace Capstone_Project.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult SignIn([FromBody] UserLogin loginInformation)
+        public async Task<IActionResult> SignIn([FromBody] UserLogin loginInformation)
         {
-            var token = _userService.SignIn(loginInformation);
-            return Ok(token);
+            var response = await _userService.SignIn(loginInformation);
+            return Ok(response);
         }
     }
 }

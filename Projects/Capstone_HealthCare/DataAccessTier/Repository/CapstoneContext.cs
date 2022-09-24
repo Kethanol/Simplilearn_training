@@ -72,7 +72,7 @@ namespace Repository
                 .HasColumnName("Username");
 
                 user.Property(x => x.Password)
-                .HasMaxLength(30)
+                .HasMaxLength(256)
                 .HasColumnName("Password");
 
                 user.Property(x => x.E_mail)
