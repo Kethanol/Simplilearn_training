@@ -1,4 +1,5 @@
 ﻿using BusinessLogicTier.Contracts;
+using BusinessLogicTier.Models;
 using Entities.Entities;
 using Repository.Contracts;
 
@@ -8,35 +9,61 @@ namespace BusinessLogicTier.Concrete
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAuthorizationService _authorizationService;
+        private readonly IValidationService _validationService;
 
-        public UserService(IUnitOfWork unitOfWork, IAuthorizationService authorizationService)
+        public UserService(IUnitOfWork unitOfWork, IAuthorizationService authorizationService, IValidationService validationService)
         {
             _unitOfWork = unitOfWork;
             _authorizationService = authorizationService;
+            _validationService = validationService;
         }
 
-        public async Task<string> SignIn(UserLogin loginInformation)
+        public async Task<LoginResponseModel> SignIn(UserLogin loginInformation)
         {
-            var existingUser = await _unitOfWork.UserRepository.GetSingleByAsync(u => (u.Username == loginInformation.UsernameOrEmail || u.E_mail == loginInformation.UsernameOrEmail)
-            && loginInformation.Password == u.Password); // To encrypt the password
+            var isValid = _validationService.ValidateUsernameOrMail(loginInformation.UsernameOrEmail!) && _validationService.ValidatePassword(loginInformation.Password!);
+            var response = new LoginResponseModel();
 
-            // Validations placeholder
+            if (!isValid) return response;
+
+            var hashedPassword = _validationService.Hash(loginInformation.Password!);
+
+            var existingUser = await _unitOfWork.UserRepository.GetSingleByAsync(u => (u.Username == loginInformation.UsernameOrEmail || u.E_mail == loginInformation.UsernameOrEmail)
+            && loginInformation.Password == hashedPassword);
 
             if (existingUser != null)
             {
                 var token = _authorizationService.GenerateToken(existingUser);
-                return token;
+
+                response.HasSuccess = true;
+                response.Token = token;
             }
 
-            return null!;
+            return response;
         }
 
-        public async Task SignUp(User user)
+        public async Task<bool> SignUp(User user)
         {
-            // Validations + password management placeholder
+            var isValid = _validationService.ValidateUsername(user.Username!) && _validationService.ValidatePassword(user.Password!) && _validationService.ValidateMail(user.E_mail!);
 
-            await _unitOfWork.UserRepository.InsertAsync(user);
+            if (!isValid) return isValid;
+
+            var hashedPassword = _validationService.Hash(user.Password!);
+
+            var newUser = new User()
+            {
+                Id = user.Id,
+                Username = user.Username,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                E_mail = user.E_mail,
+                Role = user.Role,
+                Password = hashedPassword
+            };
+
+            await _unitOfWork.UserRepository.InsertAsync(newUser);
             await _unitOfWork.SaveChangesAsync();
+
+            return true;
         }
     }
 }

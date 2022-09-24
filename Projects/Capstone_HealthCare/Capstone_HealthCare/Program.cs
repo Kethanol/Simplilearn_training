@@ -27,6 +27,7 @@ static void ConfigureServices(WebApplicationBuilder builder)
     services.AddScoped<IMedicineService, MedicineService>();
     services.AddScoped<ICartService, CartService>();
     services.AddSingleton<IAuthorizationService, AuthorizationService>();
+    services.AddSingleton<IValidationService, ValidationService>();
 
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     services.AddEndpointsApiExplorer();

@@ -1,10 +1,11 @@
-﻿using Entities.Entities;
+﻿using BusinessLogicTier.Models;
+using Entities.Entities;
 
 namespace BusinessLogicTier.Contracts
 {
     public interface IUserService
     {
-        Task SignUp(User user);
-        Task<string> SignIn(UserLogin loginInformation);
+        Task<bool> SignUp(User user);
+        Task<LoginResponseModel> SignIn(UserLogin loginInformation);
     }
 }
