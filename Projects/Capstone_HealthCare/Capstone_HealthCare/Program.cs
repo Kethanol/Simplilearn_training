@@ -26,6 +26,7 @@ static void ConfigureServices(WebApplicationBuilder builder)
     services.AddScoped<IUnitOfWork, UnitOfWork>();
     services.AddScoped<IMedicineService, MedicineService>();
     services.AddScoped<ICartService, CartService>();
+    services.AddScoped<IUserService, UserService>();
     services.AddSingleton<IAuthorizationService, AuthorizationService>();
     services.AddSingleton<IValidationService, ValidationService>();
 

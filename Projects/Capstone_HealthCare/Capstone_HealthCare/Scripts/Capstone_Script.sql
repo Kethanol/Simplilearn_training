@@ -21,7 +21,7 @@ BEGIN
     CREATE TABLE [dbo].[User] (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
 	[Username] VARCHAR(30),
-	[Password] VARCHAR(30),
+	[Password] VARCHAR(256),
 	[Email] VARCHAR(50),
 	[FirstName] VARCHAR(30),
 	[LastName] VARCHAR(30),
