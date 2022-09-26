@@ -11,15 +11,23 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import SignUpContainer from "./Components/SignUp/SignUpContainer";
 import LoginContainer from "./Components/Login/LoginContainer";
 
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import { Provider as StoreProvider } from "react-redux";
+import reducers from "./reducers";
+
+var composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+var store = createStore(reducers, composeEnhancer(applyMiddleware(thunk)));
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 var router = createBrowserRouter([
   {
     path: "/login",
-    element: <LoginContainer name={"Denis"} />,
+    element: <LoginContainer />,
   },
   {
     path: "/sign-up",
-    element: <SignUpContainer name={"Denis"} />,
+    element: <SignUpContainer />,
   },
   {
     path: "/",
@@ -40,9 +48,11 @@ var theme = extendTheme({
 
 root.render(
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <RouterProvider router={router}></RouterProvider>
-    </ChakraProvider>
+    <StoreProvider store={store}>
+      <ChakraProvider theme={theme}>
+        <RouterProvider router={router}></RouterProvider>
+      </ChakraProvider>
+    </StoreProvider>
   </React.StrictMode>
 );
 

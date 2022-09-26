@@ -17,6 +17,7 @@ static void ConfigureServices(WebApplicationBuilder builder)
         opts.LowercaseUrls = true;
     });
 
+    services.AddCustomCors();
     services.UseJWTConfiguration(builder.Configuration);
 
     var connectionString = builder.Configuration.GetConnectionString("Capstone");
@@ -51,6 +52,8 @@ if (app.Environment.IsDevelopment())
 // This one should be used only on non-development environments
 // I will use it here for now, then move it if I deploy the application
 app.ConfigureExceptionHandler();
+
+app.UseCors("Capstone Frontend");
 
 app.UseHttpsRedirection();
 

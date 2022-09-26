@@ -107,7 +107,7 @@ function SignUpComponent(props) {
             width={"70%"}
             marginRight={"1rem"}
           >
-            <FormLabel fontSize={"1.65rem"}>Password</FormLabel>
+            <FormLabel fontSize={"1.65rem"}>Repeat password</FormLabel>
             <Input
               type={"password"}
               padding={"1.6rem"}
