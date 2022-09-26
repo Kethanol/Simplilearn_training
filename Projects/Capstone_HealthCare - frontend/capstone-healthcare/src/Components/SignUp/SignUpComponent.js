@@ -5,6 +5,7 @@ import {
   Box,
   Input,
   Button,
+  Image,
 } from "@chakra-ui/react";
 
 function SignUpComponent(props) {
@@ -16,9 +17,11 @@ function SignUpComponent(props) {
           width={"70%"}
           display={"flex"}
           flexDirection={"column"}
-          alignItems={"flex-end"}
+          alignItems={"center"}
           justifyContent={"center"}
-          marginBottom={"5rem"}
+          margin={"2rem 0 5rem 0"}
+          borderRadius={"5rem"}
+          boxShadow={"0rem 0rem 0.2rem rgb(0 0 0 / 60%)"}
         >
           <FormControl
             isRequired
@@ -99,7 +102,9 @@ function SignUpComponent(props) {
         </Box>
       </Box>
       <Box width={"50%"} display={"flex"}>
-        <Box width={"45%"}></Box>
+        <Box width={"45%"}>
+          <Image src="https://ibb.co/JKdvZk4"></Image>
+        </Box>
         <Box width={"55%"}></Box>
       </Box>
     </Box>
