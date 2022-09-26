@@ -6,22 +6,28 @@ import {
   Input,
   Button,
   Image,
+  Text,
 } from "@chakra-ui/react";
+import logo from "../../healthcare.png";
 
 function SignUpComponent(props) {
   return (
     <Box height={"100vh"} width={"100%"} display={"flex"}>
-      <Box width={"50%"} display={"flex"}>
-        <Box width={"30%"}></Box>
+      <Box width={"45%"} display={"flex"}>
+        <Box width={"25%"}></Box>
         <Box
           width={"70%"}
+          height={"85%"}
           display={"flex"}
           flexDirection={"column"}
           alignItems={"center"}
           justifyContent={"center"}
-          margin={"2rem 0 5rem 0"}
-          borderRadius={"5rem"}
-          boxShadow={"0rem 0rem 0.2rem rgb(0 0 0 / 60%)"}
+          margin={"auto"}
+          borderRadius={"2rem"}
+          boxShadow={
+            "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;"
+          }
+          gap={"2rem"}
         >
           <FormControl
             isRequired
@@ -29,9 +35,16 @@ function SignUpComponent(props) {
             width={"70%"}
             marginRight={"1rem"}
           >
-            <FormLabel>Username</FormLabel>
-            <Input type={"text"}></Input>
-            <FormHelperText>Please, enter your username</FormHelperText>
+            <FormLabel fontSize={"1.65rem"}>Username</FormLabel>
+            <Input
+              type={"text"}
+              padding={"1.6rem"}
+              borderRadius={"1rem"}
+              fontSize={"1.6rem"}
+            ></Input>
+            <FormHelperText fontSize={"1.3rem"}>
+              Please, enter your username
+            </FormHelperText>
           </FormControl>
 
           <FormControl
@@ -40,9 +53,16 @@ function SignUpComponent(props) {
             width={"70%"}
             marginRight={"1rem"}
           >
-            <FormLabel>Firstname</FormLabel>
-            <Input type={"text"}></Input>
-            <FormHelperText>Please, enter your first name</FormHelperText>
+            <FormLabel fontSize={"1.65rem"}>Firstname</FormLabel>
+            <Input
+              type={"text"}
+              padding={"1.6rem"}
+              borderRadius={"1rem"}
+              fontSize={"1.6rem"}
+            ></Input>
+            <FormHelperText fontSize={"1.3rem"}>
+              Please, enter your first name
+            </FormHelperText>
           </FormControl>
 
           <FormControl
@@ -51,9 +71,16 @@ function SignUpComponent(props) {
             width={"70%"}
             marginRight={"1rem"}
           >
-            <FormLabel>Last name</FormLabel>
-            <Input type={"text"}></Input>
-            <FormHelperText>Please, enter your last name</FormHelperText>
+            <FormLabel fontSize={"1.65rem"}>Last name</FormLabel>
+            <Input
+              type={"text"}
+              padding={"1.6rem"}
+              borderRadius={"1rem"}
+              fontSize={"1.6rem"}
+            ></Input>
+            <FormHelperText fontSize={"1.3rem"}>
+              Please, enter your last name
+            </FormHelperText>
           </FormControl>
 
           <FormControl
@@ -62,9 +89,16 @@ function SignUpComponent(props) {
             width={"70%"}
             marginRight={"1rem"}
           >
-            <FormLabel>Password</FormLabel>
-            <Input type={"password"}></Input>
-            <FormHelperText>Please, enter your password</FormHelperText>
+            <FormLabel fontSize={"1.65rem"}>Password</FormLabel>
+            <Input
+              type={"password"}
+              padding={"1.6rem"}
+              borderRadius={"1rem"}
+              fontSize={"1.6rem"}
+            ></Input>
+            <FormHelperText fontSize={"1.3rem"}>
+              Please, enter your password
+            </FormHelperText>
           </FormControl>
 
           <FormControl
@@ -73,9 +107,16 @@ function SignUpComponent(props) {
             width={"70%"}
             marginRight={"1rem"}
           >
-            <FormLabel>Password</FormLabel>
-            <Input type={"password"}></Input>
-            <FormHelperText>Please, repeat your password</FormHelperText>
+            <FormLabel fontSize={"1.65rem"}>Password</FormLabel>
+            <Input
+              type={"password"}
+              padding={"1.6rem"}
+              borderRadius={"1rem"}
+              fontSize={"1.6rem"}
+            ></Input>
+            <FormHelperText fontSize={"1.3rem"}>
+              Please, repeat your password
+            </FormHelperText>
           </FormControl>
 
           <FormControl
@@ -84,28 +125,59 @@ function SignUpComponent(props) {
             width={"70%"}
             marginRight={"1rem"}
           >
-            <FormLabel>E-mail address</FormLabel>
-            <Input type={"email"}></Input>
-            <FormHelperText>Please, enter your email</FormHelperText>
+            <FormLabel fontSize={"1.65rem"}>E-mail address</FormLabel>
+            <Input
+              type={"email"}
+              padding={"1.6rem"}
+              borderRadius={"1rem"}
+              fontSize={"1.6rem"}
+            ></Input>
+            <FormHelperText fontSize={"1.3rem"}>
+              Please, enter your email
+            </FormHelperText>
           </FormControl>
           <FormControl
-            padding={2}
             marginRight={"1rem"}
             width={"70%"}
             display={"flex"}
             justifyContent={"center"}
           >
-            <Button type={"submit"} width={"80%"} marginTop={"1rem"}>
+            <Button
+              type={"submit"}
+              width={"70%"}
+              padding={"2rem"}
+              marginTop={"2rem"}
+              fontSize={"1.6rem"}
+              borderRadius={"2rem"}
+              letterSpacing={"0.1rem"}
+            >
               SIGN-UP
             </Button>
           </FormControl>
         </Box>
       </Box>
-      <Box width={"50%"} display={"flex"}>
-        <Box width={"45%"}>
-          <Image src="https://ibb.co/JKdvZk4"></Image>
+      <Box width={"5%"}></Box>
+
+      <Box width={"55%"} display={"flex"} flexDirection={"column"}>
+        <Box
+          width={"100%"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          display={"flex"}
+          height={"80%"}
+        >
+          <Image src={logo} height={"70%"} marginBottom={"4rem"}></Image>
         </Box>
-        <Box width={"55%"}></Box>
+        <Box height={"20%"} textAlign={"center"}>
+          <Text
+            fontSize={"3.7rem"}
+            fontWeight={"bold"}
+            marginTop={"1.5rem"}
+            textTransform={"capitalize"}
+          >
+            Healthcare capstone project
+          </Text>
+        </Box>
       </Box>
     </Box>
   );

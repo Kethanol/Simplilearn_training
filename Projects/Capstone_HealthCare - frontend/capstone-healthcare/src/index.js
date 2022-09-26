@@ -7,7 +7,7 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import SignUpContainer from "./Components/SignUp/SignUpContainer";
 import LoginContainer from "./Components/Login/LoginContainer";
 
@@ -28,9 +28,19 @@ var router = createBrowserRouter([
   },
 ]);
 
+var theme = extendTheme({
+  styles: {
+    global: {
+      html: {
+        fontSize: "62.5%",
+      },
+    },
+  },
+});
+
 root.render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <RouterProvider router={router}></RouterProvider>
     </ChakraProvider>
   </React.StrictMode>
