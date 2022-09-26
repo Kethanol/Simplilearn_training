@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SignUpComponent from "./SignUpComponent";
 import axios from "axios";
+import { validateSignUpUsername } from "../../Common/Functions/validations";
 
 function SignUpContainer() {
   var [user, setUser] = useState(null);
@@ -49,46 +50,41 @@ function SignUpContainer() {
     return !hasError;
   }
 
-  function validateUsername(value) {
-    if (!value) return true;
-    return value.length >= 3 && value.length <= 20;
-  }
-
   function onButtonClick() {
     var isUsernameValid = handleFormValueError(
       "username",
       username.value,
-      validateUsername
+      validateSignUpUsername
     );
 
     var isFirstNameValid = handleFormValueError(
       "firstName",
       firstName.value,
-      validateUsername
+      validateSignUpUsername
     );
 
     var isLastNameValid = handleFormValueError(
       "lastName",
       lastName.value,
-      validateUsername
+      validateSignUpUsername
     );
 
     var isPasswordValid = handleFormValueError(
       "password",
       password.value,
-      validateUsername
+      validateSignUpUsername
     );
 
     var isPasswordRepeatValid = handleFormValueError(
       "passwordRepeat",
       passwordRepeat.value,
-      validateUsername
+      validateSignUpUsername
     );
 
     var isEmailValid = handleFormValueError(
       "email",
       email.value,
-      validateUsername
+      validateSignUpUsername
     );
 
     if (

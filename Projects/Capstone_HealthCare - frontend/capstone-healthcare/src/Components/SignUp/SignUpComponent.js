@@ -1,7 +1,7 @@
 import { FormControl } from "@chakra-ui/react";
-import FormWrapper from "../Common/Shared/FormWrapper";
-import FormButton from "../Common/Shared/FormButton";
-import CustomFormControl from "../Common/Shared/FormControl";
+import FormWrapper from "../../Common/Shared/FormWrapper";
+import FormButton from "../../Common/Shared/FormButton";
+import CustomFormControl from "../../Common/Shared/FormControl";
 
 function SignUpComponent({
   formData: { username, firstName, lastName, password, passwordRepeat, email },

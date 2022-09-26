@@ -1,5 +1,5 @@
 import { Box, Image, Text } from "@chakra-ui/react";
-import logo from "../../../healthcare.png";
+import logo from "../../healthcare.png";
 
 function FormWrapper({ children, formHeightPercent }) {
   return (

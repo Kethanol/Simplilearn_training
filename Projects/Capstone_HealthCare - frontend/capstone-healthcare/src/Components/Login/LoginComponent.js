@@ -4,8 +4,8 @@ import {
   FormHelperText,
   Input,
 } from "@chakra-ui/react";
-import FormWrapper from "../Common/Shared/FormWrapper";
-import FormButton from "../Common/Shared/FormButton";
+import FormWrapper from "../../Common/Shared/FormWrapper";
+import FormButton from "../../Common/Shared/FormButton";
 
 function LoginComponent(props) {
   return (
