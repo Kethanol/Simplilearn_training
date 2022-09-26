@@ -10,9 +10,7 @@ import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 function SignUpContainer() {
-  var [user, setUser] = useState(null);
   var [isSigningUp, setIsSigningUp] = useState(false);
-  var [signUpError, setSignUpError] = useState(false);
 
   var [formData, setFormData] = useState({
     username: { value: "", hasError: false },
@@ -115,7 +113,6 @@ function SignUpContainer() {
       navigate("/login");
     } catch {
       setIsSigningUp(false);
-      setSignUpError(true);
       toast({
         title: "Error while creating account",
         description:
