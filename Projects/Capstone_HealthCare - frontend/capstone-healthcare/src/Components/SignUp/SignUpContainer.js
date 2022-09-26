@@ -6,6 +6,8 @@ import {
   validateMail,
   validatePassword,
 } from "../../Common/Functions/validations";
+import { useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 function SignUpContainer() {
   var [user, setUser] = useState(null);
@@ -21,7 +23,8 @@ function SignUpContainer() {
     email: { value: "", hasError: false },
   });
 
-  var { username, password, passwordRepeat, email } = formData;
+  var { username, firstName, lastName, password, passwordRepeat, email } =
+    formData;
 
   function populateForm(fieldName, data) {
     setFormData((prevFormData) => ({
@@ -85,14 +88,47 @@ function SignUpContainer() {
     await signUp();
   }
 
+  var toast = useToast();
+  var navigate = useNavigate();
+
   async function signUp() {
     setIsSigningUp(true);
 
+    var userObject = {
+      username: username.value,
+      password: password.value,
+      e_mail: email.value,
+      firstName: firstName.value,
+      lastName: lastName.value,
+    };
+
     try {
-      await axios.post("https://localhost:7173/api/user/sign-up", {});
+      await axios.post(
+        "https://localhost:7173/api/user/sign-up",
+        JSON.stringify(userObject),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      navigate("/login");
     } catch {
       setIsSigningUp(false);
       setSignUpError(true);
+      toast({
+        title: "Error while creating account",
+        description:
+          "There was an error creating the account. Please try again later.",
+        status: "error",
+        duration: 1500,
+        isClosable: true,
+        containerStyle: {
+          width: "45rem",
+          fontSize: "1.3rem",
+        },
+        size: "xl",
+      });
     }
   }
 
