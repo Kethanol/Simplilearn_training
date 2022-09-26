@@ -1,5 +1,5 @@
 import { Box, Image, Text } from "@chakra-ui/react";
-import logo from "../../healthcare.png";
+import logo from "../../../healthcare.png";
 
 function FormWrapper({ children, formHeightPercent }) {
   return (
@@ -36,7 +36,7 @@ function FormWrapper({ children, formHeightPercent }) {
             src={logo}
             height={"70%"}
             marginBottom={"4rem"}
-            marginTop={"10rem"}
+            marginTop={"15rem"}
           ></Image>
         </Box>
         <Box height={"20%"} textAlign={"center"}>

@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/react";
 
-function FormButton({ children }) {
+function FormButton({ children, onClick, disabled }) {
   return (
     <Button
       type={"submit"}
@@ -10,6 +10,8 @@ function FormButton({ children }) {
       fontSize={"1.6rem"}
       borderRadius={"2rem"}
       letterSpacing={"0.1rem"}
+      onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </Button>

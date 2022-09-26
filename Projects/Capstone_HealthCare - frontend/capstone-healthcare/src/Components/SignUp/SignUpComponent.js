@@ -1,93 +1,81 @@
-import {
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Input,
-} from "@chakra-ui/react";
-import FormWrapper from "../Common/FormWrapper";
-import FormButton from "../Common/FormButton";
+import { FormControl } from "@chakra-ui/react";
+import FormWrapper from "../Common/Shared/FormWrapper";
+import FormButton from "../Common/Shared/FormButton";
+import CustomFormControl from "../Common/Shared/FormControl";
 
-function SignUpComponent(props) {
+function SignUpComponent({
+  formData: { username, firstName, lastName, password, passwordRepeat, email },
+  handleFormValueChange,
+  onButtonClick,
+}) {
   return (
     <>
       <FormWrapper formHeightPercent={85}>
-        <FormControl isRequired padding={2} width={"70%"} marginRight={"1rem"}>
-          <FormLabel fontSize={"1.65rem"}>Username</FormLabel>
-          <Input
-            type={"text"}
-            padding={"1.6rem"}
-            borderRadius={"1rem"}
-            fontSize={"1.6rem"}
-          ></Input>
-          <FormHelperText fontSize={"1.3rem"}>
-            Please, enter your username
-          </FormHelperText>
-        </FormControl>
+        <CustomFormControl
+          isInvalid={username.hasError}
+          label={"Username"}
+          inputType={"text"}
+          inputValue={username.value}
+          inputError={username.hasError}
+          inputChangeFn={handleFormValueChange("username")}
+          formHelperText={"Please, enter your username"}
+          formHelperError={"Invalid username"}
+        ></CustomFormControl>
 
-        <FormControl isRequired padding={2} width={"70%"} marginRight={"1rem"}>
-          <FormLabel fontSize={"1.65rem"}>Firstname</FormLabel>
-          <Input
-            type={"text"}
-            padding={"1.6rem"}
-            borderRadius={"1rem"}
-            fontSize={"1.6rem"}
-          ></Input>
-          <FormHelperText fontSize={"1.3rem"}>
-            Please, enter your first name
-          </FormHelperText>
-        </FormControl>
+        <CustomFormControl
+          isInvalid={firstName.hasError}
+          label={"First name"}
+          inputType={"text"}
+          inputValue={firstName.value}
+          inputError={firstName.hasError}
+          inputChangeFn={handleFormValueChange("firstName")}
+          formHelperText={"Please, enter your first name"}
+          formHelperError={"Invalid first name"}
+        ></CustomFormControl>
 
-        <FormControl isRequired padding={2} width={"70%"} marginRight={"1rem"}>
-          <FormLabel fontSize={"1.65rem"}>Last name</FormLabel>
-          <Input
-            type={"text"}
-            padding={"1.6rem"}
-            borderRadius={"1rem"}
-            fontSize={"1.6rem"}
-          ></Input>
-          <FormHelperText fontSize={"1.3rem"}>
-            Please, enter your last name
-          </FormHelperText>
-        </FormControl>
+        <CustomFormControl
+          isInvalid={lastName.hasError}
+          label={"Last name"}
+          inputType={"text"}
+          inputValue={lastName.value}
+          inputError={lastName.hasError}
+          inputChangeFn={handleFormValueChange("lastName")}
+          formHelperText={"Please, enter your last name"}
+          formHelperError={"Invalid last name"}
+        ></CustomFormControl>
 
-        <FormControl isRequired padding={2} width={"70%"} marginRight={"1rem"}>
-          <FormLabel fontSize={"1.65rem"}>Password</FormLabel>
-          <Input
-            type={"password"}
-            padding={"1.6rem"}
-            borderRadius={"1rem"}
-            fontSize={"1.6rem"}
-          ></Input>
-          <FormHelperText fontSize={"1.3rem"}>
-            Please, enter your password
-          </FormHelperText>
-        </FormControl>
+        <CustomFormControl
+          isInvalid={password.hasError}
+          label={"Password"}
+          inputType={"password"}
+          inputValue={password.value}
+          inputError={password.hasError}
+          inputChangeFn={handleFormValueChange("password")}
+          formHelperText={"Please, enter your password"}
+          formHelperError={"Invalid password"}
+        ></CustomFormControl>
 
-        <FormControl isRequired padding={2} width={"70%"} marginRight={"1rem"}>
-          <FormLabel fontSize={"1.65rem"}>Repeat password</FormLabel>
-          <Input
-            type={"password"}
-            padding={"1.6rem"}
-            borderRadius={"1rem"}
-            fontSize={"1.6rem"}
-          ></Input>
-          <FormHelperText fontSize={"1.3rem"}>
-            Please, repeat your password
-          </FormHelperText>
-        </FormControl>
+        <CustomFormControl
+          isInvalid={passwordRepeat.hasError}
+          label={"Repeat password"}
+          inputType={"password"}
+          inputValue={passwordRepeat.value}
+          inputError={passwordRepeat.hasError}
+          inputChangeFn={handleFormValueChange("passwordRepeat")}
+          formHelperText={"Please, enter your password again"}
+          formHelperError={"Passwords do not match"}
+        ></CustomFormControl>
 
-        <FormControl isRequired padding={2} width={"70%"} marginRight={"1rem"}>
-          <FormLabel fontSize={"1.65rem"}>E-mail address</FormLabel>
-          <Input
-            type={"email"}
-            padding={"1.6rem"}
-            borderRadius={"1rem"}
-            fontSize={"1.6rem"}
-          ></Input>
-          <FormHelperText fontSize={"1.3rem"}>
-            Please, enter your email
-          </FormHelperText>
-        </FormControl>
+        <CustomFormControl
+          isInvalid={email.hasError}
+          label={"Email"}
+          inputType={"email"}
+          inputValue={email.value}
+          inputError={email.hasError}
+          inputChangeFn={handleFormValueChange("email")}
+          formHelperText={"Please, enter your email"}
+          formHelperError={"Invalid email"}
+        ></CustomFormControl>
 
         <FormControl
           marginRight={"1rem"}
@@ -95,7 +83,19 @@ function SignUpComponent(props) {
           display={"flex"}
           justifyContent={"center"}
         >
-          <FormButton>SIGN UP</FormButton>
+          <FormButton
+            onClick={onButtonClick}
+            disabled={
+              !username.value ||
+              !firstName.value ||
+              !lastName.value ||
+              !password.value ||
+              !passwordRepeat.value ||
+              !email.value
+            }
+          >
+            SIGN UP
+          </FormButton>
         </FormControl>
       </FormWrapper>
     </>
