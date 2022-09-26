@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SignUpComponent from "./SignUpComponent";
 import axios from "axios";
 import {
@@ -53,7 +53,7 @@ function SignUpContainer() {
     return !hasError;
   }
 
-  function onButtonClick() {
+  async function onButtonClick() {
     var isUsernameValid = handleFormValueError(
       "username",
       username.value,
@@ -82,28 +82,26 @@ function SignUpContainer() {
     )
       return;
 
-    // API call
+    await signUp();
   }
 
-  useEffect(() => {
+  async function signUp() {
     setIsSigningUp(true);
 
-    axios
-      .post("https://localhost:7173/api/user/sign-up", {})
-      .then(function afterSignIn() {
-        setIsSigningUp(false);
-      })
-      .catch(() => {
-        setIsSigningUp(false);
-        setSignUpError(true);
-      });
-  }, []);
+    try {
+      await axios.post("https://localhost:7173/api/user/sign-up", {});
+    } catch {
+      setIsSigningUp(false);
+      setSignUpError(true);
+    }
+  }
 
   return (
     <SignUpComponent
       formData={formData}
       handleFormValueChange={handleFormValueChange}
       onButtonClick={onButtonClick}
+      isSigningUp={isSigningUp}
     />
   );
 }

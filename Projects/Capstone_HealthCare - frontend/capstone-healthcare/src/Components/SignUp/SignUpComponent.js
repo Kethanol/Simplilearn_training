@@ -7,10 +7,11 @@ function SignUpComponent({
   formData: { username, firstName, lastName, password, passwordRepeat, email },
   handleFormValueChange,
   onButtonClick,
+  isSigningUp,
 }) {
   return (
     <>
-      <FormWrapper formHeightPercent={85}>
+      <FormWrapper formHeightPercent={85} isDataLoading={isSigningUp}>
         <CustomFormControl
           isInvalid={username.hasError}
           label={"Username"}
