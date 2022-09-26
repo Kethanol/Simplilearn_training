@@ -19,7 +19,9 @@ function SignUpComponent({
           inputError={username.hasError}
           inputChangeFn={handleFormValueChange("username")}
           formHelperText={"Please, enter your username"}
-          formHelperError={"Invalid username"}
+          formHelperError={
+            "Username should be at least 6 characters and at most 20 characters"
+          }
         ></CustomFormControl>
 
         <CustomFormControl
@@ -30,7 +32,6 @@ function SignUpComponent({
           inputError={firstName.hasError}
           inputChangeFn={handleFormValueChange("firstName")}
           formHelperText={"Please, enter your first name"}
-          formHelperError={"Invalid first name"}
         ></CustomFormControl>
 
         <CustomFormControl
@@ -41,7 +42,6 @@ function SignUpComponent({
           inputError={lastName.hasError}
           inputChangeFn={handleFormValueChange("lastName")}
           formHelperText={"Please, enter your last name"}
-          formHelperError={"Invalid last name"}
         ></CustomFormControl>
 
         <CustomFormControl
@@ -52,7 +52,9 @@ function SignUpComponent({
           inputError={password.hasError}
           inputChangeFn={handleFormValueChange("password")}
           formHelperText={"Please, enter your password"}
-          formHelperError={"Invalid password"}
+          formHelperError={
+            "The password must be consisted of minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+          }
         ></CustomFormControl>
 
         <CustomFormControl

@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import SignUpComponent from "./SignUpComponent";
 import axios from "axios";
-import { validateSignUpUsername } from "../../Common/Functions/validations";
+import {
+  validateSignUpUsername,
+  validateMail,
+  validatePassword,
+} from "../../Common/Functions/validations";
 
 function SignUpContainer() {
   var [user, setUser] = useState(null);
@@ -17,8 +21,7 @@ function SignUpContainer() {
     email: { value: "", hasError: false },
   });
 
-  var { username, firstName, lastName, password, passwordRepeat, email } =
-    formData;
+  var { username, password, passwordRepeat, email } = formData;
 
   function populateForm(fieldName, data) {
     setFormData((prevFormData) => ({
@@ -57,40 +60,22 @@ function SignUpContainer() {
       validateSignUpUsername
     );
 
-    var isFirstNameValid = handleFormValueError(
-      "firstName",
-      firstName.value,
-      validateSignUpUsername
-    );
-
-    var isLastNameValid = handleFormValueError(
-      "lastName",
-      lastName.value,
-      validateSignUpUsername
-    );
-
     var isPasswordValid = handleFormValueError(
       "password",
       password.value,
-      validateSignUpUsername
+      validatePassword
     );
 
     var isPasswordRepeatValid = handleFormValueError(
       "passwordRepeat",
       passwordRepeat.value,
-      validateSignUpUsername
+      (val) => val === password.value
     );
 
-    var isEmailValid = handleFormValueError(
-      "email",
-      email.value,
-      validateSignUpUsername
-    );
+    var isEmailValid = handleFormValueError("email", email.value, validateMail);
 
     if (
       !isUsernameValid ||
-      !isFirstNameValid ||
-      !isLastNameValid ||
       !isPasswordValid ||
       !isPasswordRepeatValid ||
       !isEmailValid
