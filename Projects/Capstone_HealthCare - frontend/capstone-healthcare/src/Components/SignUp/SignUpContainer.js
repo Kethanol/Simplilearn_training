@@ -12,6 +12,7 @@ import {
   handleFormValueChangeWrapper,
   handleFormValueErrorWrapper,
 } from "../../Common/Functions/misc";
+import consts from "../../Common/consts";
 
 function SignUpContainer() {
   var [isSigningUp, setIsSigningUp] = useState(false);
@@ -100,7 +101,7 @@ function SignUpContainer() {
     };
 
     try {
-      let url = `${process.env.REACT_APP_CAPSTONE_API_URL}/user/sign-up`;
+      let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.SIGN_UP_ROUTE}`;
 
       await axios.post(url, JSON.stringify(userObject), {
         headers: {
