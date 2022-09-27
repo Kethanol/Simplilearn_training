@@ -10,9 +10,13 @@ import {
   TableCaption,
   TableContainer,
   Tooltip,
+  Editable,
+  EditablePreview,
+  EditableInput,
+  IconButton,
 } from "@chakra-ui/react";
 import Backdrop from "../../Common/Shared/Backdrop";
-import { DeleteIcon } from "@chakra-ui/icons";
+import { DeleteIcon, TriangleUpIcon } from "@chakra-ui/icons";
 
 function AdminComponent({ medicineData, dataLoading, deleteMed }) {
   return (
@@ -59,23 +63,65 @@ function AdminComponent({ medicineData, dataLoading, deleteMed }) {
               {medicineData.map((medicine) => {
                 return (
                   <Tr key={medicine.id}>
-                    <Td fontSize={"2rem"}>{medicine.name}</Td>
-                    <Td fontSize={"2rem"}>{medicine.description}</Td>
-                    <Td fontSize={"2rem"}>{medicine.schemaOfTreatment}</Td>
-                    <Td fontSize={"2rem"} isNumeric>
-                      {medicine.minimumAge}
+                    <Td fontSize={"2rem"}>
+                      <Editable defaultValue={medicine.name}>
+                        <EditablePreview />
+                        <EditableInput />
+                      </Editable>
+                    </Td>
+                    <Td fontSize={"2rem"}>
+                      <Editable defaultValue={medicine.description}>
+                        <EditablePreview />
+                        <EditableInput />
+                      </Editable>
+                    </Td>
+                    <Td fontSize={"2rem"}>
+                      <Editable defaultValue={medicine.schemaOfTreatment}>
+                        <EditablePreview />
+                        <EditableInput />
+                      </Editable>
                     </Td>
                     <Td fontSize={"2rem"} isNumeric>
-                      {medicine.price}$
+                      <Editable defaultValue={medicine.minimumAge}>
+                        <EditablePreview />
+                        <EditableInput />
+                      </Editable>
+                    </Td>
+                    <Td fontSize={"2rem"} isNumeric>
+                      <Editable defaultValue={`${medicine.price}$`}>
+                        <EditablePreview />
+                        <EditableInput />
+                      </Editable>
                     </Td>
 
-                    <Td fontSize={0} padding={0}>
+                    <Td fontSize={0} padding={"0 0 0 .6rem"}>
+                      <Tooltip label={"Update medicine"} isDisabled={false}>
+                        <IconButton
+                          disabled
+                          _hover={{ background: "transparent" }}
+                          background={"transparent"}
+                          icon={
+                            <TriangleUpIcon
+                              boxSize={"8"}
+                              cursor={"pointer"}
+                            ></TriangleUpIcon>
+                          }
+                        />
+                      </Tooltip>
+                    </Td>
+
+                    <Td fontSize={0} padding={"0 0 0 .6rem"}>
                       <Tooltip label={"Delete medicine"}>
-                        <DeleteIcon
-                          boxSize={"10"}
-                          cursor={"pointer"}
-                          onClick={() => deleteMed(medicine.id)}
-                        ></DeleteIcon>
+                        <IconButton
+                          background={"transparent"}
+                          icon={
+                            <DeleteIcon
+                              boxSize={"8"}
+                              cursor={"pointer"}
+                              onClick={() => deleteMed(medicine.id)}
+                            ></DeleteIcon>
+                          }
+                        />
                       </Tooltip>
                     </Td>
                   </Tr>
