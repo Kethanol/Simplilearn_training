@@ -1,13 +1,7 @@
-import {
-  Box,
-  Image,
-  Text,
-  CircularProgress,
-  FormControl,
-  Checkbox,
-} from "@chakra-ui/react";
+import { Box, Image, Text, FormControl, Checkbox } from "@chakra-ui/react";
 import logo from "../../healthcare.png";
 import FormButton from "./FormButton";
+import Backdrop from "./Backdrop";
 
 function FormWrapper({
   children,
@@ -108,23 +102,7 @@ function FormWrapper({
           </Box>
         </Box>
       </Box>
-      {isDataLoading && (
-        <Box
-          height={"100vh"}
-          width={"100%"}
-          position={"absolute"}
-          top={0}
-          left={0}
-          right={0}
-          bottom={0}
-          background={"rgba(0, 0, 0, 0.5)"}
-          display={"flex"}
-          justifyContent={"center"}
-          alignItems={"center"}
-        >
-          <CircularProgress isIndeterminate size={"130"}></CircularProgress>
-        </Box>
-      )}
+      {isDataLoading && <Backdrop></Backdrop>}
     </>
   );
 }

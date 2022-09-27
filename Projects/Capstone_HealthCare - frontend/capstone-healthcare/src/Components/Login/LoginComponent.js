@@ -6,13 +6,13 @@ function LoginComponent({
   handleFormValueChange,
   onButtonClick,
   onTextClick,
-  isSigningUp,
+  isLoggingIn,
   isCheckboxChecked,
   handleCheckboxChange,
 }) {
   return (
     <FormWrapper
-      isDataLoading={isSigningUp}
+      isDataLoading={isLoggingIn}
       redirectText={"Do not have an account? Click here to sign up!"}
       buttonText={"SIGN-IN"}
       onButtonDisabled={!usernameOrEmail.value || !password.value}
