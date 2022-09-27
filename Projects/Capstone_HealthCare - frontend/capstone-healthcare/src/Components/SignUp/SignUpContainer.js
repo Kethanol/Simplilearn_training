@@ -88,6 +88,7 @@ function SignUpContainer() {
   var toast = useToast();
 
   async function signUp() {
+    debugger;
     setIsSigningUp(true);
 
     var userObject = {
@@ -99,15 +100,13 @@ function SignUpContainer() {
     };
 
     try {
-      await axios.post(
-        "https://localhost:7173/api/user/sign-up",
-        JSON.stringify(userObject),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      let url = `${process.env.REACT_APP_CAPSTONE_API_URL}/user/sign-up`;
+
+      await axios.post(url, JSON.stringify(userObject), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       navigate("/login");
     } catch {
       setIsSigningUp(false);
