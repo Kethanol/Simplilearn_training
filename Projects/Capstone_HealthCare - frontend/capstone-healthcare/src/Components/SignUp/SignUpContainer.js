@@ -103,12 +103,16 @@ function SignUpContainer() {
     try {
       let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.SIGN_UP_ROUTE}`;
 
-      await axios.post(url, JSON.stringify(userObject), {
+      let { data } = await axios.post(url, JSON.stringify(userObject), {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      navigate("/login");
+
+      if (!data.hasSuccess) {
+        setIsSigningUp(false);
+        applyFailToast(toast, "Error while creating account", data.errorReason);
+      } else navigate("/login");
     } catch {
       setIsSigningUp(false);
       applyFailToast(

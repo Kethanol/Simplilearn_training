@@ -31,7 +31,7 @@ function applyFailToast(creationFunc, title, description) {
     title: title,
     description: description,
     status: "error",
-    duration: 1500,
+    duration: 3000,
     isClosable: true,
     containerStyle: {
       width: "45rem",

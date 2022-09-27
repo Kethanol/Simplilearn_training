@@ -22,8 +22,8 @@ namespace Capstone_Project.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> SignUp([FromBody] User user)
         {
-            await _userService.SignUp(user);
-            return Ok();
+            var response = await _userService.SignUp(user);
+            return Ok(response);
         }
 
         [HttpPost]

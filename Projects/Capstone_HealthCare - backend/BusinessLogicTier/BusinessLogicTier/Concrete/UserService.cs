@@ -24,7 +24,7 @@ namespace BusinessLogicTier.Concrete
             var response = new LoginResponseModel();
             var hashedPassword = _validationService.Hash(loginInformation.Password!);
 
-            var existingUser = await _unitOfWork.UserRepository.GetSingleByAsync(u => (u.Username == loginInformation.UsernameOrEmail || u.E_mail == loginInformation.UsernameOrEmail)
+            var existingUser = await _unitOfWork.UserRepository.GetSingleByAsync(u => (u.Username!.ToUpper() == loginInformation!.UsernameOrEmail!.ToUpper() || u.E_mail!.ToUpper() == loginInformation.UsernameOrEmail!.ToUpper())
           && u.Password == hashedPassword && u.Role == (loginInformation.IsAdmin ? Constants.Roles.ADMINISTRATOR : Constants.Roles.BASIC));
 
             if (existingUser != null)
@@ -42,13 +42,25 @@ namespace BusinessLogicTier.Concrete
             return response;
         }
 
-        public async Task<bool> SignUp(User user)
+        public async Task<SignUpResponseModel> SignUp(User user)
         {
-            var isValid = _validationService.ValidateUsername(user.Username!) && _validationService.ValidatePassword(user.Password!) && _validationService.ValidateMail(user.E_mail!);
+            var response = new SignUpResponseModel();
 
-            if (!isValid) return isValid;
+            var isValid = _validationService.ValidateUsername(user.Username!) && _validationService.ValidatePassword(user.Password!) && _validationService.ValidateMail(user.E_mail!);
+            if (!isValid)
+            {
+                response.ErrorReason = "Invalid data!";
+                return response;
+            };
 
             var hashedPassword = _validationService.Hash(user.Password!);
+            var existingUser = await _unitOfWork.UserRepository.GetSingleByAsync(u => u.Username!.ToUpper() == user.Username!.ToUpper());
+
+            if (existingUser != null)
+            {
+                response.ErrorReason = $"There is already an existing user with the username {user.Username}!";
+                return response;
+            }
 
             var newUser = new User()
             {
@@ -64,7 +76,8 @@ namespace BusinessLogicTier.Concrete
             await _unitOfWork.UserRepository.InsertAsync(newUser);
             await _unitOfWork.SaveChangesAsync();
 
-            return true;
+            response.HasSuccess = true;
+            return response;
         }
     }
 }

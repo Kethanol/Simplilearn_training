@@ -5,7 +5,7 @@ namespace BusinessLogicTier.Contracts
 {
     public interface IUserService
     {
-        Task<bool> SignUp(User user);
+        Task<SignUpResponseModel> SignUp(User user);
         Task<LoginResponseModel> SignIn(UserLogin loginInformation);
     }
 }
