@@ -14,7 +14,7 @@ import {
 import Backdrop from "../../Common/Shared/Backdrop";
 import { DeleteIcon } from "@chakra-ui/icons";
 
-function AdminComponent({ medicineData, dataLoading }) {
+function AdminComponent({ medicineData, dataLoading, deleteMed }) {
   return (
     <Box
       height={"100vh"}
@@ -74,7 +74,7 @@ function AdminComponent({ medicineData, dataLoading }) {
                         <DeleteIcon
                           boxSize={"10"}
                           cursor={"pointer"}
-                          onClick={() => console.log("DELETE")}
+                          onClick={() => deleteMed(medicine.id)}
                         ></DeleteIcon>
                       </Tooltip>
                     </Td>

@@ -25,3 +25,26 @@ export function loadMedicines(applyToast, toastApplier) {
     }
   };
 }
+
+export function deleteMedicine(id, applyToast, toastApplier) {
+  return async function (dispatch) {
+    try {
+      let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.DELETE_MEDICINE_ROUTE}?medicineId=${id}`;
+      await axios.delete(url);
+      applyToast(
+        toastApplier,
+        "Success",
+        `The medicine was successfully deleted`,
+        "success"
+      );
+      dispatch(loadMedicines(applyToast, toastApplier));
+    } catch (err) {
+      applyToast(
+        toastApplier,
+        `Error while deleting the medicine with the id ${id}`,
+        `There was an error while deleting the medicine: ${err}`,
+        "error"
+      );
+    }
+  };
+}

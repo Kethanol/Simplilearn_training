@@ -8,7 +8,7 @@ namespace Capstone_Project.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
-    [Authorize(Roles = Constants.Roles.ADMINISTRATOR)]
+    //[Authorize(Roles = Constants.Roles.ADMINISTRATOR)]
     public class AdminController : Controller
     {
         private readonly IMedicineService _medicineService;
