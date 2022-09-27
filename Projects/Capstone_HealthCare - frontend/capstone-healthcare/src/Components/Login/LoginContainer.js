@@ -2,7 +2,7 @@ import { useState } from "react";
 import LoginComponent from "./LoginComponent";
 import {
   handleFormValueChangeWrapper,
-  applyFailToast,
+  applyToast,
 } from "../../Common/Functions/misc";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
@@ -55,7 +55,7 @@ function LoginContainer() {
       isAdmin: isCheckboxChecked,
     };
 
-    dispatch(login(userObject, applyFailToast, toast));
+    dispatch(login(userObject, applyToast, toast));
   }
 
   return (

@@ -2,7 +2,7 @@ import * as actionTypes from "./actionTypes";
 import consts from "../../Common/consts";
 import axios from "axios";
 
-export function login(userObject, applyFailToast, toastApplier) {
+export function login(userObject, applyToast, toastApplier) {
   return async function (dispatch) {
     dispatch({ type: actionTypes.USER_LOGIN_STARTED });
 
@@ -17,23 +17,26 @@ export function login(userObject, applyFailToast, toastApplier) {
 
       if (!data.hasSuccess) {
         dispatch({ type: actionTypes.USER_LOGIN_FAILED });
-        applyFailToast(
+        applyToast(
           toastApplier,
           "Error while logging in",
-          data.errorReason
+          data.errorReason,
+          "error"
         );
       } else {
         dispatch({
           type: actionTypes.USER_LOGIN_SUCCEEDED,
           payload: { token: data.token },
         });
+        applyToast(toastApplier, "Success", "Login successful", "success");
       }
     } catch {
       dispatch({ type: actionTypes.USER_LOGIN_FAILED });
-      applyFailToast(
+      applyToast(
         toastApplier,
         "Error while logging in",
-        "There was an error while logging in. Please try again later."
+        "There was an error while logging in. Please try again later.",
+        "error"
       );
     }
   };
