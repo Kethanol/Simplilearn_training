@@ -6,12 +6,15 @@ import {
 } from "../../Common/Functions/misc";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
-import consts from "../../Common/consts";
-import axios from "axios";
+
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { login } from "./actionCreators";
+import { getCachedUserData } from "./selectors";
 
 function LoginContainer() {
-  var [isLoggingIn, setIsLogginIn] = useState(false);
   var navigate = useNavigate();
+  var dispatch = useDispatch();
+  var { loading, token } = useSelector(getCachedUserData, shallowEqual);
 
   var [formData, setFormData] = useState({
     usernameOrEmail: { value: "", hasError: false },
@@ -35,35 +38,13 @@ function LoginContainer() {
 
   var toast = useToast();
 
-  async function logIn() {
-    setIsLogginIn(true);
-
+  function logIn() {
     var userObject = {
       usernameOrEmail: formData.usernameOrEmail.value,
       password: formData.password.value,
     };
 
-    try {
-      let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.LOGIN_ROUTE}`;
-
-      var { data } = await axios.post(url, JSON.stringify(userObject), {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (!data.hasSuccess) {
-        applyFailToast(toast, "Error while logging in", data.errorReason);
-      } else {
-        // Store the token
-      }
-    } catch {
-      setIsLogginIn(false);
-      applyFailToast(
-        toast,
-        "Error while logging in",
-        "There was an error while logging in. Please try again later."
-      );
-    }
+    dispatch(login(userObject, applyFailToast, toast));
   }
 
   return (
@@ -72,7 +53,7 @@ function LoginContainer() {
       handleFormValueChange={handleFormValueChange}
       onButtonClick={logIn}
       onTextClick={handleTextClick}
-      isLoggingIn={isLoggingIn}
+      isLoggingIn={loading}
     />
   );
 }
