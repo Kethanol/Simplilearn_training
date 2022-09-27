@@ -1,4 +1,5 @@
 ﻿using BusinessLogicTier.Contracts;
+using Entities.Constants;
 using Entities.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,7 @@ namespace Capstone_Project.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = Constants.Roles.ADMINISTRATOR)]
     public class AdminController : Controller
     {
         private readonly IMedicineService _medicineService;

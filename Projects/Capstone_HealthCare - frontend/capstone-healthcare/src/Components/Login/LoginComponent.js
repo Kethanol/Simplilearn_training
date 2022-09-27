@@ -7,6 +7,8 @@ function LoginComponent({
   onButtonClick,
   onTextClick,
   isSigningUp,
+  isCheckboxChecked,
+  handleCheckboxChange,
 }) {
   return (
     <FormWrapper
@@ -16,6 +18,10 @@ function LoginComponent({
       onButtonDisabled={!usernameOrEmail.value || !password.value}
       onButtonClick={onButtonClick}
       onTextClick={onTextClick}
+      hasCheckbox={true}
+      checkboxText={"Log in as administrator"}
+      isCheckboxChecked={isCheckboxChecked}
+      onCheckboxChange={handleCheckboxChange}
     >
       <CustomFormControl
         isInvalid={usernameOrEmail.hasError}

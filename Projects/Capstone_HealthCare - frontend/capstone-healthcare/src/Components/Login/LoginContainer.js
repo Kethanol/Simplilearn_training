@@ -14,7 +14,9 @@ import { getCachedUserData } from "./selectors";
 function LoginContainer() {
   var navigate = useNavigate();
   var dispatch = useDispatch();
-  var { loading, token } = useSelector(getCachedUserData, shallowEqual);
+  var { loading } = useSelector(getCachedUserData, shallowEqual);
+
+  var [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
 
   var [formData, setFormData] = useState({
     usernameOrEmail: { value: "", hasError: false },
@@ -23,6 +25,14 @@ function LoginContainer() {
 
   function handleTextClick() {
     navigate("/sign-up");
+  }
+
+  function handleCheckboxChange(e) {
+    var {
+      target: { checked },
+    } = e;
+
+    setIsCheckboxChecked(checked);
   }
 
   function populateForm(fieldName, data) {
@@ -42,6 +52,7 @@ function LoginContainer() {
     var userObject = {
       usernameOrEmail: formData.usernameOrEmail.value,
       password: formData.password.value,
+      isAdmin: isCheckboxChecked,
     };
 
     dispatch(login(userObject, applyFailToast, toast));
@@ -54,6 +65,8 @@ function LoginContainer() {
       onButtonClick={logIn}
       onTextClick={handleTextClick}
       isLoggingIn={loading}
+      isCheckboxChecked={isCheckboxChecked}
+      handleCheckboxChange={handleCheckboxChange}
     />
   );
 }

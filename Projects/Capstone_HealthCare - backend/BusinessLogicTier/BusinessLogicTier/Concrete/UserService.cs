@@ -1,6 +1,7 @@
 ﻿using BusinessLogicTier.Contracts;
 using BusinessLogicTier.Models;
 using Entities.Entities;
+using Entities.Constants;
 using Repository.Contracts;
 
 namespace BusinessLogicTier.Concrete
@@ -24,7 +25,7 @@ namespace BusinessLogicTier.Concrete
             var hashedPassword = _validationService.Hash(loginInformation.Password!);
 
             var existingUser = await _unitOfWork.UserRepository.GetSingleByAsync(u => (u.Username == loginInformation.UsernameOrEmail || u.E_mail == loginInformation.UsernameOrEmail)
-            && u.Password == hashedPassword);
+          && u.Password == hashedPassword && u.Role == (loginInformation.IsAdmin ? Constants.Roles.ADMINISTRATOR : Constants.Roles.BASIC));
 
             if (existingUser != null)
             {
@@ -33,7 +34,8 @@ namespace BusinessLogicTier.Concrete
                 response.HasSuccess = true;
                 response.Token = token;
             }
-            else {
+            else
+            {
                 response.ErrorReason = "User does not exist!";
             }
 
@@ -55,7 +57,7 @@ namespace BusinessLogicTier.Concrete
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 E_mail = user.E_mail,
-                Role = "Basic",
+                Role = Constants.Roles.BASIC,
                 Password = hashedPassword
             };
 

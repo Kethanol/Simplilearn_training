@@ -4,6 +4,7 @@ import {
   Text,
   CircularProgress,
   FormControl,
+  Checkbox,
 } from "@chakra-ui/react";
 import logo from "../../healthcare.png";
 import FormButton from "./FormButton";
@@ -16,6 +17,10 @@ function FormWrapper({
   onButtonClick,
   onButtonDisabled,
   onTextClick,
+  hasCheckbox,
+  checkboxText,
+  isCheckboxChecked,
+  onCheckboxChange,
 }) {
   return (
     <>
@@ -36,18 +41,32 @@ function FormWrapper({
             <>
               {children}
 
-              <Text
-                as={"a"}
-                onClick={onTextClick}
-                textAlign="right"
-                marginRight={"4rem"}
-                fontSize={"1.3rem"}
-                textDecoration={"underline"}
-                color={"blue"}
-                cursor={"pointer"}
-              >
-                {redirectText}
-              </Text>
+              <Box display={"flex"} justifyContent={"space-evenly"}>
+                {hasCheckbox && (
+                  <Checkbox
+                    flexBasis={"40%"}
+                    marginLeft={"2rem"}
+                    size={"lg"}
+                    isChecked={isCheckboxChecked}
+                    onChange={onCheckboxChange}
+                  >
+                    <Box fontSize={"1.3rem"}>{checkboxText}</Box>
+                  </Checkbox>
+                )}
+                <Text
+                  as={"a"}
+                  onClick={onTextClick}
+                  textAlign="right"
+                  marginRight={"4rem"}
+                  fontSize={"1.3rem"}
+                  textDecoration={"underline"}
+                  color={"blue"}
+                  cursor={"pointer"}
+                  flexBasis={hasCheckbox ? "60%" : "100%"}
+                >
+                  {redirectText}
+                </Text>
+              </Box>
 
               <FormControl
                 display={"flex"}
