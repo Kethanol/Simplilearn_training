@@ -15,6 +15,7 @@ import {
 
 function SignUpContainer() {
   var [isSigningUp, setIsSigningUp] = useState(false);
+  var navigate = useNavigate();
 
   var [formData, setFormData] = useState({
     username: { value: "", hasError: false },
@@ -33,6 +34,10 @@ function SignUpContainer() {
       ...prevFormData,
       [fieldName]: { ...prevFormData[fieldName], ...data },
     }));
+  }
+
+  function handleTextClick() {
+    navigate("/login");
   }
 
   function handleFormValueChange(fieldName) {
@@ -81,7 +86,6 @@ function SignUpContainer() {
   }
 
   var toast = useToast();
-  var navigate = useNavigate();
 
   async function signUp() {
     setIsSigningUp(true);
@@ -128,6 +132,7 @@ function SignUpContainer() {
       handleFormValueChange={handleFormValueChange}
       onButtonClick={onButtonClick}
       isSigningUp={isSigningUp}
+      onTextClick={handleTextClick}
     />
   );
 }

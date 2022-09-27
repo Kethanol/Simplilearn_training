@@ -1,7 +1,22 @@
-import { Box, Image, Text, CircularProgress } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Text,
+  CircularProgress,
+  FormControl,
+} from "@chakra-ui/react";
 import logo from "../../healthcare.png";
+import FormButton from "./FormButton";
 
-function FormWrapper({ children, isDataLoading }) {
+function FormWrapper({
+  children,
+  isDataLoading,
+  redirectText,
+  buttonText,
+  onButtonClick,
+  onButtonDisabled,
+  onTextClick,
+}) {
   return (
     <>
       <Box height={"100vh"} width={"100%"} display={"flex"}>
@@ -18,7 +33,32 @@ function FormWrapper({ children, isDataLoading }) {
             }
             gap={"1.8rem"}
           >
-            {children}
+            <>
+              {children}
+
+              <Text
+                as={"a"}
+                onClick={onTextClick}
+                textAlign="right"
+                marginRight={"4rem"}
+                fontSize={"1.3rem"}
+                textDecoration={"underline"}
+                color={"blue"}
+                cursor={"pointer"}
+              >
+                {redirectText}
+              </Text>
+
+              <FormControl
+                display={"flex"}
+                justifyContent={"center"}
+                padding={"0 2rem 0 2rem"}
+              >
+                <FormButton onClick={onButtonClick} disabled={onButtonDisabled}>
+                  {buttonText}
+                </FormButton>
+              </FormControl>
+            </>
           </Box>
         </Box>
         <Box width={"5%"}></Box>

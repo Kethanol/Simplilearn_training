@@ -1,19 +1,20 @@
 import { useState } from "react";
 import LoginComponent from "./LoginComponent";
-import {
-  handleFormValueChangeWrapper,
-  handleFormValueErrorWrapper,
-} from "../../Common/Functions/misc";
+import { handleFormValueChangeWrapper } from "../../Common/Functions/misc";
+import { useNavigate } from "react-router-dom";
 
-function LoginContainer(props) {
+function LoginContainer() {
   var [isLoggingIn, setIsLogginIn] = useState(false);
+  var navigate = useNavigate();
 
   var [formData, setFormData] = useState({
     usernameOrEmail: { value: "", hasError: false },
     password: { value: "", hasError: false },
   });
 
-  var { usernameOrEmail, password } = formData;
+  function handleTextClick() {
+    navigate("/sign-up");
+  }
 
   function populateForm(fieldName, data) {
     setFormData((prevFormData) => ({
@@ -26,20 +27,12 @@ function LoginContainer(props) {
     return handleFormValueChangeWrapper(fieldName, populateForm);
   }
 
-  function handleFormValueError(fieldName, fieldValue, validationFunc) {
-    return handleFormValueErrorWrapper(
-      fieldName,
-      fieldValue,
-      validationFunc,
-      populateForm
-    );
-  }
-
   return (
     <LoginComponent
       formData={formData}
       handleFormValueChange={handleFormValueChange}
       onButtonClick={function onClick() {}}
+      onTextClick={handleTextClick}
       isLoggingIn={isLoggingIn}
     />
   );

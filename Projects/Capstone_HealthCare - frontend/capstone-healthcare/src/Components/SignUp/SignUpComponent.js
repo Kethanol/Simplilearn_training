@@ -1,17 +1,30 @@
-import { FormControl } from "@chakra-ui/react";
 import FormWrapper from "../../Common/Shared/FormWrapper";
-import FormButton from "../../Common/Shared/FormButton";
 import CustomFormControl from "../../Common/Shared/FormControl";
 
 function SignUpComponent({
   formData: { username, firstName, lastName, password, passwordRepeat, email },
   handleFormValueChange,
   onButtonClick,
+  onTextClick,
   isSigningUp,
 }) {
   return (
     <>
-      <FormWrapper isDataLoading={isSigningUp}>
+      <FormWrapper
+        isDataLoading={isSigningUp}
+        redirectText={"Already have an account? Click here to log in!"}
+        buttonText={"SIGN-UP"}
+        onButtonDisabled={
+          !username.value ||
+          !firstName.value ||
+          !lastName.value ||
+          !password.value ||
+          !passwordRepeat.value ||
+          !email.value
+        }
+        onButtonClick={onButtonClick}
+        onTextClick={onTextClick}
+      >
         <CustomFormControl
           isInvalid={username.hasError}
           label={"Username"}
@@ -76,26 +89,6 @@ function SignUpComponent({
           inputChangeFn={handleFormValueChange("email")}
           formHelperError={"Invalid email"}
         ></CustomFormControl>
-
-        <FormControl
-          display={"flex"}
-          justifyContent={"center"}
-          padding={"0 2rem 0 2rem"}
-        >
-          <FormButton
-            onClick={onButtonClick}
-            disabled={
-              !username.value ||
-              !firstName.value ||
-              !lastName.value ||
-              !password.value ||
-              !passwordRepeat.value ||
-              !email.value
-            }
-          >
-            SIGN UP
-          </FormButton>
-        </FormControl>
       </FormWrapper>
     </>
   );
