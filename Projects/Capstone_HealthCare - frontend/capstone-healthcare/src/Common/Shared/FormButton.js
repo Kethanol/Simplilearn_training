@@ -4,8 +4,7 @@ function FormButton({ children, onClick, disabled }) {
   return (
     <Button
       type={"submit"}
-      width={"70%"}
-      padding={"2rem"}
+      padding={"2rem 11rem 2rem 11rem"}
       marginTop={"2rem"}
       fontSize={"1.6rem"}
       borderRadius={"2rem"}

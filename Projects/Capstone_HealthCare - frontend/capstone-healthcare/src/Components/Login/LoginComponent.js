@@ -29,10 +29,9 @@ function LoginComponent({
       ></CustomFormControl>
 
       <FormControl
-        marginRight={"1rem"}
-        width={"70%"}
         display={"flex"}
         justifyContent={"center"}
+        padding={"0 2rem 0 2rem"}
       >
         <FormButton
           onClick={onButtonClick}

@@ -1,31 +1,28 @@
 import { Box, Image, Text, CircularProgress } from "@chakra-ui/react";
 import logo from "../../healthcare.png";
 
-function FormWrapper({ children, formHeightPercent, isDataLoading }) {
+function FormWrapper({ children, isDataLoading }) {
   return (
     <>
       <Box height={"100vh"} width={"100%"} display={"flex"}>
-        <Box width={"45%"} display={"flex"}>
+        <Box flexBasis={"45%"} display={"flex"}>
           <Box width={"25%"}></Box>
           <Box
-            width={"70%"}
-            height={`${formHeightPercent}%`}
             display={"flex"}
             flexDirection={"column"}
-            alignItems={"center"}
-            justifyContent={"center"}
             margin={"auto"}
             borderRadius={"2rem"}
+            padding={"2rem 0 2rem 0"}
             boxShadow={
               "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;"
             }
-            gap={"2rem"}
+            gap={"1.8rem"}
           >
             {children}
           </Box>
         </Box>
         <Box width={"5%"}></Box>
-        <Box width={"55%"} display={"flex"} flexDirection={"column"}>
+        <Box flexBasis={"55%"} display={"flex"} flexDirection={"column"}>
           <Box
             width={"100%"}
             justifyContent={"center"}
