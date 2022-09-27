@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import {
   handleFormValueChangeWrapper,
   handleFormValueErrorWrapper,
+  applyFailToast,
 } from "../../Common/Functions/misc";
 import consts from "../../Common/consts";
 
@@ -89,7 +90,6 @@ function SignUpContainer() {
   var toast = useToast();
 
   async function signUp() {
-    debugger;
     setIsSigningUp(true);
 
     var userObject = {
@@ -111,18 +111,11 @@ function SignUpContainer() {
       navigate("/login");
     } catch {
       setIsSigningUp(false);
-      toast({
-        title: "Error while creating account",
-        description:
-          "There was an error creating the account. Please try again later.",
-        status: "error",
-        duration: 1500,
-        isClosable: true,
-        containerStyle: {
-          width: "45rem",
-          fontSize: "1.3rem",
-        },
-      });
+      applyFailToast(
+        toast,
+        "Error while creating account",
+        "There was an error creating the account. Please try again later."
+      );
     }
   }
 

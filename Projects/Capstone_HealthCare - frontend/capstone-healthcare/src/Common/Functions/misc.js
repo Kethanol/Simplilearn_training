@@ -26,4 +26,22 @@ function handleFormValueErrorWrapper(
   return !hasError;
 }
 
-export { handleFormValueChangeWrapper, handleFormValueErrorWrapper };
+function applyFailToast(creationFunc, title, description) {
+  creationFunc({
+    title: title,
+    description: description,
+    status: "error",
+    duration: 1500,
+    isClosable: true,
+    containerStyle: {
+      width: "45rem",
+      fontSize: "1.3rem",
+    },
+  });
+}
+
+export {
+  handleFormValueChangeWrapper,
+  handleFormValueErrorWrapper,
+  applyFailToast,
+};

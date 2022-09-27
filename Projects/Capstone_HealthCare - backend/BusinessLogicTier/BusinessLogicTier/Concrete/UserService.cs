@@ -20,11 +20,7 @@ namespace BusinessLogicTier.Concrete
 
         public async Task<LoginResponseModel> SignIn(UserLogin loginInformation)
         {
-            var isValid = _validationService.ValidateUsernameOrMail(loginInformation.UsernameOrEmail!) && _validationService.ValidatePassword(loginInformation.Password!);
             var response = new LoginResponseModel();
-
-            if (!isValid) return response;
-
             var hashedPassword = _validationService.Hash(loginInformation.Password!);
 
             var existingUser = await _unitOfWork.UserRepository.GetSingleByAsync(u => (u.Username == loginInformation.UsernameOrEmail || u.E_mail == loginInformation.UsernameOrEmail)
@@ -36,6 +32,9 @@ namespace BusinessLogicTier.Concrete
 
                 response.HasSuccess = true;
                 response.Token = token;
+            }
+            else {
+                response.ErrorReason = "User does not exist!";
             }
 
             return response;
@@ -56,7 +55,7 @@ namespace BusinessLogicTier.Concrete
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 E_mail = user.E_mail,
-                Role = user.Role,
+                Role = "Basic",
                 Password = hashedPassword
             };
 

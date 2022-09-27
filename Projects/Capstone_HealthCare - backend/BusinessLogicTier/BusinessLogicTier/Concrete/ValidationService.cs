@@ -21,7 +21,7 @@ namespace BusinessLogicTier.Concrete
         {
             if (string.IsNullOrEmpty(input)) return false;
 
-            var regex = new Regex("^(?=.*[a - z])(?=.*[A - Z])(?=.*\\d)(?=.*[@$! % *? &])[A - Za - z\\d@$! % *? &]{ 8, }$");
+            var regex = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
 
             var isValid = regex.Match(input).Success;
 
