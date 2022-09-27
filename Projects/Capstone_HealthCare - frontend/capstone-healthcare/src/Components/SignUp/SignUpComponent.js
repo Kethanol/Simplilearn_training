@@ -19,10 +19,10 @@ function SignUpComponent({
           inputValue={username.value}
           inputError={username.hasError}
           inputChangeFn={handleFormValueChange("username")}
-          formHelperText={"Please, enter your username"}
-          formHelperError={
+          formHelperText={
             "Username should be at least 6 characters and at most 20 characters"
           }
+          formHelperError={"Invalid username!"}
         ></CustomFormControl>
 
         <CustomFormControl
@@ -32,7 +32,6 @@ function SignUpComponent({
           inputValue={firstName.value}
           inputError={firstName.hasError}
           inputChangeFn={handleFormValueChange("firstName")}
-          formHelperText={"Please, enter your first name"}
         ></CustomFormControl>
 
         <CustomFormControl
@@ -42,7 +41,6 @@ function SignUpComponent({
           inputValue={lastName.value}
           inputError={lastName.hasError}
           inputChangeFn={handleFormValueChange("lastName")}
-          formHelperText={"Please, enter your last name"}
         ></CustomFormControl>
 
         <CustomFormControl
@@ -52,10 +50,10 @@ function SignUpComponent({
           inputValue={password.value}
           inputError={password.hasError}
           inputChangeFn={handleFormValueChange("password")}
-          formHelperText={"Please, enter your password"}
-          formHelperError={
+          formHelperText={
             "The password must be consisted of minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
           }
+          formHelperError={"Invalid password!"}
         ></CustomFormControl>
 
         <CustomFormControl
@@ -65,8 +63,8 @@ function SignUpComponent({
           inputValue={passwordRepeat.value}
           inputError={passwordRepeat.hasError}
           inputChangeFn={handleFormValueChange("passwordRepeat")}
-          formHelperText={"Please, enter your password again"}
-          formHelperError={"Passwords do not match"}
+          formHelperText={"Passwords must match"}
+          formHelperError={"Passwords do not match!"}
         ></CustomFormControl>
 
         <CustomFormControl
@@ -76,7 +74,6 @@ function SignUpComponent({
           inputValue={email.value}
           inputError={email.hasError}
           inputChangeFn={handleFormValueChange("email")}
-          formHelperText={"Please, enter your email"}
           formHelperError={"Invalid email"}
         ></CustomFormControl>
 

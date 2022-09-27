@@ -8,6 +8,10 @@ import {
 } from "../../Common/Functions/validations";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import {
+  handleFormValueChangeWrapper,
+  handleFormValueErrorWrapper,
+} from "../../Common/Functions/misc";
 
 function SignUpContainer() {
   var [isSigningUp, setIsSigningUp] = useState(false);
@@ -32,26 +36,16 @@ function SignUpContainer() {
   }
 
   function handleFormValueChange(fieldName) {
-    return function inner(event) {
-      var {
-        target: { value },
-      } = event;
-
-      populateForm(fieldName, {
-        value,
-        ...(!value && { hasError: false }),
-      });
-    };
+    return handleFormValueChangeWrapper(fieldName, populateForm);
   }
 
   function handleFormValueError(fieldName, fieldValue, validationFunc) {
-    var hasError = !validationFunc(fieldValue);
-
-    populateForm(fieldName, {
-      hasError,
-    });
-
-    return !hasError;
+    return handleFormValueErrorWrapper(
+      fieldName,
+      fieldValue,
+      validationFunc,
+      populateForm
+    );
   }
 
   async function onButtonClick() {
@@ -124,7 +118,6 @@ function SignUpContainer() {
           width: "45rem",
           fontSize: "1.3rem",
         },
-        size: "xl",
       });
     }
   }

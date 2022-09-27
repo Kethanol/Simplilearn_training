@@ -1,40 +1,32 @@
-import {
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Input,
-} from "@chakra-ui/react";
+import { FormControl } from "@chakra-ui/react";
 import FormWrapper from "../../Common/Shared/FormWrapper";
 import FormButton from "../../Common/Shared/FormButton";
+import CustomFormControl from "../../Common/Shared/FormControl";
 
-function LoginComponent(props) {
+function LoginComponent({
+  formData: { usernameOrEmail, password },
+  handleFormValueChange,
+  onButtonClick,
+  isSigningUp,
+}) {
   return (
-    <FormWrapper formHeightPercent={40}>
-      <FormControl isRequired padding={2} width={"70%"} marginRight={"1rem"}>
-        <FormLabel fontSize={"1.65rem"}>Username or Mail</FormLabel>
-        <Input
-          type={"text"}
-          padding={"1.6rem"}
-          borderRadius={"1rem"}
-          fontSize={"1.6rem"}
-        ></Input>
-        <FormHelperText fontSize={"1.3rem"}>
-          Please, enter your username or your mail
-        </FormHelperText>
-      </FormControl>
-
-      <FormControl isRequired padding={2} width={"70%"} marginRight={"1rem"}>
-        <FormLabel fontSize={"1.65rem"}>Password</FormLabel>
-        <Input
-          type={"password"}
-          padding={"1.6rem"}
-          borderRadius={"1rem"}
-          fontSize={"1.6rem"}
-        ></Input>
-        <FormHelperText fontSize={"1.3rem"}>
-          Please, enter your password
-        </FormHelperText>
-      </FormControl>
+    <FormWrapper formHeightPercent={35} isDataLoading={isSigningUp}>
+      <CustomFormControl
+        isInvalid={usernameOrEmail.hasError}
+        label={"Username or email"}
+        inputType={"text"}
+        inputValue={usernameOrEmail.value}
+        inputError={usernameOrEmail.hasError}
+        inputChangeFn={handleFormValueChange("usernameOrEmail")}
+      ></CustomFormControl>
+      <CustomFormControl
+        isInvalid={password.hasError}
+        label={"Password"}
+        inputType={"password"}
+        inputValue={password.value}
+        inputError={password.hasError}
+        inputChangeFn={handleFormValueChange("password")}
+      ></CustomFormControl>
 
       <FormControl
         marginRight={"1rem"}
@@ -42,7 +34,12 @@ function LoginComponent(props) {
         display={"flex"}
         justifyContent={"center"}
       >
-        <FormButton>SIGN IN</FormButton>
+        <FormButton
+          onClick={onButtonClick}
+          disabled={!usernameOrEmail.value || !password.value}
+        >
+          SIGN IN
+        </FormButton>
       </FormControl>
     </FormWrapper>
   );
