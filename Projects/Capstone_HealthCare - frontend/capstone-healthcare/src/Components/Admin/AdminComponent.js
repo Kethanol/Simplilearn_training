@@ -9,8 +9,10 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Tooltip,
 } from "@chakra-ui/react";
 import Backdrop from "../../Common/Shared/Backdrop";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 function AdminComponent({ medicineData, dataLoading }) {
   return (
@@ -65,6 +67,16 @@ function AdminComponent({ medicineData, dataLoading }) {
                     </Td>
                     <Td fontSize={"2rem"} isNumeric>
                       {medicine.price}$
+                    </Td>
+
+                    <Td fontSize={0} padding={0}>
+                      <Tooltip label={"Delete medicine"}>
+                        <DeleteIcon
+                          boxSize={"10"}
+                          cursor={"pointer"}
+                          onClick={() => console.log("DELETE")}
+                        ></DeleteIcon>
+                      </Tooltip>
                     </Td>
                   </Tr>
                 );
