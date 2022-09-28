@@ -188,7 +188,7 @@ function MedicinesComponent({
                               Can not be empty
                             </FormErrorMessage>
                             <Input
-                              value={medicine.name}
+                              defaultValue={medicine.name}
                               name={"name"}
                               border={"none"}
                               outline={"none"}
@@ -208,7 +208,7 @@ function MedicinesComponent({
                               Can not be empty
                             </FormErrorMessage>
                             <Input
-                              value={medicine.description}
+                              defaultValue={medicine.description}
                               name={"description"}
                               border={"none"}
                               outline={"none"}
@@ -230,7 +230,7 @@ function MedicinesComponent({
                               Can not be empty
                             </FormErrorMessage>
                             <Input
-                              value={medicine.schemaOfTreatment}
+                              defaultValue={medicine.schemaOfTreatment}
                               name={"schemaOfTreatment"}
                               border={"none"}
                               outline={"none"}
@@ -250,7 +250,7 @@ function MedicinesComponent({
                               Can not be empty
                             </FormErrorMessage>
                             <Input
-                              value={medicine.minimumAge}
+                              defaultValue={medicine.minimumAge}
                               name={"minimumAge"}
                               border={"none"}
                               outline={"none"}
@@ -271,7 +271,7 @@ function MedicinesComponent({
                               Can not be empty
                             </FormErrorMessage>
                             <Input
-                              value={medicine.price}
+                              defaultValue={medicine.price}
                               name={"price"}
                               border={"none"}
                               outline={"none"}

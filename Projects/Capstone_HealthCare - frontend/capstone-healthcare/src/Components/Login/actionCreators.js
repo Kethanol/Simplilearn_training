@@ -21,10 +21,10 @@ export function login(userObject, toaster, callback) {
       } else {
         dispatch({
           type: actionTypes.USER_LOGIN_SUCCEEDED,
-          payload: { token: data.token, isAdmin: data.isAdmin },
+          payload: { isAdmin: data.isAdmin },
         });
         toaster("Success", "Login successful", "success");
-        callback();
+        callback(data.token);
       }
     } catch {
       dispatch({ type: actionTypes.USER_LOGIN_FAILED });

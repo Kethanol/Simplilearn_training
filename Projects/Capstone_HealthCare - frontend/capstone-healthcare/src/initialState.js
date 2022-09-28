@@ -1,6 +1,5 @@
 const initialState = {
   user: {
-    token: null,
     isAdmin: false,
     loading: false,
   },

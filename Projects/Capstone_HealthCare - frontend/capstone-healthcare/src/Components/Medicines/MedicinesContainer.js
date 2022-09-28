@@ -10,7 +10,7 @@ import {
 } from "./actionCreators";
 import { getCachedMedicineData } from "./selectors";
 import { getCachedUserData } from "../Login/selectors";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { applyToast } from "../../Common/Functions/misc";
 
@@ -20,7 +20,9 @@ function MedicinesContainer() {
       getCachedMedicineData,
       shallowEqual
     ),
-    { token, isAdmin } = useSelector(getCachedUserData, shallowEqual),
+    { isAdmin } = useSelector(getCachedUserData, shallowEqual),
+    tokenRef = useRef(localStorage.getItem("token")),
+    token = tokenRef.current,
     [medicines, setMedicines] = useState([]),
     [dirtyRows, setDirtyRows] = useState([]),
     [invalidRows, setInvalidRows] = useState([]),

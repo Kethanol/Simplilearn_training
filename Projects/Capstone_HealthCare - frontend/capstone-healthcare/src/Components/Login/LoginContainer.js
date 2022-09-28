@@ -54,7 +54,12 @@ function LoginContainer() {
     };
 
     dispatch(
-      login(userObject, toaster, () => {
+      login(userObject, toaster, (token) => {
+        // THIS IS NOT SECURE AT ALL, AS THE TOKEN IS PRONE TO XSS ATTACKS.
+        // I WILL DO IT JUST AS AN EXAMPLE
+
+        localStorage.setItem("token", token);
+
         navigate("/medicines");
       })
     );
