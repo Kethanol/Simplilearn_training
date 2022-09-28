@@ -70,7 +70,6 @@ export function addMedicines(medicines, toaster, token) {
       await axiosWrapper("post", url, token, JSON.stringify(medicines));
 
       toaster("Success", `The medicines were successfully created`, "success");
-      debugger;
       dispatch(loadMedicines(toaster, token));
     } catch (err) {
       toaster(
