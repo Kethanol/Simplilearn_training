@@ -21,7 +21,8 @@ namespace BusinessLogicTier.Concrete
 
         public async Task<IEnumerable<Medicine?>> GetAsync(string medicineName)
         {
-            var medicines = await _unitOfWork.MedicineRepository.GetManyByAsync(m => m.Name != null && EF.Functions.Like(m.Name.ToUpper(), medicineName.ToUpper()));
+            if (string.IsNullOrEmpty(medicineName)) medicineName = string.Empty;
+            var medicines = await _unitOfWork.MedicineRepository.GetManyByAsync(m => m.Name != null && EF.Functions.Like(m.Name.ToUpper(), $"%{medicineName.ToUpper()}%"));
             return medicines ?? new List<Medicine?>();
         }
 

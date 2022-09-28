@@ -49,7 +49,7 @@ export function deleteMedicine(id, applyToast, toastApplier, callback) {
   };
 }
 
-export function updateMedicine(medicine, applyToast, toastApplier) {
+export function updateMedicine(medicine, applyToast, toastApplier, callback) {
   return async function () {
     try {
       let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.UPDATE_MEDICINE_ROUTE}`;
@@ -64,11 +64,35 @@ export function updateMedicine(medicine, applyToast, toastApplier) {
         `The medicine was successfully updated`,
         "success"
       );
+      callback(medicine.id);
     } catch (err) {
       applyToast(
         toastApplier,
         `Error while updating the medicine with the id ${medicine.id}`,
         `There was an error while updating the medicine: ${err}`,
+        "error"
+      );
+    }
+  };
+}
+
+export function searchMedicine(
+  medicineName,
+  applyToast,
+  toastApplier,
+  callback
+) {
+  return async function () {
+    try {
+      let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.LOAD_MEDICINE_ROUTE}?medicineName=${medicineName}`;
+
+      let { data } = await axios.get(url);
+      callback(data);
+    } catch (err) {
+      applyToast(
+        toastApplier,
+        "Error while searching for the medicines",
+        `There was an error while searching for the medicines: ${err}`,
         "error"
       );
     }

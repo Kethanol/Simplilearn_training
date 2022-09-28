@@ -5,6 +5,7 @@ import {
   loadMedicines,
   deleteMedicine,
   updateMedicine,
+  searchMedicine,
 } from "./actionCreators";
 import { getCachedMedicineData } from "./selectors";
 import { useEffect, useState } from "react";
@@ -19,7 +20,8 @@ function AdminContainer() {
       shallowEqual
     ),
     [dirtyRows, setDirtyRows] = useState({}),
-    [medicines, setMedicines] = useState([]);
+    [medicines, setMedicines] = useState([]),
+    [searchTerm, setSearchTerm] = useState("");
 
   useEffect(
     function insideEffect() {
@@ -53,9 +55,31 @@ function AdminContainer() {
     );
   }
 
+  function onSearchTermChange(event) {
+    var {
+      target: { value },
+    } = event;
+
+    setSearchTerm(value);
+  }
+
+  function searchForMedicine() {
+    dispatch(
+      searchMedicine(searchTerm, applyToast, toast, (data) => {
+        setMedicines(data);
+      })
+    );
+  }
+
   function updateMed(id) {
     var medicine = medicines.find((m) => m.id === id);
-    dispatch(updateMedicine(medicine, applyToast, toast));
+    dispatch(
+      updateMedicine(medicine, applyToast, toast, (medicineId) => {
+        setDirtyRows((prevDirtyRows) => {
+          return { ...prevDirtyRows, [medicineId]: false };
+        });
+      })
+    );
   }
 
   return (
@@ -66,6 +90,9 @@ function AdminContainer() {
       updateMed={updateMed}
       handleRowChange={handleRowChange}
       dirtyRows={dirtyRows}
+      searchTerm={searchTerm}
+      onSearchTermChange={onSearchTermChange}
+      searchMedicine={searchForMedicine}
     ></AdminComponent>
   );
 }
