@@ -12,16 +12,16 @@ import { login } from "./actionCreators";
 import { getCachedUserData } from "./selectors";
 
 function LoginContainer() {
-  var navigate = useNavigate();
-  var dispatch = useDispatch();
-  var { loading } = useSelector(getCachedUserData, shallowEqual);
-
-  var [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
-
-  var [formData, setFormData] = useState({
-    usernameOrEmail: { value: "", hasError: false },
-    password: { value: "", hasError: false },
-  });
+  var navigate = useNavigate(),
+    dispatch = useDispatch(),
+    { loading } = useSelector(getCachedUserData, shallowEqual),
+    [isCheckboxChecked, setIsCheckboxChecked] = useState(false),
+    [formData, setFormData] = useState({
+      usernameOrEmail: { value: "", hasError: false },
+      password: { value: "", hasError: false },
+    }),
+    toast = useToast(),
+    toaster = applyToast(toast);
 
   function handleTextClick() {
     navigate("/sign-up");
@@ -46,8 +46,6 @@ function LoginContainer() {
     return handleFormValueChangeWrapper(fieldName, populateForm);
   }
 
-  var toast = useToast();
-
   function logIn() {
     var userObject = {
       usernameOrEmail: formData.usernameOrEmail.value,
@@ -56,7 +54,7 @@ function LoginContainer() {
     };
 
     dispatch(
-      login(userObject, applyToast, toast, () => {
+      login(userObject, toaster, () => {
         navigate("/medicines");
       })
     );

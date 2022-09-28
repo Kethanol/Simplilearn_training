@@ -1,23 +1,25 @@
 import * as actionTypes from "./actionTypes";
 import consts from "../../Common/consts";
 import axios from "axios";
+import { axiosWrapper } from "../../Common/Functions/misc";
 
-export function loadMedicines(applyToast, toastApplier) {
+export function loadMedicines(toaster, token) {
   return async function (dispatch) {
     dispatch({ type: actionTypes.LOAD_MEDICINES_STARTED });
 
     try {
       let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.LOAD_MEDICINES_ROUTE}`;
 
-      let { data } = await axios.get(url);
+      let { data } = await axiosWrapper("get", url, token);
+
+      //let { data } = await axios.get(url);
       dispatch({
         type: actionTypes.LOAD_MEDICINES_SUCCEEDED,
         payload: { data },
       });
     } catch (err) {
       dispatch({ type: actionTypes.LOAD_MEDICINES_FAILED });
-      applyToast(
-        toastApplier,
+      toaster(
         "Error while retrieving the medicines",
         `There was an error while retrieveing the medicines: ${err}`,
         "error"
@@ -26,21 +28,15 @@ export function loadMedicines(applyToast, toastApplier) {
   };
 }
 
-export function deleteMedicine(id, applyToast, toastApplier, callback) {
+export function deleteMedicine(id, toaster, callback) {
   return async function () {
     try {
       let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.DELETE_MEDICINE_ROUTE}?medicineId=${id}`;
       await axios.delete(url);
-      applyToast(
-        toastApplier,
-        "Success",
-        `The medicine was successfully deleted`,
-        "success"
-      );
+      toaster("Success", `The medicine was successfully deleted`, "success");
       callback();
     } catch (err) {
-      applyToast(
-        toastApplier,
+      toaster(
         `Error while deleting the medicine with the id ${id}`,
         `There was an error while deleting the medicine: ${err}`,
         "error"
@@ -49,7 +45,7 @@ export function deleteMedicine(id, applyToast, toastApplier, callback) {
   };
 }
 
-export function updateMedicine(medicine, applyToast, toastApplier, callback) {
+export function updateMedicine(medicine, toaster, callback) {
   return async function () {
     try {
       let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.UPDATE_MEDICINE_ROUTE}`;
@@ -58,16 +54,10 @@ export function updateMedicine(medicine, applyToast, toastApplier, callback) {
           "Content-Type": "application/json",
         },
       });
-      applyToast(
-        toastApplier,
-        "Success",
-        `The medicine was successfully updated`,
-        "success"
-      );
+      toaster("Success", `The medicine was successfully updated`, "success");
       callback();
     } catch (err) {
-      applyToast(
-        toastApplier,
+      toaster(
         `Error while updating the medicine with the id ${medicine.id}`,
         `There was an error while updating the medicine: ${err}`,
         "error"
@@ -76,7 +66,7 @@ export function updateMedicine(medicine, applyToast, toastApplier, callback) {
   };
 }
 
-export function addMedicines(medicines, applyToast, toastApplier) {
+export function addMedicines(medicines, toaster) {
   return async function (dispatch) {
     try {
       let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.CREATE_MEDICINES_ROUTE}`;
@@ -85,16 +75,10 @@ export function addMedicines(medicines, applyToast, toastApplier) {
           "Content-Type": "application/json",
         },
       });
-      applyToast(
-        toastApplier,
-        "Success",
-        `The medicines were successfully created`,
-        "success"
-      );
-      dispatch(loadMedicines(applyToast, toastApplier));
+      toaster("Success", `The medicines were successfully created`, "success");
+      dispatch(loadMedicines(toaster));
     } catch (err) {
-      applyToast(
-        toastApplier,
+      toaster(
         `Error while creating medicines`,
         `There was an error while creating medicines: ${err}`,
         "error"
@@ -103,12 +87,7 @@ export function addMedicines(medicines, applyToast, toastApplier) {
   };
 }
 
-export function searchMedicine(
-  medicineName,
-  applyToast,
-  toastApplier,
-  callback
-) {
+export function searchMedicine(medicineName, toaster, callback) {
   return async function () {
     try {
       let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.LOAD_MEDICINE_ROUTE}?medicineName=${medicineName}`;
@@ -116,8 +95,7 @@ export function searchMedicine(
       let { data } = await axios.get(url);
       callback(data);
     } catch (err) {
-      applyToast(
-        toastApplier,
+      toaster(
         "Error while searching for the medicines",
         `There was an error while searching for the medicines: ${err}`,
         "error"

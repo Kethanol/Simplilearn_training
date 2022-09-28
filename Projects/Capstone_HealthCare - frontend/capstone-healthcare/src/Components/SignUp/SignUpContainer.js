@@ -16,20 +16,20 @@ import {
 import consts from "../../Common/consts";
 
 function SignUpContainer() {
-  var [isSigningUp, setIsSigningUp] = useState(false);
-  var navigate = useNavigate();
-
-  var [formData, setFormData] = useState({
-    username: { value: "", hasError: false },
-    firstName: { value: "", hasError: false },
-    lastName: { value: "", hasError: false },
-    password: { value: "", hasError: false },
-    passwordRepeat: { value: "", hasError: false },
-    email: { value: "", hasError: false },
-  });
-
-  var { username, firstName, lastName, password, passwordRepeat, email } =
-    formData;
+  var [isSigningUp, setIsSigningUp] = useState(false),
+    navigate = useNavigate(),
+    [formData, setFormData] = useState({
+      username: { value: "", hasError: false },
+      firstName: { value: "", hasError: false },
+      lastName: { value: "", hasError: false },
+      password: { value: "", hasError: false },
+      passwordRepeat: { value: "", hasError: false },
+      email: { value: "", hasError: false },
+    }),
+    { username, firstName, lastName, password, passwordRepeat, email } =
+      formData,
+    toast = useToast(),
+    toaster = applyToast(toast);
 
   function populateForm(fieldName, data) {
     setFormData((prevFormData) => ({
@@ -87,8 +87,6 @@ function SignUpContainer() {
     await signUp();
   }
 
-  var toast = useToast();
-
   async function signUp() {
     setIsSigningUp(true);
 
@@ -111,20 +109,14 @@ function SignUpContainer() {
 
       if (!data.hasSuccess) {
         setIsSigningUp(false);
-        applyToast(
-          toast,
-          "Error while creating account",
-          data.errorReason,
-          "error"
-        );
+        toaster("Error while creating account", data.errorReason, "error");
       } else {
-        applyToast(toast, "Success", "Sign-up successful", "success");
+        toaster("Success", "Sign-up successful", "success");
         navigate("/login");
       }
     } catch {
       setIsSigningUp(false);
-      applyToast(
-        toast,
+      toaster(
         "Error while creating account",
         "There was an error creating the account. Please try again later.",
         "error"

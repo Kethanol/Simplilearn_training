@@ -16,7 +16,6 @@ import { applyToast } from "../../Common/Functions/misc";
 
 function MedicinesContainer() {
   var dispatch = useDispatch(),
-    toast = useToast(),
     { data, loading, loaded } = useSelector(
       getCachedMedicineData,
       shallowEqual
@@ -25,18 +24,20 @@ function MedicinesContainer() {
     [medicines, setMedicines] = useState([]),
     [dirtyRows, setDirtyRows] = useState([]),
     [invalidRows, setInvalidRows] = useState([]),
-    [searchTerm, setSearchTerm] = useState("");
+    [searchTerm, setSearchTerm] = useState(""),
+    toast = useToast(),
+    toaster = applyToast(toast);
 
   useEffect(
     function insideEffect() {
-      if (!loaded && !loading) dispatch(loadMedicines(applyToast, toast));
+      if (!loaded && !loading) dispatch(loadMedicines(toaster, token));
       else {
         setMedicines(data);
         setDirtyRows(data.map(() => false));
         setInvalidRows(data.map(() => false));
       }
     },
-    [dispatch, toast, loading, loaded, data]
+    [dispatch, toaster, loading, loaded, data, token]
   );
 
   function handleRowChange(event, index) {
@@ -76,7 +77,7 @@ function MedicinesContainer() {
       deleteMedicineFromList(index);
     } else {
       dispatch(
-        deleteMedicine(medicine.id, applyToast, toast, () => {
+        deleteMedicine(medicine.id, toaster, () => {
           deleteMedicineFromList(index);
         })
       );
@@ -93,7 +94,7 @@ function MedicinesContainer() {
 
   function searchForMedicine() {
     dispatch(
-      searchMedicine(searchTerm, applyToast, toast, (data) => {
+      searchMedicine(searchTerm, toaster, (data) => {
         setMedicines(data);
       })
     );
@@ -102,7 +103,7 @@ function MedicinesContainer() {
   function updateMed(index) {
     var medicine = medicines.find((_, i) => i === index);
     dispatch(
-      updateMedicine(medicine, applyToast, toast, () => {
+      updateMedicine(medicine, toaster, () => {
         var newDirtyRows = [...dirtyRows];
         newDirtyRows[index] = false;
         setDirtyRows(newDirtyRows);
@@ -113,7 +114,7 @@ function MedicinesContainer() {
   function addMeds() {
     var newMeds = medicines.filter((m) => m.id === 0);
 
-    dispatch(addMedicines(newMeds, applyToast, toast));
+    dispatch(addMedicines(newMeds, toaster));
 
     var dirtyInfo = medicines.map(() => false);
     setDirtyRows(dirtyInfo);
