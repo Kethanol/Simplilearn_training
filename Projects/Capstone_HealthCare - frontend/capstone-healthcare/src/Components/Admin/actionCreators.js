@@ -64,12 +64,39 @@ export function updateMedicine(medicine, applyToast, toastApplier, callback) {
         `The medicine was successfully updated`,
         "success"
       );
-      callback(medicine.id);
+      callback();
     } catch (err) {
       applyToast(
         toastApplier,
         `Error while updating the medicine with the id ${medicine.id}`,
         `There was an error while updating the medicine: ${err}`,
+        "error"
+      );
+    }
+  };
+}
+
+export function addMedicines(medicines, applyToast, toastApplier) {
+  return async function (dispatch) {
+    try {
+      let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.CREATE_MEDICINES_ROUTE}`;
+      await axios.post(url, JSON.stringify(medicines), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      applyToast(
+        toastApplier,
+        "Success",
+        `The medicines were successfully created`,
+        "success"
+      );
+      dispatch(loadMedicines(applyToast, toastApplier));
+    } catch (err) {
+      applyToast(
+        toastApplier,
+        `Error while creating medicines`,
+        `There was an error while creating medicines: ${err}`,
         "error"
       );
     }

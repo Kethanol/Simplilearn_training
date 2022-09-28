@@ -6,6 +6,7 @@ const consts = {
   LOAD_MEDICINE_ROUTE: "/admin/get-medicine",
   DELETE_MEDICINE_ROUTE: "/admin/delete-medicine",
   UPDATE_MEDICINE_ROUTE: "/admin/update-medicine",
+  CREATE_MEDICINES_ROUTE: "/admin/add-medicines",
 };
 
 export default consts;

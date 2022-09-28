@@ -26,9 +26,11 @@ namespace BusinessLogicTier.Concrete
             return medicines ?? new List<Medicine?>();
         }
 
-        public async Task AddMedicine(Medicine medicine)
+        public async Task AddMedicines(IEnumerable<Medicine> medicines)
         {
-            await _unitOfWork.MedicineRepository.InsertAsync(medicine);
+            foreach (var medicine in medicines)
+                await _unitOfWork.MedicineRepository.InsertAsync(medicine);
+
             await _unitOfWork.SaveChangesAsync();
         }
 

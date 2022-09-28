@@ -10,16 +10,21 @@ import {
   TableCaption,
   TableContainer,
   Tooltip,
-  Editable,
-  EditablePreview,
-  EditableInput,
   IconButton,
   Input,
   InputGroup,
   InputRightElement,
+  FormErrorMessage,
+  FormControl,
 } from "@chakra-ui/react";
 import Backdrop from "../../Common/Shared/Backdrop";
-import { DeleteIcon, TriangleUpIcon, SearchIcon } from "@chakra-ui/icons";
+import {
+  DeleteIcon,
+  TriangleUpIcon,
+  SearchIcon,
+  AddIcon,
+  CheckIcon,
+} from "@chakra-ui/icons";
 
 function AdminComponent({
   medicineData,
@@ -28,16 +33,33 @@ function AdminComponent({
   updateMed,
   handleRowChange,
   dirtyRows,
+  invalidRows,
   searchTerm,
   onSearchTermChange,
   searchMedicine,
+  addNewRow,
+  addMedicines,
 }) {
   var iconButtonEditableProps = {
     _hover: { background: "transparent" },
   };
 
-  function renderEditableBackgroundProps(medicineId) {
-    if (!dirtyRows[medicineId]) return iconButtonEditableProps;
+  var iconButtonSaveProps = {
+    _hover: { background: "rgba(178,245,234, 0.8)" },
+  };
+
+  function renderEditableBackgroundProps(index) {
+    if (!dirtyRows[index]) return iconButtonEditableProps;
+    else return {};
+  }
+
+  function isSaveButtonDisabled() {
+    if (!medicineData.some((m) => m.id === 0)) return true;
+    else if (medicineData.some((_, i) => invalidRows[i])) return true;
+  }
+
+  function renderSaveChangesProps() {
+    if (!medicineData.some((m) => m.id === 0)) return iconButtonSaveProps;
     else return {};
   }
 
@@ -97,8 +119,44 @@ function AdminComponent({
                 colorScheme="teal"
                 size={"lg"}
               >
-                <TableCaption fontSize={"2rem"} textTransform={"uppercase"}>
+                <TableCaption
+                  position={"relative"}
+                  fontSize={"2rem"}
+                  textTransform={"uppercase"}
+                >
                   Medicine list
+                  <Box
+                    position={"absolute"}
+                    right={"4rem"}
+                    bottom={0}
+                    transform={"translateY(-10%)"}
+                  >
+                    <Tooltip label={"Add medicine"}>
+                      <IconButton
+                        isRound
+                        background={"rgba(178,245,234, 0.8)"}
+                        width={"4rem"}
+                        height={"4rem"}
+                        size={"lg"}
+                        onClick={addNewRow}
+                        icon={<AddIcon boxSize={"8"}></AddIcon>}
+                      />
+                    </Tooltip>
+                    <Tooltip label={"Save changes"}>
+                      <IconButton
+                        marginLeft={"2rem"}
+                        isRound
+                        background={"rgba(178,245,234, 0.8)"}
+                        width={"4rem"}
+                        height={"4rem"}
+                        size={"lg"}
+                        onClick={addMedicines}
+                        disabled={isSaveButtonDisabled()}
+                        {...renderSaveChangesProps()}
+                        icon={<CheckIcon boxSize={"8"}></CheckIcon>}
+                      />
+                    </Tooltip>
+                  </Box>
                 </TableCaption>
                 <Thead>
                   <Tr>
@@ -109,84 +167,149 @@ function AdminComponent({
                       Minimum Age
                     </Th>
                     <Th fontSize={"1.7rem"} isNumeric>
-                      Price
+                      Price ($)
                     </Th>
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {medicineData.map((medicine) => {
+                  {medicineData.map((medicine, index) => {
                     return (
                       <Tr
-                        key={medicine.id}
-                        onChange={(e) => handleRowChange(e, medicine.id)}
+                        key={index}
+                        onChange={(e) => handleRowChange(e, index)}
                       >
                         <Td fontSize={"2rem"}>
-                          <Editable defaultValue={medicine.name}>
-                            <EditablePreview width={"full"} />
-                            <EditableInput name="name" />
-                          </Editable>
+                          <FormControl isInvalid={medicine.name === ""}>
+                            <FormErrorMessage
+                              fontSize={"1.3rem"}
+                              marginBottom={".5rem"}
+                            >
+                              Can not be empty
+                            </FormErrorMessage>
+                            <Input
+                              value={medicine.name}
+                              name={"name"}
+                              border={"none"}
+                              outline={"none"}
+                              fontSize={"2rem"}
+                              padding={"1.5rem"}
+                              background={"inherit"}
+                              type={"text"}
+                            ></Input>
+                          </FormControl>
                         </Td>
                         <Td fontSize={"2rem"}>
-                          <Editable defaultValue={medicine.description}>
-                            <EditablePreview width={"full"} />
-                            <EditableInput name="description" />
-                          </Editable>
+                          <FormControl isInvalid={medicine.description === ""}>
+                            <FormErrorMessage
+                              fontSize={"1.3rem"}
+                              marginBottom={".5rem"}
+                            >
+                              Can not be empty
+                            </FormErrorMessage>
+                            <Input
+                              value={medicine.description}
+                              name={"description"}
+                              border={"none"}
+                              outline={"none"}
+                              fontSize={"2rem"}
+                              padding={"1.5rem"}
+                              background={"inherit"}
+                              type={"text"}
+                            ></Input>
+                          </FormControl>
                         </Td>
                         <Td fontSize={"2rem"}>
-                          <Editable defaultValue={medicine.schemaOfTreatment}>
-                            <EditablePreview width={"full"} />
-                            <EditableInput name="schemaOfTreatment" />
-                          </Editable>
-                        </Td>
-                        <Td fontSize={"2rem"} isNumeric>
-                          <Editable defaultValue={medicine.minimumAge}>
-                            <EditablePreview width={"40%"} />
-                            <EditableInput
-                              width={"40%"}
-                              type={"number"}
-                              name={"minimumAge"}
-                            />
-                          </Editable>
-                        </Td>
-                        <Td fontSize={"2rem"} isNumeric>
-                          <Editable defaultValue={`${medicine.price}`}>
-                            <EditablePreview width={"40%"} />
-                            <EditableInput
-                              width={"40%"}
-                              type={"number"}
-                              name={"price"}
-                            />
-                            $
-                          </Editable>
-                        </Td>
-
-                        <Td fontSize={0} padding={"0 0 0 .6rem"}>
-                          <Tooltip
-                            label={"Update medicine"}
-                            isDisabled={!dirtyRows[medicine.id]}
+                          <FormControl
+                            isInvalid={medicine.schemaOfTreatment === ""}
                           >
+                            <FormErrorMessage
+                              fontSize={"1.3rem"}
+                              marginBottom={".5rem"}
+                            >
+                              Can not be empty
+                            </FormErrorMessage>
+                            <Input
+                              value={medicine.schemaOfTreatment}
+                              name={"schemaOfTreatment"}
+                              border={"none"}
+                              outline={"none"}
+                              fontSize={"2rem"}
+                              padding={"1.5rem"}
+                              background={"inherit"}
+                              type={"text"}
+                            ></Input>
+                          </FormControl>
+                        </Td>
+                        <Td fontSize={"2rem"}>
+                          <FormControl isInvalid={medicine.minimumAge === ""}>
+                            <FormErrorMessage
+                              fontSize={"1.3rem"}
+                              marginBottom={".5rem"}
+                            >
+                              Can not be empty
+                            </FormErrorMessage>
+                            <Input
+                              value={medicine.minimumAge}
+                              name={"minimumAge"}
+                              border={"none"}
+                              outline={"none"}
+                              fontSize={"2rem"}
+                              padding={"1.5rem"}
+                              background={"inherit"}
+                              type={"number"}
+                              textAlign={"right"}
+                            ></Input>
+                          </FormControl>
+                        </Td>
+                        <Td fontSize={"2rem"}>
+                          <FormControl isInvalid={medicine.price === ""}>
+                            <FormErrorMessage
+                              fontSize={"1.3rem"}
+                              marginBottom={".5rem"}
+                            >
+                              Can not be empty
+                            </FormErrorMessage>
+                            <Input
+                              value={medicine.price}
+                              name={"price"}
+                              border={"none"}
+                              outline={"none"}
+                              fontSize={"2rem"}
+                              padding={"1.5rem"}
+                              background={"inherit"}
+                              type={"number"}
+                              textAlign={"right"}
+                            ></Input>
+                          </FormControl>
+                        </Td>
+                        <Td fontSize={0}>
+                          <Tooltip label={"Update medicine"}>
                             <IconButton
-                              disabled={!dirtyRows[medicine.id]}
-                              {...renderEditableBackgroundProps(medicine.id)}
+                              disabled={
+                                !dirtyRows[index] ||
+                                medicine.id === 0 ||
+                                invalidRows[index]
+                              }
+                              {...renderEditableBackgroundProps(index)}
                               background={"transparent"}
                               icon={
                                 <TriangleUpIcon
                                   boxSize={"10"}
-                                  onClick={() => updateMed(medicine.id)}
+                                  onClick={() => updateMed(index)}
                                 ></TriangleUpIcon>
                               }
                             />
                           </Tooltip>
                         </Td>
 
-                        <Td fontSize={0} padding={"0 0 0 .6rem"}>
+                        <Td fontSize={0}>
                           <Tooltip label={"Delete medicine"}>
                             <IconButton
                               background={"transparent"}
                               icon={
                                 <DeleteIcon
                                   boxSize={"10"}
-                                  onClick={() => deleteMed(medicine.id)}
+                                  onClick={() => deleteMed(index)}
                                 ></DeleteIcon>
                               }
                             />

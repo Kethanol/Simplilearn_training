@@ -6,6 +6,7 @@ import {
   deleteMedicine,
   updateMedicine,
   searchMedicine,
+  addMedicines,
 } from "./actionCreators";
 import { getCachedMedicineData } from "./selectors";
 import { useEffect, useState } from "react";
@@ -19,40 +20,65 @@ function AdminContainer() {
       getCachedMedicineData,
       shallowEqual
     ),
-    [dirtyRows, setDirtyRows] = useState({}),
     [medicines, setMedicines] = useState([]),
+    [dirtyRows, setDirtyRows] = useState([]),
+    [invalidRows, setInvalidRows] = useState([]),
     [searchTerm, setSearchTerm] = useState("");
 
   useEffect(
     function insideEffect() {
       if (!loaded && !loading) dispatch(loadMedicines(applyToast, toast));
-      else setMedicines(data);
+      else {
+        setMedicines(data);
+        setDirtyRows(data.map(() => false));
+        setInvalidRows(data.map(() => false));
+      }
     },
     [dispatch, toast, loading, loaded, data]
   );
 
-  function handleRowChange(event, medicineId) {
+  function handleRowChange(event, index) {
     var {
         target: { name, value },
       } = event,
-      existingMedicine = medicines.find((m) => m.id === medicineId);
+      existingMedicine = medicines.find((_, i) => index === i),
+      newDirtyRows = [...dirtyRows],
+      newInvalidRows = [...invalidRows];
 
     existingMedicine[name] = value;
-
     setMedicines(medicines);
 
-    setDirtyRows((prevDirtyRows) => {
-      return { ...prevDirtyRows, [medicineId]: true };
-    });
+    newDirtyRows[index] = true;
+    setDirtyRows(newDirtyRows);
+
+    newInvalidRows[index] = setValidity(existingMedicine);
+    setInvalidRows(newInvalidRows);
   }
 
-  function deleteMed(id) {
-    dispatch(
-      deleteMedicine(id, applyToast, toast, () => {
-        var newMedicines = medicines.filter((m) => m.id !== id);
-        setMedicines(newMedicines);
-      })
-    );
+  function setValidity(medicine) {
+    return Object.values(medicine).some((v) => v === "");
+  }
+
+  function deleteMedicineFromList(index) {
+    var newMedicines = medicines.filter((_, i) => i !== index),
+      invalidRows = newMedicines.map(setValidity);
+    setInvalidRows(invalidRows);
+
+    setMedicines(newMedicines);
+  }
+
+  function deleteMed(index) {
+    var medicine = medicines.find((_, i) => i === index);
+
+    if (medicine.id === 0) {
+      deleteMedicineFromList(index);
+    } else {
+      dispatch(
+        deleteMedicine(medicine.id, applyToast, toast, () => {
+          deleteMedicineFromList(index);
+        })
+      );
+    }
   }
 
   function onSearchTermChange(event) {
@@ -71,15 +97,42 @@ function AdminContainer() {
     );
   }
 
-  function updateMed(id) {
-    var medicine = medicines.find((m) => m.id === id);
+  function updateMed(index) {
+    var medicine = medicines.find((_, i) => i === index);
     dispatch(
-      updateMedicine(medicine, applyToast, toast, (medicineId) => {
-        setDirtyRows((prevDirtyRows) => {
-          return { ...prevDirtyRows, [medicineId]: false };
-        });
+      updateMedicine(medicine, applyToast, toast, () => {
+        var newDirtyRows = [...dirtyRows];
+        newDirtyRows[index] = false;
+        setDirtyRows(newDirtyRows);
       })
     );
+  }
+
+  function addMeds() {
+    var newMeds = medicines.filter((m) => m.id === 0);
+
+    dispatch(addMedicines(newMeds, applyToast, toast));
+
+    var dirtyInfo = medicines.map(() => false);
+    setDirtyRows(dirtyInfo);
+  }
+
+  function addNewRow() {
+    var newMedicine = {
+        id: 0,
+        name: "",
+        description: "",
+        schemaOfTreatment: "",
+        minimumAge: "",
+        price: "",
+      },
+      newInvalidRows = [...invalidRows];
+
+    medicines.push(newMedicine);
+    setMedicines(medicines);
+
+    newInvalidRows[medicines.length - 1] = true;
+    setInvalidRows(newInvalidRows);
   }
 
   return (
@@ -90,9 +143,12 @@ function AdminContainer() {
       updateMed={updateMed}
       handleRowChange={handleRowChange}
       dirtyRows={dirtyRows}
+      invalidRows={invalidRows}
       searchTerm={searchTerm}
       onSearchTermChange={onSearchTermChange}
       searchMedicine={searchForMedicine}
+      addMedicines={addMeds}
+      addNewRow={addNewRow}
     ></AdminComponent>
   );
 }

@@ -1,4 +1,5 @@
 ﻿using BusinessLogicTier.Contracts;
+using BusinessLogicTier.Models;
 using Entities.Constants;
 using Entities.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -36,20 +37,20 @@ namespace Capstone_Project.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetMedicine([FromQuery] string medicineName)
+        public async Task<IActionResult> GetMedicine([FromQuery] SearchQueryModel model)
         {
-            var medicine = await _medicineService.GetAsync(medicineName);
+            var medicine = await _medicineService.GetAsync(model.MedicineName!);
             return Ok(medicine);
         }
 
         [HttpPost]
-        [Route("add-medicine")]
+        [Route("add-medicines")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> AddMedicine([FromBody] Medicine medicine)
+        public async Task<IActionResult> AddMedicine([FromBody] IEnumerable<Medicine> medicines)
         {
-            await _medicineService.AddMedicine(medicine);
+            await _medicineService.AddMedicines(medicines);
             return Ok();
         }
 

@@ -6,7 +6,7 @@ namespace BusinessLogicTier.Contracts
     {
         Task<IEnumerable<Medicine>> GetAllAsync();
         Task<IEnumerable<Medicine?>> GetAsync(string name);
-        Task AddMedicine(Medicine medicine);
+        Task AddMedicines(IEnumerable<Medicine> medicines);
         Task UpdateMedicine(Medicine medicine);
         Task DeleteMedicine(int id);
     }
