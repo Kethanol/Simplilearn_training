@@ -52,13 +52,11 @@ var theme = extendTheme({
 });
 
 root.render(
-  <React.StrictMode>
-    <StoreProvider store={store}>
-      <ChakraProvider theme={theme}>
-        <RouterProvider router={router}></RouterProvider>
-      </ChakraProvider>
-    </StoreProvider>
-  </React.StrictMode>
+  <StoreProvider store={store}>
+    <ChakraProvider theme={theme}>
+      <RouterProvider router={router}></RouterProvider>
+    </ChakraProvider>
+  </StoreProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

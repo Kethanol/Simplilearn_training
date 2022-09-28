@@ -10,7 +10,7 @@ import {
 } from "./actionCreators";
 import { getCachedMedicineData } from "./selectors";
 import { getCachedUserData } from "../Login/selectors";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { applyToast } from "../../Common/Functions/misc";
 
@@ -21,7 +21,6 @@ function MedicinesContainer() {
       shallowEqual
     ),
     { token, isAdmin } = useSelector(getCachedUserData, shallowEqual),
-    tokenRef = useRef(token),
     [medicines, setMedicines] = useState([]),
     [dirtyRows, setDirtyRows] = useState([]),
     [invalidRows, setInvalidRows] = useState([]),
@@ -31,14 +30,13 @@ function MedicinesContainer() {
 
   useEffect(
     function insideEffect() {
-      if (!loaded) dispatch(loadMedicines(toaster(), tokenRef.current));
-      else {
+      if (loaded) {
         setMedicines(data);
         setDirtyRows(data.map(() => false));
         setInvalidRows(data.map(() => false));
-      }
+      } else dispatch(loadMedicines(toaster(), token));
     },
-    [dispatch, loaded, toaster, data]
+    [dispatch, loaded, data, toaster, token]
   );
 
   function handleRowChange(event, index) {
@@ -115,7 +113,7 @@ function MedicinesContainer() {
   function addMeds() {
     var newMeds = medicines.filter((m) => m.id === 0);
 
-    dispatch(addMedicines(newMeds, toaster()));
+    dispatch(addMedicines(newMeds, toaster(), token));
 
     var dirtyInfo = medicines.map(() => false);
     setDirtyRows(dirtyInfo);
