@@ -28,11 +28,11 @@ export function loadMedicines(toaster, token) {
   };
 }
 
-export function deleteMedicine(id, toaster, callback) {
+export function deleteMedicine(id, toaster, token, callback) {
   return async function () {
     try {
       let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.DELETE_MEDICINE_ROUTE}?medicineId=${id}`;
-      await axios.delete(url);
+      await axiosWrapper("delete", url, token);
       toaster("Success", `The medicine was successfully deleted`, "success");
       callback();
     } catch (err) {
@@ -45,15 +45,12 @@ export function deleteMedicine(id, toaster, callback) {
   };
 }
 
-export function updateMedicine(medicine, toaster, callback) {
+export function updateMedicine(medicine, toaster, token, callback) {
   return async function () {
     try {
       let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.UPDATE_MEDICINE_ROUTE}`;
-      await axios.put(url, JSON.stringify(medicine), {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      await axiosWrapper("put", url, token, JSON.stringify(medicine));
+
       toaster("Success", `The medicine was successfully updated`, "success");
       callback();
     } catch (err) {
@@ -66,17 +63,14 @@ export function updateMedicine(medicine, toaster, callback) {
   };
 }
 
-export function addMedicines(medicines, toaster) {
+export function addMedicines(medicines, toaster, token) {
   return async function (dispatch) {
     try {
       let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.CREATE_MEDICINES_ROUTE}`;
-      await axios.post(url, JSON.stringify(medicines), {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      await axiosWrapper("post", url, token, JSON.stringify(medicines));
+
       toaster("Success", `The medicines were successfully created`, "success");
-      dispatch(loadMedicines(toaster));
+      dispatch(loadMedicines(toaster, token));
     } catch (err) {
       toaster(
         `Error while creating medicines`,

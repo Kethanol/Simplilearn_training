@@ -10,7 +10,7 @@ import {
 } from "./actionCreators";
 import { getCachedMedicineData } from "./selectors";
 import { getCachedUserData } from "../Login/selectors";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { applyToast } from "../../Common/Functions/misc";
 
@@ -21,23 +21,24 @@ function MedicinesContainer() {
       shallowEqual
     ),
     { token, isAdmin } = useSelector(getCachedUserData, shallowEqual),
+    tokenRef = useRef(token),
     [medicines, setMedicines] = useState([]),
     [dirtyRows, setDirtyRows] = useState([]),
     [invalidRows, setInvalidRows] = useState([]),
     [searchTerm, setSearchTerm] = useState(""),
     toast = useToast(),
-    toaster = applyToast(toast);
+    toaster = useCallback(() => applyToast(toast), [toast]);
 
   useEffect(
     function insideEffect() {
-      if (!loaded && !loading) dispatch(loadMedicines(toaster, token));
+      if (!loaded) dispatch(loadMedicines(toaster(), tokenRef.current));
       else {
         setMedicines(data);
         setDirtyRows(data.map(() => false));
         setInvalidRows(data.map(() => false));
       }
     },
-    [dispatch, toaster, loading, loaded, data, token]
+    [dispatch, loaded, toaster, data]
   );
 
   function handleRowChange(event, index) {
@@ -77,7 +78,7 @@ function MedicinesContainer() {
       deleteMedicineFromList(index);
     } else {
       dispatch(
-        deleteMedicine(medicine.id, toaster, () => {
+        deleteMedicine(medicine.id, toaster(), token, () => {
           deleteMedicineFromList(index);
         })
       );
@@ -94,7 +95,7 @@ function MedicinesContainer() {
 
   function searchForMedicine() {
     dispatch(
-      searchMedicine(searchTerm, toaster, (data) => {
+      searchMedicine(searchTerm, toaster(), (data) => {
         setMedicines(data);
       })
     );
@@ -103,7 +104,7 @@ function MedicinesContainer() {
   function updateMed(index) {
     var medicine = medicines.find((_, i) => i === index);
     dispatch(
-      updateMedicine(medicine, toaster, () => {
+      updateMedicine(medicine, toaster(), token, () => {
         var newDirtyRows = [...dirtyRows];
         newDirtyRows[index] = false;
         setDirtyRows(newDirtyRows);
@@ -114,7 +115,7 @@ function MedicinesContainer() {
   function addMeds() {
     var newMeds = medicines.filter((m) => m.id === 0);
 
-    dispatch(addMedicines(newMeds, toaster));
+    dispatch(addMedicines(newMeds, toaster()));
 
     var dirtyInfo = medicines.map(() => false);
     setDirtyRows(dirtyInfo);
