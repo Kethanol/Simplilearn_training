@@ -18,7 +18,23 @@ import {
 import Backdrop from "../../Common/Shared/Backdrop";
 import { DeleteIcon, TriangleUpIcon } from "@chakra-ui/icons";
 
-function AdminComponent({ medicineData, dataLoading, deleteMed }) {
+function AdminComponent({
+  medicineData,
+  dataLoading,
+  deleteMed,
+  updateMed,
+  handleRowChange,
+  dirtyRows,
+}) {
+  var iconButtonEditableProps = {
+    _hover: { background: "transparent" },
+  };
+
+  function renderEditableBackgroundProps(medicineId) {
+    if (!dirtyRows[medicineId]) return iconButtonEditableProps;
+    else return {};
+  }
+
   return (
     <Box
       height={"100vh"}
@@ -62,48 +78,54 @@ function AdminComponent({ medicineData, dataLoading, deleteMed }) {
             <Tbody>
               {medicineData.map((medicine) => {
                 return (
-                  <Tr key={medicine.id}>
+                  <Tr
+                    key={medicine.id}
+                    onChange={(e) => handleRowChange(e, medicine.id)}
+                  >
                     <Td fontSize={"2rem"}>
                       <Editable defaultValue={medicine.name}>
-                        <EditablePreview />
-                        <EditableInput />
+                        <EditablePreview width={"full"} />
+                        <EditableInput name="name" />
                       </Editable>
                     </Td>
                     <Td fontSize={"2rem"}>
                       <Editable defaultValue={medicine.description}>
-                        <EditablePreview />
+                        <EditablePreview width={"full"} />
                         <EditableInput />
                       </Editable>
                     </Td>
                     <Td fontSize={"2rem"}>
                       <Editable defaultValue={medicine.schemaOfTreatment}>
-                        <EditablePreview />
+                        <EditablePreview width={"full"} />
                         <EditableInput />
                       </Editable>
                     </Td>
                     <Td fontSize={"2rem"} isNumeric>
                       <Editable defaultValue={medicine.minimumAge}>
                         <EditablePreview />
-                        <EditableInput />
+                        <EditableInput width={"40%"} type={"number"} />
                       </Editable>
                     </Td>
                     <Td fontSize={"2rem"} isNumeric>
-                      <Editable defaultValue={`${medicine.price}$`}>
+                      <Editable defaultValue={`${medicine.price}`}>
                         <EditablePreview />
-                        <EditableInput />
+                        <EditableInput width={"40%"} type={"number"} />$
                       </Editable>
                     </Td>
 
                     <Td fontSize={0} padding={"0 0 0 .6rem"}>
-                      <Tooltip label={"Update medicine"} isDisabled={false}>
+                      <Tooltip
+                        label={"Update medicine"}
+                        isDisabled={!dirtyRows[medicine.id]}
+                      >
                         <IconButton
-                          disabled
-                          _hover={{ background: "transparent" }}
+                          disabled={!dirtyRows[medicine.id]}
+                          {...renderEditableBackgroundProps(medicine.id)}
                           background={"transparent"}
                           icon={
                             <TriangleUpIcon
-                              boxSize={"8"}
-                              cursor={"pointer"}
+                              boxSize={"10"}
+                              onClick={() => updateMed(medicine.id)}
                             ></TriangleUpIcon>
                           }
                         />
@@ -116,8 +138,7 @@ function AdminComponent({ medicineData, dataLoading, deleteMed }) {
                           background={"transparent"}
                           icon={
                             <DeleteIcon
-                              boxSize={"8"}
-                              cursor={"pointer"}
+                              boxSize={"10"}
                               onClick={() => deleteMed(medicine.id)}
                             ></DeleteIcon>
                           }

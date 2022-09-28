@@ -4,6 +4,7 @@ const consts = {
   LOGIN_ROUTE: "/user/sign-in",
   LOAD_MEDICINES_ROUTE: "/admin/get-medicines",
   DELETE_MEDICINE_ROUTE: "/admin/delete-medicine",
+  UPDATE_MEDICINE_ROUTE: "/admin/update-medicine",
 };
 
 export default consts;

@@ -41,8 +41,7 @@ namespace Repository
 
                 medicine.Property(x => x.Price)
                 .HasColumnName("Price")
-                .HasMaxLength(16)
-                .HasPrecision(2);
+                .HasPrecision(16);
 
                 medicine.ToTable("Medicine");
             });
