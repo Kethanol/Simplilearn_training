@@ -15,7 +15,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { Provider as StoreProvider } from "react-redux";
 import reducers from "./reducers";
-import AdminContainer from "./Components/Admin/AdminContainer";
+import MedicinesContainer from "./Components/Medicines/MedicinesContainer";
 
 var composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 var store = createStore(reducers, composeEnhancer(applyMiddleware(thunk)));
@@ -36,8 +36,8 @@ var router = createBrowserRouter([
     errorElement: <div>404, page not found!</div>,
   },
   {
-    path: "/admin/medicines",
-    element: <AdminContainer />,
+    path: "/medicines",
+    element: <MedicinesContainer />,
   },
 ]);
 

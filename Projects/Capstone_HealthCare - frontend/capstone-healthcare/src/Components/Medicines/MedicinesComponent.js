@@ -26,7 +26,7 @@ import {
   CheckIcon,
 } from "@chakra-ui/icons";
 
-function AdminComponent({
+function MedicinesComponent({
   medicineData,
   dataLoading,
   deleteMed,
@@ -342,4 +342,4 @@ function AdminComponent({
   );
 }
 
-export default AdminComponent;
+export default MedicinesComponent;

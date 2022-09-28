@@ -1,4 +1,4 @@
-import AdminComponent from "./AdminComponent";
+import MedicinesComponent from "./MedicinesComponent";
 
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import {
@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { applyToast } from "../../Common/Functions/misc";
 
-function AdminContainer() {
+function MedicinesContainer() {
   var dispatch = useDispatch(),
     toast = useToast(),
     { data, loading, loaded } = useSelector(
@@ -136,7 +136,7 @@ function AdminContainer() {
   }
 
   return (
-    <AdminComponent
+    <MedicinesComponent
       medicineData={medicines}
       dataLoading={loading}
       deleteMed={deleteMed}
@@ -149,8 +149,8 @@ function AdminContainer() {
       searchMedicine={searchForMedicine}
       addMedicines={addMeds}
       addNewRow={addNewRow}
-    ></AdminComponent>
+    ></MedicinesComponent>
   );
 }
 
-export default AdminContainer;
+export default MedicinesContainer;

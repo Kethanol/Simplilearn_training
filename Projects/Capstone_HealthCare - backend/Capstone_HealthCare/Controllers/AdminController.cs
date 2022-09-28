@@ -1,5 +1,4 @@
 ﻿using BusinessLogicTier.Contracts;
-using BusinessLogicTier.Models;
 using Entities.Constants;
 using Entities.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -17,30 +16,6 @@ namespace Capstone_Project.Controllers
         public AdminController(IMedicineService medicineService)
         {
             _medicineService = medicineService;
-        }
-
-        [HttpGet]
-        [Route("get-medicines")]
-        [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAllMedicines()
-        {
-            var medicineList = await _medicineService.GetAllAsync();
-            return Ok(medicineList);
-        }
-
-        [HttpGet]
-        [Route("get-medicine")]
-        [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetMedicine([FromQuery] SearchQueryModel model)
-        {
-            var medicine = await _medicineService.GetAsync(model.MedicineName!);
-            return Ok(medicine);
         }
 
         [HttpPost]
