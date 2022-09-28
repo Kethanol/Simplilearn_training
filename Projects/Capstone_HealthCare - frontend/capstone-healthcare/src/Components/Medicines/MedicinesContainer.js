@@ -9,6 +9,7 @@ import {
   addMedicines,
 } from "./actionCreators";
 import { getCachedMedicineData } from "./selectors";
+import { getCachedUserData } from "../Login/selectors";
 import { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { applyToast } from "../../Common/Functions/misc";
@@ -20,6 +21,7 @@ function MedicinesContainer() {
       getCachedMedicineData,
       shallowEqual
     ),
+    { token, isAdmin } = useSelector(getCachedUserData, shallowEqual),
     [medicines, setMedicines] = useState([]),
     [dirtyRows, setDirtyRows] = useState([]),
     [invalidRows, setInvalidRows] = useState([]),
@@ -149,6 +151,7 @@ function MedicinesContainer() {
       searchMedicine={searchForMedicine}
       addMedicines={addMeds}
       addNewRow={addNewRow}
+      isAdmin={isAdmin}
     ></MedicinesComponent>
   );
 }

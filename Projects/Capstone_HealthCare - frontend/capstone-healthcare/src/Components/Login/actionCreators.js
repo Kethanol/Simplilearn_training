@@ -2,7 +2,7 @@ import * as actionTypes from "./actionTypes";
 import consts from "../../Common/consts";
 import axios from "axios";
 
-export function login(userObject, applyToast, toastApplier) {
+export function login(userObject, applyToast, toastApplier, callback) {
   return async function (dispatch) {
     dispatch({ type: actionTypes.USER_LOGIN_STARTED });
 
@@ -26,9 +26,10 @@ export function login(userObject, applyToast, toastApplier) {
       } else {
         dispatch({
           type: actionTypes.USER_LOGIN_SUCCEEDED,
-          payload: { token: data.token },
+          payload: { token: data.token, isAdmin: data.isAdmin },
         });
         applyToast(toastApplier, "Success", "Login successful", "success");
+        callback();
       }
     } catch {
       dispatch({ type: actionTypes.USER_LOGIN_FAILED });

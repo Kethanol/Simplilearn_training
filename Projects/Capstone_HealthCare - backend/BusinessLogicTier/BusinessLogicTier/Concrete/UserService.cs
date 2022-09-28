@@ -33,7 +33,8 @@ namespace BusinessLogicTier.Concrete
 
                 response.HasSuccess = true;
                 response.Token = token;
-            }
+                response.IsAdmin = existingUser.Role == Constants.Roles.ADMINISTRATOR;
+            }       
             else
             {
                 response.ErrorReason = "User does not exist!";

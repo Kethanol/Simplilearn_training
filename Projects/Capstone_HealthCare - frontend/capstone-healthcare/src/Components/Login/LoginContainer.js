@@ -55,7 +55,11 @@ function LoginContainer() {
       isAdmin: isCheckboxChecked,
     };
 
-    dispatch(login(userObject, applyToast, toast));
+    dispatch(
+      login(userObject, applyToast, toast, () => {
+        navigate("/medicines");
+      })
+    );
   }
 
   return (

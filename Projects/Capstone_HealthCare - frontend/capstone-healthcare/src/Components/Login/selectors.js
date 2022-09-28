@@ -4,6 +4,7 @@ function getUserData(state) {
   return {
     token: state.user.token,
     loading: state.user.loading,
+    isAdmin: state.user.isAdmin,
   };
 }
 

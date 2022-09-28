@@ -16,6 +16,7 @@ import {
   InputRightElement,
   FormErrorMessage,
   FormControl,
+  Flex,
 } from "@chakra-ui/react";
 import Backdrop from "../../Common/Shared/Backdrop";
 import {
@@ -39,6 +40,7 @@ function MedicinesComponent({
   searchMedicine,
   addNewRow,
   addMedicines,
+  isAdmin,
 }) {
   var iconButtonEditableProps = {
     _hover: { background: "transparent" },
@@ -64,18 +66,11 @@ function MedicinesComponent({
   }
 
   return (
-    <Box
-      height={"100vh"}
-      width={"100%"}
-      display={"flex"}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
-      <Box
+    <Flex height={"100vh"} width={"100%"} justify={"center"} align={"center"}>
+      <Flex
         width={"85%"}
-        display={"flex"}
         maxHeight={"90%"}
-        flexDirection={"column"}
+        direction={"column"}
         boxShadow={"rgba(17, 17, 26, 0.1) 0 0 1.6rem;"}
         border={"2px solid #eee"}
         borderRadius={"2rem"}
@@ -131,31 +126,35 @@ function MedicinesComponent({
                     bottom={0}
                     transform={"translateY(-10%)"}
                   >
-                    <Tooltip label={"Add medicine"}>
-                      <IconButton
-                        isRound
-                        background={"rgba(178,245,234, 0.8)"}
-                        width={"4rem"}
-                        height={"4rem"}
-                        size={"lg"}
-                        onClick={addNewRow}
-                        icon={<AddIcon boxSize={"8"}></AddIcon>}
-                      />
-                    </Tooltip>
-                    <Tooltip label={"Save changes"}>
-                      <IconButton
-                        marginLeft={"2rem"}
-                        isRound
-                        background={"rgba(178,245,234, 0.8)"}
-                        width={"4rem"}
-                        height={"4rem"}
-                        size={"lg"}
-                        onClick={addMedicines}
-                        disabled={isSaveButtonDisabled()}
-                        {...renderSaveChangesProps()}
-                        icon={<CheckIcon boxSize={"8"}></CheckIcon>}
-                      />
-                    </Tooltip>
+                    {isAdmin && (
+                      <>
+                        <Tooltip label={"Add medicine"}>
+                          <IconButton
+                            isRound
+                            background={"rgba(178,245,234, 0.8)"}
+                            width={"4rem"}
+                            height={"4rem"}
+                            size={"lg"}
+                            onClick={addNewRow}
+                            icon={<AddIcon boxSize={"8"}></AddIcon>}
+                          />
+                        </Tooltip>
+                        <Tooltip label={"Save changes"}>
+                          <IconButton
+                            marginLeft={"2rem"}
+                            isRound
+                            background={"rgba(178,245,234, 0.8)"}
+                            width={"4rem"}
+                            height={"4rem"}
+                            size={"lg"}
+                            onClick={addMedicines}
+                            disabled={isSaveButtonDisabled()}
+                            {...renderSaveChangesProps()}
+                            icon={<CheckIcon boxSize={"8"}></CheckIcon>}
+                          />
+                        </Tooltip>
+                      </>
+                    )}
                   </Box>
                 </TableCaption>
                 <Thead>
@@ -282,39 +281,42 @@ function MedicinesComponent({
                             ></Input>
                           </FormControl>
                         </Td>
-                        <Td fontSize={0}>
-                          <Tooltip label={"Update medicine"}>
-                            <IconButton
-                              disabled={
-                                !dirtyRows[index] ||
-                                medicine.id === 0 ||
-                                invalidRows[index]
-                              }
-                              {...renderEditableBackgroundProps(index)}
-                              background={"transparent"}
-                              icon={
-                                <TriangleUpIcon
-                                  boxSize={"10"}
-                                  onClick={() => updateMed(index)}
-                                ></TriangleUpIcon>
-                              }
-                            />
-                          </Tooltip>
-                        </Td>
-
-                        <Td fontSize={0}>
-                          <Tooltip label={"Delete medicine"}>
-                            <IconButton
-                              background={"transparent"}
-                              icon={
-                                <DeleteIcon
-                                  boxSize={"10"}
-                                  onClick={() => deleteMed(index)}
-                                ></DeleteIcon>
-                              }
-                            />
-                          </Tooltip>
-                        </Td>
+                        {isAdmin && (
+                          <>
+                            <Td fontSize={0}>
+                              <Tooltip label={"Update medicine"}>
+                                <IconButton
+                                  disabled={
+                                    !dirtyRows[index] ||
+                                    medicine.id === 0 ||
+                                    invalidRows[index]
+                                  }
+                                  {...renderEditableBackgroundProps(index)}
+                                  background={"transparent"}
+                                  icon={
+                                    <TriangleUpIcon
+                                      boxSize={"10"}
+                                      onClick={() => updateMed(index)}
+                                    ></TriangleUpIcon>
+                                  }
+                                />
+                              </Tooltip>
+                            </Td>
+                            <Td fontSize={0}>
+                              <Tooltip label={"Delete medicine"}>
+                                <IconButton
+                                  background={"transparent"}
+                                  icon={
+                                    <DeleteIcon
+                                      boxSize={"10"}
+                                      onClick={() => deleteMed(index)}
+                                    ></DeleteIcon>
+                                  }
+                                />
+                              </Tooltip>
+                            </Td>
+                          </>
+                        )}
                       </Tr>
                     );
                   })}
@@ -337,8 +339,8 @@ function MedicinesComponent({
             {dataLoading && <Backdrop></Backdrop>}
           </TableContainer>
         </>
-      </Box>
-    </Box>
+      </Flex>
+    </Flex>
   );
 }
 

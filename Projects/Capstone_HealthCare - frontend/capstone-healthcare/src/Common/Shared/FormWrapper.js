@@ -1,4 +1,11 @@
-import { Box, Image, Text, FormControl, Checkbox } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Text,
+  FormControl,
+  Checkbox,
+  Flex,
+} from "@chakra-ui/react";
 import logo from "../../healthcare.png";
 import FormButton from "./FormButton";
 import Backdrop from "./Backdrop";
@@ -18,12 +25,11 @@ function FormWrapper({
 }) {
   return (
     <>
-      <Box height={"100vh"} width={"100%"} display={"flex"}>
-        <Box flexBasis={"45%"} display={"flex"}>
+      <Flex height={"100vh"} width={"100%"}>
+        <Flex flexBasis={"45%"}>
           <Box width={"25%"}></Box>
-          <Box
-            display={"flex"}
-            flexDirection={"column"}
+          <Flex
+            direction={"column"}
             margin={"auto"}
             borderRadius={"2rem"}
             padding={"2rem 0 2rem 0"}
@@ -35,7 +41,7 @@ function FormWrapper({
             <>
               {children}
 
-              <Box display={"flex"} justifyContent={"space-evenly"}>
+              <Flex justify={"space-evenly"}>
                 {hasCheckbox && (
                   <Checkbox
                     flexBasis={"40%"}
@@ -60,7 +66,7 @@ function FormWrapper({
                 >
                   {redirectText}
                 </Text>
-              </Box>
+              </Flex>
 
               <FormControl
                 display={"flex"}
@@ -72,15 +78,14 @@ function FormWrapper({
                 </FormButton>
               </FormControl>
             </>
-          </Box>
-        </Box>
+          </Flex>
+        </Flex>
         <Box width={"5%"}></Box>
-        <Box flexBasis={"55%"} display={"flex"} flexDirection={"column"}>
-          <Box
+        <Flex basis={"55%"} direction={"column"}>
+          <Flex
             width={"100%"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            display={"flex"}
+            justify={"center"}
+            align={"center"}
             height={"80%"}
           >
             <Image
@@ -89,7 +94,7 @@ function FormWrapper({
               marginBottom={"4rem"}
               marginTop={"15rem"}
             ></Image>
-          </Box>
+          </Flex>
           <Box height={"20%"} textAlign={"center"}>
             <Text
               fontSize={"3.7rem"}
@@ -100,8 +105,8 @@ function FormWrapper({
               Healthcare capstone project
             </Text>
           </Box>
-        </Box>
-      </Box>
+        </Flex>
+      </Flex>
       {isDataLoading && <Backdrop></Backdrop>}
     </>
   );
