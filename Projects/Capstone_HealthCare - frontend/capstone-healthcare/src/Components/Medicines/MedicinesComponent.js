@@ -17,6 +17,7 @@ import {
   FormErrorMessage,
   FormControl,
   Flex,
+  Icon,
 } from "@chakra-ui/react";
 import Backdrop from "../../Common/Shared/Backdrop";
 import {
@@ -26,6 +27,7 @@ import {
   AddIcon,
   CheckIcon,
 } from "@chakra-ui/icons";
+import { MdAddShoppingCart } from "react-icons/md";
 
 function MedicinesComponent({
   medicineData,
@@ -316,6 +318,22 @@ function MedicinesComponent({
                               </Tooltip>
                             </Td>
                           </>
+                        )}
+                        {!isAdmin && (
+                          <Td fontSize={0}>
+                            <Tooltip label={"Add to cart"}>
+                              <IconButton
+                                background={"transparent"}
+                                icon={
+                                  <Icon
+                                    boxSize={"10"}
+                                    as={MdAddShoppingCart}
+                                    onClick={() => console.log("Aaaa")}
+                                  ></Icon>
+                                }
+                              />
+                            </Tooltip>
+                          </Td>
                         )}
                       </Tr>
                     );
