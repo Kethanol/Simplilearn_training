@@ -55,13 +55,15 @@ namespace BusinessLogicTier.Concrete
             };
 
             var hashedPassword = _validationService.Hash(user.Password!);
-            var existingUser = await _unitOfWork.UserRepository.GetSingleByAsync(u => u.Username!.ToUpper() == user.Username!.ToUpper());
+            var existingUser = await _unitOfWork.UserRepository.GetSingleByAsync(u => u.Username!.ToUpper() == user.Username!.ToUpper() || u.E_mail!.ToUpper() == user.E_mail!.ToUpper());
 
             if (existingUser != null)
             {
-                response.ErrorReason = $"There is already an existing user with the username {user.Username}!";
+                response.ErrorReason = $"There is already an existing user with the username {user.Username} or the email ${user.E_mail}!";
                 return response;
             }
+
+            // Insert new user
 
             var newUser = new User()
             {
@@ -74,7 +76,14 @@ namespace BusinessLogicTier.Concrete
                 Password = hashedPassword
             };
 
-            await _unitOfWork.UserRepository.InsertAsync(newUser);
+
+            // Insert new cart
+            var newCart = new Cart()
+            {
+                User = newUser
+            };
+
+            await _unitOfWork.CartRepository.InsertAsync(newCart);
             await _unitOfWork.SaveChangesAsync();
 
             response.HasSuccess = true;
