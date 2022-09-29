@@ -15,6 +15,7 @@ const userReducer = function userReducer(state = initialState.user, action) {
         ...state,
         loading: false,
         isAdmin: action.payload.isAdmin,
+        userId: action.payload.userId,
       };
     }
 

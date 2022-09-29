@@ -86,6 +86,8 @@ namespace BusinessLogicTier.Concrete
             await _unitOfWork.SaveChangesAsync();
 
             response.HasSuccess = true;
+            response.UserId = newUser.Id;
+
             return response;
         }
     }

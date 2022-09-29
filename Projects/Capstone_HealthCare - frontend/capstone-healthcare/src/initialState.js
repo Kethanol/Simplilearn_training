@@ -2,6 +2,7 @@ const initialState = {
   user: {
     isAdmin: false,
     loading: false,
+    userId: 0,
   },
   medicines: {
     data: [],

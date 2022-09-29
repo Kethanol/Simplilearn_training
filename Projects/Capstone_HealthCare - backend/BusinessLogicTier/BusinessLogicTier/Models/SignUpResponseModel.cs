@@ -4,5 +4,6 @@
     {
         public bool HasSuccess { get; set; }
         public string? ErrorReason { get; set; }
+        public int UserId { get; set; }
     }
 }
