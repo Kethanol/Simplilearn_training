@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import initialState from "./initialState";
 import userReducer from "./Components/Login/reducer";
-import medicinesReducer from "./Components/Shop/reducer";
+import medicinesReducer from "./Components/Shop/Medicines/reducer";
 import cartReducer from "./Components/Shop/Cart/reducer";
 
 var reducer = combineReducers({

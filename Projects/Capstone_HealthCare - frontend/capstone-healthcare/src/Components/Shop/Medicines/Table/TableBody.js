@@ -28,7 +28,7 @@ function TableBody({
     <Tbody>
       {medicineData.map((medicine, index) => {
         return (
-          <Tr key={index} onChange={(e) => handleRowChange(e, index)}>
+          <Tr key={medicine.id} onChange={(e) => handleRowChange(e, index)}>
             <Td fontSize={"2rem"}>
               <FormControl isInvalid={medicine.name === ""}>
                 <FormErrorMessage fontSize={"1.3rem"} marginBottom={".5rem"}>

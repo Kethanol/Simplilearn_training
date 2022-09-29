@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
-import consts from "../../Common/consts";
-import { axiosWrapper } from "../../Common/Functions/misc";
+import consts from "../../../Common/consts";
+import { axiosWrapper } from "../../../Common/Functions/misc";
 
 export function loadMedicines(toaster, token) {
   return async function (dispatch) {

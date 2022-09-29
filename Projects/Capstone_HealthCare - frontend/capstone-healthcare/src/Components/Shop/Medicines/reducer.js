@@ -1,4 +1,4 @@
-import initialState from "../../initialState";
+import initialState from "../../../initialState";
 import * as actionTypes from "./actionTypes";
 
 const medicinesReducer = function medicinesReducer(

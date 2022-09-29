@@ -13,11 +13,8 @@ function MedicinesComponent({
   isAdmin,
   addNewRow,
   addMedicines,
-  isSaveButtonDisabled,
-  renderEditableBackgroundProps,
   medicineData,
   handleRowChange,
-  renderSaveChangesProps,
   deleteMed,
   updateMed,
   dirtyRows,
@@ -25,6 +22,30 @@ function MedicinesComponent({
   dataLoading,
   addMedicineToCart,
 }) {
+  console.log(medicineData);
+  var iconButtonEditableProps = {
+    _hover: { background: "transparent" },
+  };
+
+  var iconButtonSaveProps = {
+    _hover: { background: "rgba(178,245,234, 0.8)" },
+  };
+
+  function renderEditableBackgroundProps(index) {
+    if (!dirtyRows[index]) return iconButtonEditableProps;
+    else return {};
+  }
+
+  function isSaveButtonDisabled() {
+    if (!medicineData.some((m) => m.id === 0)) return true;
+    else if (medicineData.some((_, i) => invalidRows[i])) return true;
+  }
+
+  function renderSaveChangesProps() {
+    if (!medicineData.some((m) => m.id === 0)) return iconButtonSaveProps;
+    else return {};
+  }
+
   return (
     <Flex
       width={"95%"}

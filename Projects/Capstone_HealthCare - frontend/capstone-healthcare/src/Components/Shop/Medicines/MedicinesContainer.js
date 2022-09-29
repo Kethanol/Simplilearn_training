@@ -1,77 +1,163 @@
 import MedicinesComponent from "./MedicinesComponent";
 
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { addMedicineToCart as addToCart } from "../Cart/actionCreators";
-import { getCachedCartData } from "../Cart/selectors";
 import { useToast } from "@chakra-ui/react";
 import { applyToast } from "../../../Common/Functions/misc";
-import { useCallback, useRef } from "react";
 
-function MedicinesContainer({
-  searchTerm,
-  onSearchTermChange,
+import {
+  loadMedicines,
+  deleteMedicine,
+  updateMedicine,
   searchMedicine,
-  isAdmin,
-  addNewRow,
   addMedicines,
-  isSaveButtonDisabled,
-  renderEditableBackgroundProps,
-  medicineData,
-  handleRowChange,
-  renderSaveChangesProps,
-  deleteMed,
-  updateMed,
-  dirtyRows,
-  invalidRows,
-  dataLoading,
-  cartMedicines,
-  setCartMedicines,
-}) {
+} from "./actionCreators";
+import { getCachedMedicineData } from "./selectors";
+import { getCachedUserData } from "../../Login/selectors";
+import { useCallback, useEffect, useRef, useState } from "react";
+
+function MedicinesContainer({ addMedicineToCart }) {
   var dispatch = useDispatch(),
-    { id: cartId } = useSelector(getCachedCartData, shallowEqual),
+    { data, loading, loaded } = useSelector(
+      getCachedMedicineData,
+      shallowEqual
+    ),
+    { isAdmin } = useSelector(getCachedUserData, shallowEqual),
+    [searchTerm, setSearchTerm] = useState(""),
+    [medicines, setMedicines] = useState([]),
+    [dirtyRows, setDirtyRows] = useState([]),
+    [invalidRows, setInvalidRows] = useState([]),
     toast = useToast(),
     toaster = useCallback(() => applyToast(toast), [toast]),
     tokenRef = useRef(localStorage.getItem("token"));
 
   const token = tokenRef.current;
 
-  function addMedicineToCart(medicine) {
-    if (cartMedicines.length > 0) {
-      var medicineExists = cartMedicines.some(
-        (cm) => cm.name === medicine.name
+  useEffect(
+    function insideEffect() {
+      if (loaded) {
+        setMedicines(data);
+        setDirtyRows(data.map(() => false));
+        setInvalidRows(data.map(() => false));
+      } else dispatch(loadMedicines(toaster(), token));
+    },
+    [dispatch, loaded, data, toaster, token]
+  );
+
+  function setValidity(medicine) {
+    return Object.values(medicine).some((v) => v === "");
+  }
+
+  function handleRowChange(event, index) {
+    var {
+        target: { name, value },
+      } = event,
+      existingMedicine = medicines.find((_, i) => index === i),
+      newDirtyRows = [...dirtyRows],
+      newInvalidRows = [...invalidRows];
+
+    existingMedicine[name] = value;
+    setMedicines(medicines);
+
+    newDirtyRows[index] = true;
+    setDirtyRows(newDirtyRows);
+
+    newInvalidRows[index] = setValidity(existingMedicine);
+    setInvalidRows(newInvalidRows);
+  }
+
+  function deleteMedicineFromList(index) {
+    var newMedicines = medicines.filter((_, i) => i !== index),
+      invalidRows = newMedicines.map(setValidity);
+    setInvalidRows(invalidRows);
+
+    setMedicines(newMedicines);
+  }
+
+  function deleteMed(index) {
+    var medicine = medicines.find((_, i) => i === index);
+
+    if (medicine.id === 0) {
+      deleteMedicineFromList(index);
+    } else {
+      dispatch(
+        deleteMedicine(medicine.id, toaster(), token, () => {
+          deleteMedicineFromList(index);
+        })
       );
-
-      if (medicineExists) return;
     }
+  }
 
-    var newCartMedicines = [...cartMedicines];
-    newCartMedicines.push({ ...medicine, quantity: 1 });
+  function onSearchTermChange(event) {
+    var {
+      target: { value },
+    } = event;
 
-    setCartMedicines(newCartMedicines);
+    setSearchTerm(value);
+  }
 
-    dispatch(addToCart(medicine.id, cartId, toaster, token));
+  function searchForMedicine() {
+    dispatch(
+      searchMedicine(searchTerm, toaster(), token, (data) => {
+        setMedicines(data);
+        console.log(data);
+      })
+    );
+  }
+
+  function updateMed(index) {
+    var medicine = medicines.find((_, i) => i === index);
+    dispatch(
+      updateMedicine(medicine, toaster(), token, () => {
+        var newDirtyRows = [...dirtyRows];
+        newDirtyRows[index] = false;
+        setDirtyRows(newDirtyRows);
+      })
+    );
+  }
+
+  function addMeds() {
+    var newMeds = medicines.filter((m) => m.id === 0);
+
+    dispatch(addMedicines(newMeds, toaster(), token));
+
+    var dirtyInfo = medicines.map(() => false);
+    setDirtyRows(dirtyInfo);
+  }
+
+  function addNewRow() {
+    var newMedicine = {
+        id: 0,
+        name: "",
+        description: "",
+        schemaOfTreatment: "",
+        minimumAge: "",
+        price: "",
+      },
+      newInvalidRows = [...invalidRows];
+
+    medicines.push(newMedicine);
+    setMedicines(medicines);
+
+    newInvalidRows[medicines.length - 1] = true;
+    setInvalidRows(newInvalidRows);
   }
 
   return (
     <MedicinesComponent
       searchTerm={searchTerm}
       onSearchTermChange={onSearchTermChange}
-      searchMedicine={searchMedicine}
+      searchMedicine={searchForMedicine}
       isAdmin={isAdmin}
       addNewRow={addNewRow}
-      addMedicines={addMedicines}
-      isSaveButtonDisabled={isSaveButtonDisabled}
-      renderEditableBackgroundProps={renderEditableBackgroundProps}
-      medicineData={medicineData}
+      addMedicines={addMeds}
+      medicineData={medicines}
       handleRowChange={handleRowChange}
-      renderSaveChangesProps={renderSaveChangesProps}
       deleteMed={deleteMed}
       updateMed={updateMed}
       dirtyRows={dirtyRows}
       invalidRows={invalidRows}
-      dataLoading={dataLoading}
+      dataLoading={loading}
       addMedicineToCart={addMedicineToCart}
-      cartMedicines={cartMedicines}
     />
   );
 }
