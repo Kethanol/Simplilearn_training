@@ -6,5 +6,6 @@
         public string? ErrorReason { get; set; }
         public string? Token { get; set; }
         public bool IsAdmin { get; set; }
+        public int UserId { get; set; }
     }
 }

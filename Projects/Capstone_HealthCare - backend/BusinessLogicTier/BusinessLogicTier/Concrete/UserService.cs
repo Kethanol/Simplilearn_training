@@ -33,6 +33,7 @@ namespace BusinessLogicTier.Concrete
 
                 response.HasSuccess = true;
                 response.Token = token;
+                response.UserId = existingUser.Id;
                 response.IsAdmin = existingUser.Role == Constants.Roles.ADMINISTRATOR;
             }       
             else
@@ -86,7 +87,6 @@ namespace BusinessLogicTier.Concrete
             await _unitOfWork.SaveChangesAsync();
 
             response.HasSuccess = true;
-            response.UserId = newUser.Id;
 
             return response;
         }
