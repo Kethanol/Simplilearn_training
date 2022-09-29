@@ -21,7 +21,7 @@ export function login(userObject, toaster, callback) {
       } else {
         dispatch({
           type: actionTypes.USER_LOGIN_SUCCEEDED,
-          payload: { isAdmin: data.isAdmin },
+          payload: { isAdmin: data.isAdmin, userId: data.userId },
         });
         toaster("Success", "Login successful", "success");
         callback(data.token);

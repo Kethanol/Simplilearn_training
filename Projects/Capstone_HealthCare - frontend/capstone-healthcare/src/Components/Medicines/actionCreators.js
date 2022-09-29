@@ -11,7 +11,6 @@ export function loadMedicines(toaster, token) {
 
       let { data } = await axiosWrapper("get", url, token);
 
-      //let { data } = await axios.get(url);
       dispatch({
         type: actionTypes.LOAD_MEDICINES_SUCCEEDED,
         payload: { data },

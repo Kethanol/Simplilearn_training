@@ -8,6 +8,7 @@ import {
   searchMedicine,
   addMedicines,
 } from "./actionCreators";
+import { loadCart } from "./Cart/actionCreators";
 import { getCachedMedicineData } from "./selectors";
 import { getCachedUserData } from "../Login/selectors";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -20,7 +21,7 @@ function MedicinesContainer() {
       getCachedMedicineData,
       shallowEqual
     ),
-    { isAdmin } = useSelector(getCachedUserData, shallowEqual),
+    { isAdmin, id: userId } = useSelector(getCachedUserData, shallowEqual),
     tokenRef = useRef(localStorage.getItem("token")),
     token = tokenRef.current,
     [medicines, setMedicines] = useState([]),
@@ -41,6 +42,10 @@ function MedicinesContainer() {
     },
     [dispatch, loaded, data, toaster, token]
   );
+
+  useEffect(() => {
+    dispatch(loadCart(userId, toaster(), token));
+  }, [dispatch, userId, toaster, token]);
 
   function handleRowChange(event, index) {
     var {

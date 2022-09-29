@@ -2,10 +2,16 @@ const initialState = {
   user: {
     isAdmin: false,
     loading: false,
-    userId: 0,
+    id: 0,
   },
   medicines: {
     data: [],
+    loading: false,
+    loaded: false,
+  },
+  cart: {
+    id: 0,
+    medicines: [],
     loading: false,
     loaded: false,
   },

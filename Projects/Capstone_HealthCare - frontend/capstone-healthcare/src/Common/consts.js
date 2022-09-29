@@ -3,6 +3,7 @@ const consts = {
   SIGN_UP_ROUTE: "/user/sign-up",
   LOGIN_ROUTE: "/user/sign-in",
   LOAD_MEDICINES_ROUTE: "/medicine/all",
+  LOAD_CART_ROUTE: "/cart/get-by-user",
   LOAD_MEDICINE_ROUTE: "/medicine/by-name",
   DELETE_MEDICINE_ROUTE: "/admin/delete-medicine",
   UPDATE_MEDICINE_ROUTE: "/admin/update-medicine",
