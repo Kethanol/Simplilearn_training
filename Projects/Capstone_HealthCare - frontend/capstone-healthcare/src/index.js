@@ -18,7 +18,7 @@ import reducers from "./reducers";
 
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import ShopContainer from "./Components/Medicines/ShopContainer";
+import ShopContainer from "./Components/Shop/ShopContainer";
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

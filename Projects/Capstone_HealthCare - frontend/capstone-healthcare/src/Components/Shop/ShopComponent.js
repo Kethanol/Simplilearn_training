@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import CartContainer from "./Cart/CartContainer";
-import MedicinesContainer from "./Shop/MedicinesContainer";
+import MedicinesContainer from "./Medicines/MedicinesContainer";
 
 function ShopComponent({
   medicineData,

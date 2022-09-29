@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import initialState from "./initialState";
 import userReducer from "./Components/Login/reducer";
-import medicinesReducer from "./Components/Medicines/reducer";
-import cartReducer from "./Components/Medicines/Cart/reducer";
+import medicinesReducer from "./Components/Shop/reducer";
+import cartReducer from "./Components/Shop/Cart/reducer";
 
 var reducer = combineReducers({
   user: userReducer,
