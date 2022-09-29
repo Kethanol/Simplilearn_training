@@ -35,6 +35,8 @@ function OrderDetails({ cartMedicines, handleQuantityChange }) {
       borderRadius={"2rem"}
       direction={"column"}
       align={"center"}
+      border={"0.4rem solid rgba(178,245,234, 0.8)"}
+      overflowY={"auto"}
     >
       <Stack
         spacing={{

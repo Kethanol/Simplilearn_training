@@ -29,6 +29,7 @@ function OrderSummary({ total }) {
   return (
     <Flex
       width={"40%"}
+      border={"0.4rem solid rgba(178,245,234, 0.8)"}
       boxShadow={"rgba(17, 17, 26, 0.1) 0 0 1.6rem;"}
       borderRadius={"2rem"}
       direction={"column"}

@@ -31,8 +31,8 @@ function ShopComponent({
       maxHeight={"60%"}
       direction={"column"}
       boxShadow={"rgba(17, 17, 26, 0.1) 0 0 1.6rem;"}
-      border={"2px solid #eee"}
       borderRadius={"2rem"}
+      border={"0.4rem solid rgba(178,245,234, 0.8)"}
     >
       <>
         <SearchMedicine
