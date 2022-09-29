@@ -17,8 +17,22 @@ import { Provider as StoreProvider } from "react-redux";
 import reducers from "./reducers";
 import MedicinesContainer from "./Components/Medicines/MedicinesContainer";
 
-var composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-var store = createStore(reducers, composeEnhancer(applyMiddleware(thunk)));
+import { persistReducer, persistStore } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const store = createStore(
+  persistReducer(persistConfig, reducers),
+  composeEnhancer(applyMiddleware(thunk))
+);
+
+persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 var router = createBrowserRouter([

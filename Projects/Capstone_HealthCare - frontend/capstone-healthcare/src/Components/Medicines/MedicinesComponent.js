@@ -49,11 +49,11 @@ function MedicinesComponent({
       justify={"space-evenly"}
       align={"center"}
       direction={"column"}
-      height={"100rem"}
+      height={"100%"}
     >
       <Flex
         width={"95%"}
-        maxHeight={"80%"}
+        maxHeight={"60%"}
         direction={"column"}
         boxShadow={"rgba(17, 17, 26, 0.1) 0 0 1.6rem;"}
         border={"2px solid #eee"}
@@ -100,8 +100,8 @@ function MedicinesComponent({
         </>
       </Flex>
       <Flex
-        maxHeight={"40%"}
-        height={"40%"}
+        maxHeight={"30%"}
+        height={"30%"}
         width={"95%"}
         justifyContent={"space-between"}
       >
