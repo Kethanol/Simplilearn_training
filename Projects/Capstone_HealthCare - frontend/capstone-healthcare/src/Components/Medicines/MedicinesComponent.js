@@ -5,6 +5,8 @@ import TableFoot from "./Table/TableFoot";
 import TableBody from "./Table/TableBody";
 import TableCaptionWrapper from "./Table/TableCaptionWrapper";
 import SearchMedicine from "./Table/SearchMedicine";
+import OrderSummary from "./Checkout/OrderSummary";
+import OrderDetails from "./Checkout/OrderDetails";
 
 function MedicinesComponent({
   medicineData,
@@ -106,16 +108,8 @@ function MedicinesComponent({
         justifyContent={"space-between"}
       >
         <>
-          <Flex
-            width={"65%"}
-            boxShadow={"rgba(17, 17, 26, 0.1) 0 0 1.6rem;"}
-            borderRadius={"2rem"}
-          ></Flex>
-          <Flex
-            width={"25%"}
-            boxShadow={"rgba(17, 17, 26, 0.1) 0 0 1.6rem;"}
-            borderRadius={"2rem"}
-          ></Flex>
+          <OrderDetails />
+          <OrderSummary />
         </>
       </Flex>
     </Flex>
