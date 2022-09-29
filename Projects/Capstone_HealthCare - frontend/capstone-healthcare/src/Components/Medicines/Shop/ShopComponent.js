@@ -1,0 +1,79 @@
+import { Flex, Table, TableContainer } from "@chakra-ui/react";
+import Backdrop from "../../../Common/Shared/Backdrop";
+import SearchMedicine from "./SearchMedicine";
+import TableBody from "./TableBody";
+import TableCaptionWrapper from "./TableCaptionWrapper";
+import TableFoot from "./TableFoot";
+import TableHead from "./TableHead";
+
+function ShopComponent({
+  searchTerm,
+  onSearchTermChange,
+  searchMedicine,
+  isAdmin,
+  addNewRow,
+  addMedicines,
+  isSaveButtonDisabled,
+  renderEditableBackgroundProps,
+  medicineData,
+  handleRowChange,
+  renderSaveChangesProps,
+  deleteMed,
+  updateMed,
+  dirtyRows,
+  invalidRows,
+  dataLoading,
+}) {
+  return (
+    <Flex
+      width={"95%"}
+      maxHeight={"60%"}
+      direction={"column"}
+      boxShadow={"rgba(17, 17, 26, 0.1) 0 0 1.6rem;"}
+      border={"2px solid #eee"}
+      borderRadius={"2rem"}
+    >
+      <>
+        <SearchMedicine
+          searchTerm={searchTerm}
+          onSearchTermChange={onSearchTermChange}
+          searchMedicine={searchMedicine}
+        />
+
+        <TableContainer padding="1rem" width={"100%"} overflowY={"auto"}>
+          <>
+            <Table
+              variant={"striped"}
+              fontSize={"100rem"}
+              colorScheme="teal"
+              size={"lg"}
+            >
+              <TableCaptionWrapper
+                isAdmin={isAdmin}
+                addNewRow={addNewRow}
+                addMedicines={addMedicines}
+                isSaveButtonDisabled={isSaveButtonDisabled}
+                renderSaveChangesProps={renderSaveChangesProps}
+              />
+              <TableHead />
+              <TableBody
+                medicineData={medicineData}
+                handleRowChange={handleRowChange}
+                renderEditableBackgroundProps={renderEditableBackgroundProps}
+                isAdmin={isAdmin}
+                deleteMed={deleteMed}
+                updateMed={updateMed}
+                dirtyRows={dirtyRows}
+                invalidRows={invalidRows}
+              />
+              <TableFoot />
+            </Table>
+          </>
+          {dataLoading && <Backdrop></Backdrop>}
+        </TableContainer>
+      </>
+    </Flex>
+  );
+}
+
+export default ShopComponent;

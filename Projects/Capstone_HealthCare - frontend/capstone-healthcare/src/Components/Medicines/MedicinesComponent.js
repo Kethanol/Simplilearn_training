@@ -1,12 +1,6 @@
-import { Table, TableContainer, Flex } from "@chakra-ui/react";
-import Backdrop from "../../Common/Shared/Backdrop";
-import TableHead from "./Table/TableHead";
-import TableFoot from "./Table/TableFoot";
-import TableBody from "./Table/TableBody";
-import TableCaptionWrapper from "./Table/TableCaptionWrapper";
-import SearchMedicine from "./Table/SearchMedicine";
-import OrderSummary from "./Checkout/OrderSummary";
-import OrderDetails from "./Checkout/OrderDetails";
+import { Flex } from "@chakra-ui/react";
+import CartContainer from "./CartContainer/CartContainer";
+import ShopContainer from "./Shop/ShopContainer";
 
 function MedicinesComponent({
   medicineData,
@@ -53,65 +47,25 @@ function MedicinesComponent({
       direction={"column"}
       height={"100%"}
     >
-      <Flex
-        width={"95%"}
-        maxHeight={"60%"}
-        direction={"column"}
-        boxShadow={"rgba(17, 17, 26, 0.1) 0 0 1.6rem;"}
-        border={"2px solid #eee"}
-        borderRadius={"2rem"}
-      >
-        <>
-          <SearchMedicine
-            searchTerm={searchTerm}
-            onSearchTermChange={onSearchTermChange}
-            searchMedicine={searchMedicine}
-          />
-
-          <TableContainer padding="1rem" width={"100%"} overflowY={"auto"}>
-            <>
-              <Table
-                variant={"striped"}
-                fontSize={"100rem"}
-                colorScheme="teal"
-                size={"lg"}
-              >
-                <TableCaptionWrapper
-                  isAdmin={isAdmin}
-                  addNewRow={addNewRow}
-                  addMedicines={addMedicines}
-                  isSaveButtonDisabled={isSaveButtonDisabled}
-                  renderSaveChangesProps={renderSaveChangesProps}
-                />
-                <TableHead />
-                <TableBody
-                  medicineData={medicineData}
-                  handleRowChange={handleRowChange}
-                  renderEditableBackgroundProps={renderEditableBackgroundProps}
-                  isAdmin={isAdmin}
-                  deleteMed={deleteMed}
-                  updateMed={updateMed}
-                  dirtyRows={dirtyRows}
-                  invalidRows={invalidRows}
-                />
-                <TableFoot />
-              </Table>
-            </>
-            {dataLoading && <Backdrop></Backdrop>}
-          </TableContainer>
-        </>
-      </Flex>
-      <Flex
-        maxHeight={"30%"}
-        height={"30%"}
-        width={"95%"}
-        justifyContent={"space-between"}
-      >
-        <>
-          <OrderDetails />
-          <OrderSummary />
-        </>
-      </Flex>
+      <ShopContainer
+        searchTerm={searchTerm}
+        onSearchTermChange={onSearchTermChange}
+        searchMedicine={searchMedicine}
+        isAdmin={isAdmin}
+        addNewRow={addNewRow}
+        addMedicines={addMedicines}
+        isSaveButtonDisabled={isSaveButtonDisabled}
+        renderEditableBackgroundProps={renderEditableBackgroundProps}
+        medicineData={medicineData}
+        handleRowChange={handleRowChange}
+        renderSaveChangesProps={renderSaveChangesProps}
+        deleteMed={deleteMed}
+        updateMed={updateMed}
+        dirtyRows={dirtyRows}
+        invalidRows={invalidRows}
+        dataLoading={dataLoading}
+      />
+      <CartContainer />
     </Flex>
   );
 }

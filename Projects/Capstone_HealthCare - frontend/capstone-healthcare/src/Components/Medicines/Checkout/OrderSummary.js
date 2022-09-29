@@ -24,7 +24,7 @@ function OrderSummaryItem({ label, value, children }) {
 function OrderSummary() {
   return (
     <Flex
-      width={"25%"}
+      width={"40%"}
       boxShadow={"rgba(17, 17, 26, 0.1) 0 0 1.6rem;"}
       borderRadius={"2rem"}
       direction={"column"}
@@ -44,7 +44,7 @@ function OrderSummary() {
               Add coupon code
             </Link>
           </OrderSummaryItem>
-          <Flex justify={"space-between"}>
+          <Flex justify={"space-around"}>
             <Text fontSize={"3xl"} fontWeight={"semibold"}>
               Total
             </Text>
