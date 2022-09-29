@@ -95,7 +95,7 @@ function MedicinesContainer() {
 
   function searchForMedicine() {
     dispatch(
-      searchMedicine(searchTerm, toaster(), (data) => {
+      searchMedicine(searchTerm, toaster(), token, (data) => {
         setMedicines(data);
       })
     );

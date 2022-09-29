@@ -1,6 +1,5 @@
 import * as actionTypes from "./actionTypes";
 import consts from "../../Common/consts";
-import axios from "axios";
 import { axiosWrapper } from "../../Common/Functions/misc";
 
 export function loadMedicines(toaster, token) {
@@ -81,12 +80,12 @@ export function addMedicines(medicines, toaster, token) {
   };
 }
 
-export function searchMedicine(medicineName, toaster, callback) {
+export function searchMedicine(medicineName, toaster, token, callback) {
   return async function () {
     try {
       let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.LOAD_MEDICINE_ROUTE}?medicineName=${medicineName}`;
 
-      let { data } = await axios.get(url);
+      let { data } = await axiosWrapper("get", url, token);
       callback(data);
     } catch (err) {
       toaster(
