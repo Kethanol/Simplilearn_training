@@ -15,10 +15,10 @@ import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { Provider as StoreProvider } from "react-redux";
 import reducers from "./reducers";
-import MedicinesContainer from "./Components/Medicines/MedicinesContainer";
 
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import ShopContainer from "./Components/Medicines/ShopContainer";
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -50,8 +50,8 @@ var router = createBrowserRouter([
     errorElement: <div>404, page not found!</div>,
   },
   {
-    path: "/medicines",
-    element: <MedicinesContainer />,
+    path: "/shop",
+    element: <ShopContainer />,
   },
 ]);
 

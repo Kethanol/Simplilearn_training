@@ -1,4 +1,4 @@
-import MedicinesComponent from "./MedicinesComponent";
+import ShopComponent from "./ShopComponent";
 
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import {
@@ -11,12 +11,12 @@ import {
 import { loadCart } from "./Cart/actionCreators";
 import { getCachedMedicineData } from "./selectors";
 import { getCachedUserData } from "../Login/selectors";
-import { getCachedCartData } from "../Medicines/Cart/selectors";
+import { getCachedCartData } from "./Cart/selectors";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { applyToast } from "../../Common/Functions/misc";
 
-function MedicinesContainer() {
+function ShopContainer() {
   var dispatch = useDispatch(),
     { data, loading, loaded } = useSelector(
       getCachedMedicineData,
@@ -169,7 +169,7 @@ function MedicinesContainer() {
   }
 
   return (
-    <MedicinesComponent
+    <ShopComponent
       medicineData={medicines}
       cartMedicines={internalCartMedicines}
       dataLoading={loading}
@@ -185,8 +185,8 @@ function MedicinesContainer() {
       addNewRow={addNewRow}
       isAdmin={isAdmin}
       setCartMedicines={setCartMedicineList}
-    ></MedicinesComponent>
+    ></ShopComponent>
   );
 }
 
-export default MedicinesContainer;
+export default ShopContainer;

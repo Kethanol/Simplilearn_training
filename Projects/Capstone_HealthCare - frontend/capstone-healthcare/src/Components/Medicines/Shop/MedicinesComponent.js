@@ -6,7 +6,7 @@ import TableCaptionWrapper from "./Table/TableCaptionWrapper";
 import TableFoot from "./Table/TableFoot";
 import TableHead from "./Table/TableHead";
 
-function ShopComponent({
+function MedicinesComponent({
   searchTerm,
   onSearchTermChange,
   searchMedicine,
@@ -78,4 +78,4 @@ function ShopComponent({
   );
 }
 
-export default ShopComponent;
+export default MedicinesComponent;

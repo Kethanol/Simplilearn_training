@@ -1,6 +1,6 @@
-import ShopComponent from "./ShopComponent";
+import MedicinesComponent from "./MedicinesComponent";
 
-function ShopContainer({
+function MedicinesContainer({
   searchTerm,
   onSearchTermChange,
   searchMedicine,
@@ -36,7 +36,7 @@ function ShopContainer({
   }
 
   return (
-    <ShopComponent
+    <MedicinesComponent
       searchTerm={searchTerm}
       onSearchTermChange={onSearchTermChange}
       searchMedicine={searchMedicine}
@@ -59,4 +59,4 @@ function ShopContainer({
   );
 }
 
-export default ShopContainer;
+export default MedicinesContainer;

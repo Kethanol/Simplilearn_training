@@ -1,8 +1,8 @@
 import { Flex } from "@chakra-ui/react";
 import CartContainer from "./Cart/CartContainer";
-import ShopContainer from "./Shop/ShopContainer";
+import MedicinesContainer from "./Shop/MedicinesContainer";
 
-function MedicinesComponent({
+function ShopComponent({
   medicineData,
   dataLoading,
   deleteMed,
@@ -49,7 +49,7 @@ function MedicinesComponent({
       direction={"column"}
       height={"100%"}
     >
-      <ShopContainer
+      <MedicinesContainer
         searchTerm={searchTerm}
         onSearchTermChange={onSearchTermChange}
         searchMedicine={searchMedicine}
@@ -79,4 +79,4 @@ function MedicinesComponent({
   );
 }
 
-export default MedicinesComponent;
+export default ShopComponent;
