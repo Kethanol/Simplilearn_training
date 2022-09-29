@@ -69,10 +69,12 @@ function MedicinesComponent({
         setCartMedicines={setCartMedicines}
         cartMedicines={cartMedicines}
       />
-      <CartContainer
-        cartMedicines={cartMedicines}
-        setCartMedicines={setCartMedicines}
-      />
+      {!isAdmin && (
+        <CartContainer
+          cartMedicines={cartMedicines}
+          setCartMedicines={setCartMedicines}
+        />
+      )}
     </Flex>
   );
 }
