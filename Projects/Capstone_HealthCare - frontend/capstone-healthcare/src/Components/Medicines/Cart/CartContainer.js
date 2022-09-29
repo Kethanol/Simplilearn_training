@@ -17,7 +17,7 @@ function CartContainer({ cartMedicines, setCartMedicines }) {
 
     setCartMedicines(
       cartMedicines.map((cm) =>
-        cm.data.id === cartMedicine.data.id ? newCartMedicine : cm
+        cm.id === cartMedicine.id ? newCartMedicine : cm
       )
     );
   }
@@ -26,7 +26,7 @@ function CartContainer({ cartMedicines, setCartMedicines }) {
     if (cartMedicines.length === 0) return 0;
     else
       return cartMedicines.reduce(function reducer(acc, cv) {
-        return acc + cv.data.price * cv.quantity;
+        return acc + cv.price * cv.quantity;
       }, 0);
   }
 

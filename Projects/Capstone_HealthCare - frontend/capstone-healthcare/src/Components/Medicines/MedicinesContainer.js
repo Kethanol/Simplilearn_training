@@ -11,6 +11,7 @@ import {
 import { loadCart } from "./Cart/actionCreators";
 import { getCachedMedicineData } from "./selectors";
 import { getCachedUserData } from "../Login/selectors";
+import { getCachedCartData } from "../Medicines/Cart/selectors";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { applyToast } from "../../Common/Functions/misc";
@@ -22,10 +23,14 @@ function MedicinesContainer() {
       shallowEqual
     ),
     { isAdmin, id: userId } = useSelector(getCachedUserData, shallowEqual),
+    { cartMedicines, loaded: cartMedicinesLoaded } = useSelector(
+      getCachedCartData,
+      shallowEqual
+    ),
     tokenRef = useRef(localStorage.getItem("token")),
     token = tokenRef.current,
     [medicines, setMedicines] = useState([]),
-    [cartMedicines, setCartMedicines] = useState([]),
+    [internalCartMedicines, setInternalCartMedicines] = useState([]),
     [dirtyRows, setDirtyRows] = useState([]),
     [invalidRows, setInvalidRows] = useState([]),
     [searchTerm, setSearchTerm] = useState(""),
@@ -43,9 +48,23 @@ function MedicinesContainer() {
     [dispatch, loaded, data, toaster, token]
   );
 
-  useEffect(() => {
-    dispatch(loadCart(userId, toaster(), token));
-  }, [dispatch, userId, toaster, token]);
+  useEffect(
+    function insideEffect() {
+      if (!isAdmin) {
+        if (cartMedicinesLoaded) setInternalCartMedicines(cartMedicines);
+        else dispatch(loadCart(userId, toaster(), token));
+      }
+    },
+    [
+      cartMedicines,
+      cartMedicinesLoaded,
+      dispatch,
+      isAdmin,
+      toaster,
+      token,
+      userId,
+    ]
+  );
 
   function handleRowChange(event, index) {
     var {
@@ -146,13 +165,13 @@ function MedicinesContainer() {
   }
 
   function setCartMedicineList(newCartMedicines) {
-    setCartMedicines(newCartMedicines);
+    setInternalCartMedicines(newCartMedicines);
   }
 
   return (
     <MedicinesComponent
       medicineData={medicines}
-      cartMedicines={cartMedicines}
+      cartMedicines={internalCartMedicines}
       dataLoading={loading}
       deleteMed={deleteMed}
       updateMed={updateMed}

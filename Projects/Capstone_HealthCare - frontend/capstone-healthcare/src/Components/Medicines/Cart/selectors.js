@@ -2,10 +2,10 @@ import { createSelector } from "reselect";
 
 function getCartData(state) {
   return {
-    cartMedicines: state.user.cart.cartMedicines,
-    loading: state.user.cart.loading,
-    loaded: state.user.cart.loaded,
-    id: state.user.cart.id,
+    cartMedicines: state.cart.medicines,
+    loading: state.cart.loading,
+    loaded: state.cart.loaded,
+    id: state.cart.id,
   };
 }
 

@@ -59,22 +59,26 @@ function OrderDetails({ cartMedicines, handleQuantityChange }) {
         justify={"flex-start"}
         height={"90%"}
       >
-        {cartMedicines.map(({ data, quantity }) => {
+        {cartMedicines.map((cartMedicine) => {
           return (
-            <Flex justify={"space-between"} key={data.id} marginBottom={"2rem"}>
+            <Flex
+              justify={"space-between"}
+              key={cartMedicine.id}
+              marginBottom={"2rem"}
+            >
               <Text fontWeight={"medium"} fontSize={"2xl"} width={"25%"}>
-                {data.name}
+                {cartMedicine.name}
               </Text>
               <Text
                 color={mode("gray.600", "gray.400")}
                 fontSize={"xl"}
                 width={"25%"}
               >
-                {data.schemaOfTreatment}
+                {cartMedicine.schemaOfTreatment}
               </Text>
               <QuantitySelect
-                value={quantity}
-                onChange={(e) => handleQuantityChange(e, { data, quantity })}
+                value={cartMedicine.quantity}
+                onChange={(e) => handleQuantityChange(e, cartMedicine)}
               />
               <CloseButton aria-label="Delete from cart"></CloseButton>
             </Flex>

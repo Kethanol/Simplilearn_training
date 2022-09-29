@@ -23,14 +23,14 @@ function ShopContainer({
   function addMedicineToCart(medicine) {
     if (cartMedicines.length > 0) {
       var medicineExists = cartMedicines.some(
-        (cm) => cm.data.id === medicine.id
+        (cm) => cm.name === medicine.name
       );
 
       if (medicineExists) return;
     }
 
     var newCartMedicines = [...cartMedicines];
-    newCartMedicines.push({ data: medicine, quantity: 1 });
+    newCartMedicines.push({ ...medicine, quantity: 1 });
 
     setCartMedicines(newCartMedicines);
   }
