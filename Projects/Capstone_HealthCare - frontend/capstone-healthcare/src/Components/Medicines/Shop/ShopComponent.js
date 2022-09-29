@@ -1,10 +1,10 @@
 import { Flex, Table, TableContainer } from "@chakra-ui/react";
 import Backdrop from "../../../Common/Shared/Backdrop";
-import SearchMedicine from "./SearchMedicine";
-import TableBody from "./TableBody";
-import TableCaptionWrapper from "./TableCaptionWrapper";
-import TableFoot from "./TableFoot";
-import TableHead from "./TableHead";
+import SearchMedicine from "./Search/SearchMedicine";
+import TableBody from "./Table/TableBody";
+import TableCaptionWrapper from "./Table/TableCaptionWrapper";
+import TableFoot from "./Table/TableFoot";
+import TableHead from "./Table/TableHead";
 
 function ShopComponent({
   searchTerm,
