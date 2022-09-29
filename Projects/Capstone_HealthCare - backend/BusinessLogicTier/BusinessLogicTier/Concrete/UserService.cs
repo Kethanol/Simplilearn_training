@@ -64,7 +64,6 @@ namespace BusinessLogicTier.Concrete
             }
 
             // Insert new user
-
             var newUser = new User()
             {
                 Id = user.Id,
