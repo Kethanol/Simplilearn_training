@@ -19,6 +19,7 @@ export function login(userObject, toaster, callback) {
         dispatch({ type: actionTypes.USER_LOGIN_FAILED });
         toaster("Error while logging in", data.errorReason, "error");
       } else {
+        debugger;
         dispatch({
           type: actionTypes.USER_LOGIN_SUCCEEDED,
           payload: { isAdmin: data.isAdmin },

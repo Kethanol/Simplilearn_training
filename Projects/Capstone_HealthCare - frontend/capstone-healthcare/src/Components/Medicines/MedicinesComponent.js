@@ -45,10 +45,15 @@ function MedicinesComponent({
   }
 
   return (
-    <Flex height={"100vh"} width={"100%"} justify={"center"} align={"center"}>
+    <Flex
+      justify={"space-evenly"}
+      align={"center"}
+      direction={"column"}
+      height={"100rem"}
+    >
       <Flex
-        width={"85%"}
-        maxHeight={"90%"}
+        width={"95%"}
+        maxHeight={"80%"}
         direction={"column"}
         boxShadow={"rgba(17, 17, 26, 0.1) 0 0 1.6rem;"}
         border={"2px solid #eee"}
@@ -61,12 +66,7 @@ function MedicinesComponent({
             searchMedicine={searchMedicine}
           />
 
-          <TableContainer
-            padding="1rem"
-            width={"100%"}
-            maxHeight={"80%"}
-            overflowY={"auto"}
-          >
+          <TableContainer padding="1rem" width={"100%"} overflowY={"auto"}>
             <>
               <Table
                 variant={"striped"}
@@ -97,6 +97,25 @@ function MedicinesComponent({
             </>
             {dataLoading && <Backdrop></Backdrop>}
           </TableContainer>
+        </>
+      </Flex>
+      <Flex
+        maxHeight={"40%"}
+        height={"40%"}
+        width={"95%"}
+        justifyContent={"space-between"}
+      >
+        <>
+          <Flex
+            width={"65%"}
+            boxShadow={"rgba(17, 17, 26, 0.1) 0 0 1.6rem;"}
+            borderRadius={"2rem"}
+          ></Flex>
+          <Flex
+            width={"25%"}
+            boxShadow={"rgba(17, 17, 26, 0.1) 0 0 1.6rem;"}
+            borderRadius={"2rem"}
+          ></Flex>
         </>
       </Flex>
     </Flex>

@@ -46,6 +46,10 @@ var theme = extendTheme({
     global: {
       html: {
         fontSize: "62.5%",
+        height: "100%",
+      },
+      body: {
+        height: "100%",
       },
     },
   },
