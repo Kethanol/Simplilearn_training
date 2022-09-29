@@ -53,6 +53,9 @@ namespace Repository
                 entity.HasOne(x => x.Cart).WithMany(x => x.CartXMedicines).HasForeignKey(x => x.CartId);
                 entity.HasOne(x => x.Medicine).WithMany(x => x.CartXMedicines).HasForeignKey(x => x.MedicineId);
 
+                entity.Property(x => x.Quantity)
+                .HasColumnName("Quantity");
+
                 entity.ToTable("CartXMedicine");
             });
 

@@ -46,7 +46,8 @@ IF (NOT EXISTS (SELECT *
                  AND  TABLE_NAME = 'CartXMedicine'))
 BEGIN
     CREATE TABLE [dbo].[CartXMedicine] (
-	CartId INT FOREIGN KEY References dbo.Cart(Id),
-	MedicineId INT FOREIGN KEY References dbo.Medicine(Id),
+	[CartId] INT FOREIGN KEY References dbo.Cart(Id),
+	[MedicineId] INT FOREIGN KEY References dbo.Medicine(Id),
+	[Quantity] INT DEFAULT 1
 	)
 END
