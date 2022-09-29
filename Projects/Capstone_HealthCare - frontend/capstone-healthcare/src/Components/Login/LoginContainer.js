@@ -60,7 +60,7 @@ function LoginContainer() {
 
         localStorage.setItem("token", token);
 
-        navigate("/medicines");
+        navigate("/shop");
       })
     );
   }

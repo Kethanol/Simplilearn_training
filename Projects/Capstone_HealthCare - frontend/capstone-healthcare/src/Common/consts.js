@@ -4,6 +4,7 @@ const consts = {
   LOGIN_ROUTE: "/user/sign-in",
   LOAD_MEDICINES_ROUTE: "/medicine/all",
   LOAD_CART_ROUTE: "/cart/get-by-user",
+  ADD_MEDICINE_TO_CART_ROUTE: "/cart/add-medicine",
   LOAD_MEDICINE_ROUTE: "/medicine/by-name",
   DELETE_MEDICINE_ROUTE: "/admin/delete-medicine",
   UPDATE_MEDICINE_ROUTE: "/admin/update-medicine",

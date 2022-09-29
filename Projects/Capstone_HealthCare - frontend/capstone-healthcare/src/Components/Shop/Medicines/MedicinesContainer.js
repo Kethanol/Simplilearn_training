@@ -1,5 +1,12 @@
 import MedicinesComponent from "./MedicinesComponent";
 
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { addMedicineToCart as addToCart } from "../Cart/actionCreators";
+import { getCachedCartData } from "../Cart/selectors";
+import { useToast } from "@chakra-ui/react";
+import { applyToast } from "../../../Common/Functions/misc";
+import { useCallback, useRef } from "react";
+
 function MedicinesContainer({
   searchTerm,
   onSearchTermChange,
@@ -20,6 +27,14 @@ function MedicinesContainer({
   cartMedicines,
   setCartMedicines,
 }) {
+  var dispatch = useDispatch(),
+    { id: cartId } = useSelector(getCachedCartData, shallowEqual),
+    toast = useToast(),
+    toaster = useCallback(() => applyToast(toast), [toast]),
+    tokenRef = useRef(localStorage.getItem("token"));
+
+  const token = tokenRef.current;
+
   function addMedicineToCart(medicine) {
     if (cartMedicines.length > 0) {
       var medicineExists = cartMedicines.some(
@@ -33,6 +48,8 @@ function MedicinesContainer({
     newCartMedicines.push({ ...medicine, quantity: 1 });
 
     setCartMedicines(newCartMedicines);
+
+    dispatch(addToCart(medicine.id, cartId, toaster, token));
   }
 
   return (

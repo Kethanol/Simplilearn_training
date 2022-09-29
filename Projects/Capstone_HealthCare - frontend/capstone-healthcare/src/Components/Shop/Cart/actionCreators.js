@@ -24,3 +24,25 @@ export function loadCart(userId, toaster, token) {
     }
   };
 }
+
+export function addMedicineToCart(medicineId, cartId, toaster, token) {
+  return async function () {
+    try {
+      let url = `${consts.REACT_APP_CAPSTONE_API_URL}${consts.ADD_MEDICINE_TO_CART_ROUTE}?medicineId=${medicineId}&cartId=${cartId}`;
+      await axiosWrapper("post", url, token);
+
+      toaster(
+        "Success",
+        `The medicinewas successfully added to the cart`,
+        "success"
+      );
+      //dispatch(loadMedicines(toaster, token));
+    } catch (err) {
+      toaster(
+        `Error while adding the medicine to cart`,
+        `There was an error while adding the medicine to cart: ${err}`,
+        "error"
+      );
+    }
+  };
+}
