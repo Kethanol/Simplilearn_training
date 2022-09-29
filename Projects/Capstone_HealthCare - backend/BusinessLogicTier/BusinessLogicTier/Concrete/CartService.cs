@@ -24,7 +24,8 @@ namespace BusinessLogicTier.Concrete
             var cartMedicine = new CartXMedicine()
             {
                 CartId = cartId,
-                MedicineId = medicineId
+                MedicineId = medicineId,
+                Quantity = 1
             };
 
             await _unitOfWork.CartMedicineRepository.InsertAsync(cartMedicine);
