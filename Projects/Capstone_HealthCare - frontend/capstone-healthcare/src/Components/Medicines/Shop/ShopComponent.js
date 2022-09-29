@@ -23,6 +23,7 @@ function ShopComponent({
   dirtyRows,
   invalidRows,
   dataLoading,
+  addMedicineToCart,
 }) {
   return (
     <Flex
@@ -40,12 +41,12 @@ function ShopComponent({
           searchMedicine={searchMedicine}
         />
 
-        <TableContainer padding="1rem" width={"100%"} overflowY={"auto"}>
+        <TableContainer padding={"1rem"} width={"100%"} overflowY={"auto"}>
           <>
             <Table
               variant={"striped"}
               fontSize={"100rem"}
-              colorScheme="teal"
+              colorScheme={"teal"}
               size={"lg"}
             >
               <TableCaptionWrapper
@@ -65,6 +66,7 @@ function ShopComponent({
                 updateMed={updateMed}
                 dirtyRows={dirtyRows}
                 invalidRows={invalidRows}
+                addMedicineToCart={addMedicineToCart}
               />
               <TableFoot />
             </Table>

@@ -22,6 +22,7 @@ function TableBody({
   updateMed,
   dirtyRows,
   invalidRows,
+  addMedicineToCart,
 }) {
   return (
     <Tbody>
@@ -160,7 +161,7 @@ function TableBody({
                       <Icon
                         boxSize={"10"}
                         as={MdAddShoppingCart}
-                        onClick={() => console.log("Aaaa")}
+                        onClick={() => addMedicineToCart(medicine)}
                       ></Icon>
                     }
                   />

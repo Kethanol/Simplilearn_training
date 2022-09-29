@@ -16,6 +16,8 @@ function MedicinesComponent({
   addNewRow,
   addMedicines,
   isAdmin,
+  cartMedicines,
+  setCartMedicines,
 }) {
   var iconButtonEditableProps = {
     _hover: { background: "transparent" },
@@ -64,8 +66,13 @@ function MedicinesComponent({
         dirtyRows={dirtyRows}
         invalidRows={invalidRows}
         dataLoading={dataLoading}
+        setCartMedicines={setCartMedicines}
+        cartMedicines={cartMedicines}
       />
-      <CartContainer />
+      <CartContainer
+        cartMedicines={cartMedicines}
+        setCartMedicines={setCartMedicines}
+      />
     </Flex>
   );
 }

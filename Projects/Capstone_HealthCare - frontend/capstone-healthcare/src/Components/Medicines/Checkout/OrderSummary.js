@@ -16,12 +16,16 @@ function OrderSummaryItem({ label, value, children }) {
       <Text fontWeight={"medium"} color={mode("gray.600", "gray.400")}>
         {label}
       </Text>
-      {value ? <Text fontWeight={"medium"}>{value}</Text> : children}
+      {value || value === 0 ? (
+        <Text fontWeight={"medium"}>{value}</Text>
+      ) : (
+        children
+      )}
     </Flex>
   );
 }
 
-function OrderSummary() {
+function OrderSummary({ total }) {
   return (
     <Flex
       width={"40%"}
@@ -33,7 +37,7 @@ function OrderSummary() {
       <Stack padding={"8"} width={"full"} spacing={"8"}>
         <Heading size={"lg"}>Order Summary</Heading>
         <Stack spacing={"6"}>
-          <OrderSummaryItem label={"Subtotal"} value={1000} />
+          <OrderSummaryItem label={"Subtotal"} value={`${total} $`} />
           <OrderSummaryItem label={"Shipping"}>
             <Link href="#" textDecor={"underline"}>
               Shipping taxes
@@ -49,7 +53,7 @@ function OrderSummary() {
               Total
             </Text>
             <Text fontSize={"3xl"} fontWeight={"extrabold"}>
-              {1000}
+              {`${total} $`}
             </Text>
           </Flex>
         </Stack>

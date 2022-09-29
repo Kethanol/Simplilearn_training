@@ -16,6 +16,8 @@ function QuantitySelect(props) {
       {...props}
       aria-label={"Select quantity"}
       focusBorderColor={useColorModeValue("teal.500", "teal.200")}
+      fontSize={"xl"}
+      textAlign={"center"}
     >
       <option value="1">1</option>
       <option value="2">2</option>
@@ -25,7 +27,7 @@ function QuantitySelect(props) {
   );
 }
 
-function OrderDetails() {
+function OrderDetails({ cartMedicines, handleQuantityChange }) {
   return (
     <Flex
       width={"50%"}
@@ -42,7 +44,9 @@ function OrderDetails() {
         padding={"4"}
       >
         <Heading fontSize={"3xl"} fontWeight={"extrabold"}>
-          Shopping cart (n items)
+          {`Shopping cart (${cartMedicines.length} item${
+            cartMedicines.length > 1 || cartMedicines.length === 0 ? "s" : ""
+          })`}
         </Heading>
       </Stack>
 
@@ -50,49 +54,30 @@ function OrderDetails() {
         direction={"column"}
         margin={"2rem 1rem 2rem 1rem"}
         width={"90%"}
-        justify="space-between"
+        justify={"flex-start"}
         height={"90%"}
       >
-        <Flex justify={"space-between"}>
-          <Text fontWeight={"medium"} fontSize={"2xl"}>
-            Denis
-          </Text>
-          <Text color={mode("gray.600", "gray.400")} fontSize={"xl"}>
-            Denis
-          </Text>
-          <QuantitySelect />
-          <CloseButton aria-label="Delete from cart"></CloseButton>
-        </Flex>
-        <Flex justify={"space-between"}>
-          <Text fontWeight={"medium"} fontSize={"2xl"}>
-            Denis
-          </Text>
-          <Text color={mode("gray.600", "gray.400")} fontSize={"xl"}>
-            Denis
-          </Text>
-          <QuantitySelect />
-          <CloseButton aria-label="Delete from cart"></CloseButton>
-        </Flex>
-        <Flex justify={"space-between"}>
-          <Text fontWeight={"medium"} fontSize={"2xl"}>
-            Denis
-          </Text>
-          <Text color={mode("gray.600", "gray.400")} fontSize={"xl"}>
-            Denis
-          </Text>
-          <QuantitySelect />
-          <CloseButton aria-label="Delete from cart"></CloseButton>
-        </Flex>
-        <Flex justify={"space-between"}>
-          <Text fontWeight={"medium"} fontSize={"2xl"}>
-            Denis
-          </Text>
-          <Text color={mode("gray.600", "gray.400")} fontSize={"xl"}>
-            Denis
-          </Text>
-          <QuantitySelect />
-          <CloseButton aria-label="Delete from cart"></CloseButton>
-        </Flex>
+        {cartMedicines.map(({ data, quantity }) => {
+          return (
+            <Flex justify={"space-between"} key={data.id} marginBottom={"2rem"}>
+              <Text fontWeight={"medium"} fontSize={"2xl"} width={"25%"}>
+                {data.name}
+              </Text>
+              <Text
+                color={mode("gray.600", "gray.400")}
+                fontSize={"xl"}
+                width={"25%"}
+              >
+                {data.schemaOfTreatment}
+              </Text>
+              <QuantitySelect
+                value={quantity}
+                onChange={(e) => handleQuantityChange(e, { data, quantity })}
+              />
+              <CloseButton aria-label="Delete from cart"></CloseButton>
+            </Flex>
+          );
+        })}
       </Flex>
     </Flex>
   );

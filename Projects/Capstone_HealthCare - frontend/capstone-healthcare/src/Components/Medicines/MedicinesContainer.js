@@ -24,6 +24,7 @@ function MedicinesContainer() {
     tokenRef = useRef(localStorage.getItem("token")),
     token = tokenRef.current,
     [medicines, setMedicines] = useState([]),
+    [cartMedicines, setCartMedicines] = useState([]),
     [dirtyRows, setDirtyRows] = useState([]),
     [invalidRows, setInvalidRows] = useState([]),
     [searchTerm, setSearchTerm] = useState(""),
@@ -139,9 +140,14 @@ function MedicinesContainer() {
     setInvalidRows(newInvalidRows);
   }
 
+  function setCartMedicineList(newCartMedicines) {
+    setCartMedicines(newCartMedicines);
+  }
+
   return (
     <MedicinesComponent
       medicineData={medicines}
+      cartMedicines={cartMedicines}
       dataLoading={loading}
       deleteMed={deleteMed}
       updateMed={updateMed}
@@ -154,6 +160,7 @@ function MedicinesContainer() {
       addMedicines={addMeds}
       addNewRow={addNewRow}
       isAdmin={isAdmin}
+      setCartMedicines={setCartMedicineList}
     ></MedicinesComponent>
   );
 }

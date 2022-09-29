@@ -17,7 +17,24 @@ function ShopContainer({
   dirtyRows,
   invalidRows,
   dataLoading,
+  cartMedicines,
+  setCartMedicines,
 }) {
+  function addMedicineToCart(medicine) {
+    if (cartMedicines.length > 0) {
+      var medicineExists = cartMedicines.some(
+        (cm) => cm.data.id === medicine.id
+      );
+
+      if (medicineExists) return;
+    }
+
+    var newCartMedicines = [...cartMedicines];
+    newCartMedicines.push({ data: medicine, quantity: 1 });
+
+    setCartMedicines(newCartMedicines);
+  }
+
   return (
     <ShopComponent
       searchTerm={searchTerm}
@@ -36,6 +53,8 @@ function ShopContainer({
       dirtyRows={dirtyRows}
       invalidRows={invalidRows}
       dataLoading={dataLoading}
+      addMedicineToCart={addMedicineToCart}
+      cartMedicines={cartMedicines}
     />
   );
 }
