@@ -1,0 +1,8 @@
+services:
+  capstone-healthcare-frontend:
+    build: ./src
+    container_name: capstone_healthcare_frontend
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
