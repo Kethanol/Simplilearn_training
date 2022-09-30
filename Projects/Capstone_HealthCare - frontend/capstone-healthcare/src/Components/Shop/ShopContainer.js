@@ -8,6 +8,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { applyToast } from "../../Common/Functions/misc";
 import { addMedicineToCart as addToCart } from "../Shop/Cart/actionCreators";
+import { useNavigate } from "react-router-dom";
 
 function ShopContainer() {
   var dispatch = useDispatch(),
@@ -21,11 +22,16 @@ function ShopContainer() {
     token = tokenRef.current,
     [internalCartMedicines, setInternalCartMedicines] = useState([]),
     toast = useToast(),
-    toaster = useCallback(() => applyToast(toast), [toast]);
+    toaster = useCallback(() => applyToast(toast), [toast]),
+    navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) navigate("/login");
+  }, [navigate, token]);
 
   useEffect(
     function insideEffect() {
-      if (!isAdmin) {
+      if (!isAdmin && token) {
         if (cartMedicinesLoaded) setInternalCartMedicines(cartMedicines);
         else dispatch(loadCart(userId, toaster(), token));
       }

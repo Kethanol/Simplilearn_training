@@ -34,11 +34,13 @@ function MedicinesContainer({ addMedicineToCart }) {
 
   useEffect(
     function insideEffect() {
-      if (loaded) {
-        setMedicines(data);
-        setDirtyRows(data.map(() => false));
-        setInvalidRows(data.map(() => false));
-      } else dispatch(loadMedicines(toaster(), token));
+      if (token) {
+        if (loaded) {
+          setMedicines(data);
+          setDirtyRows(data.map(() => false));
+          setInvalidRows(data.map(() => false));
+        } else dispatch(loadMedicines(toaster(), token));
+      }
     },
     [dispatch, loaded, data, toaster, token]
   );
