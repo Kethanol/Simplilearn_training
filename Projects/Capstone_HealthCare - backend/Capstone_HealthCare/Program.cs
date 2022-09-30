@@ -1,6 +1,7 @@
 using BusinessLogicTier.Concrete;
 using BusinessLogicTier.Contracts;
 using Capstone_HealthCare.Extensions;
+using Entities.Entities;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Concrete;
@@ -20,7 +21,7 @@ static void ConfigureServices(WebApplicationBuilder builder)
     services.AddCustomCors();
     services.UseJWTConfiguration(builder.Configuration);
 
-    var connectionString = builder.Configuration.GetConnectionString("Capstone");
+    var connectionString = Environment.GetEnvironmentVariable("DB_HOST") != null ? $"Data Source={Environment.GetEnvironmentVariable("DB_HOST")}, {Environment.GetEnvironmentVariable("DB_PORT")};Initial Catalog={Environment.GetEnvironmentVariable("DB_NAME")};User ID=sa;Password={Environment.GetEnvironmentVariable("DB_SA_PASSWORD")}" : builder.Configuration.GetConnectionString("Capstone");
     services.AddDbContext<CapstoneContext>(opts => opts.UseSqlServer(connectionString));
 
     services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -48,6 +49,22 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Data population
+using var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<CapstoneContext>();
+context.Database.EnsureCreated();
+context.Add(new User()
+{
+    Username = "Denis.Dragomir",
+    FirstName = "Denis",
+    LastName = "Alexandru",
+    E_mail = "denis.alexandru88@gmail.com",
+    Password = "tg+jmsAU6Ol+W3CJIrfrI1kFmgczdr9VGaVYtDTLO6A=",
+    Role = "Administrator"
+});
+
+context.SaveChanges();
 
 // This one should be used only on non-development environments
 // I will use it here for now, then move it if I deploy the application

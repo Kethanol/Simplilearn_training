@@ -1,0 +1,31 @@
+version: '3.4'
+
+networks:
+  capstonehealthcare:
+
+services:
+  capstone_healthcare_db:
+    container_name: capstone-backend-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=capstone@12345#
+    networks:
+      - capstonehealthcare
+  capstone_healthcare:
+    container_name: capstone-backend
+    image: ${DOCKER_REGISTRY-}capstonehealthcare
+    build:
+      context: .
+      dockerfile: Capstone_HealthCare/Dockerfile
+    ports:
+      - 8001:80
+    depends_on:
+      - capstone_healthcare_db
+    environment:
+      - DB_HOST=capstone_healthcare_db
+      - DB_NAME=CapstoneHealthcare
+      - DB_PORT=1433
+      - DB_SA_PASSWORD=capstone@12345#
+    networks:
+      - capstonehealthcare

@@ -1,5 +1,7 @@
 ﻿using Entities.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Repository
 {
@@ -7,7 +9,22 @@ namespace Repository
     {
         public CapstoneContext() { }
 
-        public CapstoneContext(DbContextOptions<CapstoneContext> options) : base(options) { }
+        public CapstoneContext(DbContextOptions<CapstoneContext> options) : base(options)
+        {
+            try {
+                RelationalDatabaseCreator? databaseCreator = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+                if (databaseCreator != null)
+                {
+                    if (!databaseCreator.CanConnect()) databaseCreator.Create();
+                    if (!databaseCreator.HasTables()) databaseCreator.CreateTables();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
 
         #region Tables
         public virtual DbSet<Medicine>? Medicines { get; set; }
@@ -41,7 +58,7 @@ namespace Repository
 
                 medicine.Property(x => x.Price)
                 .HasColumnName("Price")
-                .HasPrecision(16);
+                .HasColumnType("decimal(18,2)");
 
                 medicine.ToTable("Medicine");
             });
@@ -68,6 +85,7 @@ namespace Repository
             modelBuilder.Entity<User>(user =>
             {
                 user.HasKey(x => x.Id);
+                user.Property(x => x.Id).UseIdentityColumn();
 
                 user.Property(x => x.Username)
                 .HasMaxLength(30)
@@ -94,6 +112,8 @@ namespace Repository
                 .HasColumnName("Role");
 
                 user.ToTable("User");
+
+  
             });
         }
     }
