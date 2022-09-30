@@ -10,13 +10,14 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 
+import { renderEditableBackgroundProps } from "../../../../Common/Functions/misc";
+
 import { DeleteIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { MdAddShoppingCart } from "react-icons/md";
 
 function TableBody({
   medicineData,
   handleRowChange,
-  renderEditableBackgroundProps,
   isAdmin,
   deleteMed,
   updateMed,
@@ -135,7 +136,7 @@ function TableBody({
                         medicine.id === 0 ||
                         invalidRows[index]
                       }
-                      {...renderEditableBackgroundProps(index)}
+                      {...renderEditableBackgroundProps(dirtyRows, index)}
                       background={"transparent"}
                       icon={
                         <TriangleUpIcon

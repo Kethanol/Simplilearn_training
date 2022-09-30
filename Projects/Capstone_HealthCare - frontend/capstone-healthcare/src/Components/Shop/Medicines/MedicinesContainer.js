@@ -2,7 +2,7 @@ import MedicinesComponent from "./MedicinesComponent";
 
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useToast } from "@chakra-ui/react";
-import { applyToast } from "../../../Common/Functions/misc";
+import { applyToast, setValidity } from "../../../Common/Functions/misc";
 
 import {
   loadMedicines,
@@ -42,10 +42,6 @@ function MedicinesContainer({ addMedicineToCart }) {
     },
     [dispatch, loaded, data, toaster, token]
   );
-
-  function setValidity(medicine) {
-    return Object.values(medicine).some((v) => v === "");
-  }
 
   function handleRowChange(event, index) {
     var {

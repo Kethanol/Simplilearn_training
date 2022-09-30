@@ -6,6 +6,8 @@ import TableCaptionWrapper from "./Table/TableCaptionWrapper";
 import TableFoot from "./Table/TableFoot";
 import TableHead from "./Table/TableHead";
 
+import { renderSaveChangesProps } from "../../../Common/Functions/misc";
+
 function MedicinesComponent({
   searchTerm,
   onSearchTermChange,
@@ -22,27 +24,13 @@ function MedicinesComponent({
   dataLoading,
   addMedicineToCart,
 }) {
-  var iconButtonEditableProps = {
-    _hover: { background: "transparent" },
-  };
-
-  var iconButtonSaveProps = {
-    _hover: { background: "rgba(178,245,234, 0.8)" },
-  };
-
-  function renderEditableBackgroundProps(index) {
-    if (!dirtyRows[index]) return iconButtonEditableProps;
-    else return {};
-  }
-
   function isSaveButtonDisabled() {
     if (!medicineData.some((m) => m.id === 0)) return true;
     else if (medicineData.some((_, i) => invalidRows[i])) return true;
   }
 
-  function renderSaveChangesProps() {
-    if (!medicineData.some((m) => m.id === 0)) return iconButtonSaveProps;
-    else return {};
+  function configRenderSaveChanges() {
+    return renderSaveChangesProps(medicineData);
   }
 
   return (
@@ -74,13 +62,12 @@ function MedicinesComponent({
                 addNewRow={addNewRow}
                 addMedicines={addMedicines}
                 isSaveButtonDisabled={isSaveButtonDisabled}
-                renderSaveChangesProps={renderSaveChangesProps}
+                renderSaveChangesProps={configRenderSaveChanges}
               />
               <TableHead />
               <TableBody
                 medicineData={medicineData}
                 handleRowChange={handleRowChange}
-                renderEditableBackgroundProps={renderEditableBackgroundProps}
                 isAdmin={isAdmin}
                 deleteMed={deleteMed}
                 updateMed={updateMed}

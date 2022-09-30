@@ -56,9 +56,38 @@ async function axiosWrapper(method, url, token, data = null) {
   });
 }
 
+function setValidity(medicine) {
+  return Object.values(medicine).some((v) => v === "");
+}
+
+var renderEditableBackgroundProps = (function () {
+  var iconButtonEditableProps = {
+    _hover: { background: "transparent" },
+  };
+
+  return function inner(dirtyRows, index) {
+    if (!dirtyRows[index]) return iconButtonEditableProps;
+    else return {};
+  };
+})();
+
+var renderSaveChangesProps = (function () {
+  var iconButtonSaveProps = {
+    _hover: { background: "rgba(178,245,234, 0.8)" },
+  };
+
+  return function inner(medicineData) {
+    if (!medicineData.some((m) => m.id === 0)) return iconButtonSaveProps;
+    else return {};
+  };
+})();
+
 export {
   handleFormValueChangeWrapper,
   handleFormValueErrorWrapper,
   applyToast,
   axiosWrapper,
+  setValidity,
+  renderEditableBackgroundProps,
+  renderSaveChangesProps,
 };
