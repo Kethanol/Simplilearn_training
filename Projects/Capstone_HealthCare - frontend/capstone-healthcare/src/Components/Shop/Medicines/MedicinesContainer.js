@@ -99,7 +99,6 @@ function MedicinesContainer({ addMedicineToCart }) {
     dispatch(
       searchMedicine(searchTerm, toaster(), token, (data) => {
         setMedicines(data);
-        console.log(data);
       })
     );
   }

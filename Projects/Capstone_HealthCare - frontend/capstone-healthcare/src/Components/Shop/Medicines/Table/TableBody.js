@@ -34,16 +34,19 @@ function TableBody({
                 <FormErrorMessage fontSize={"1.3rem"} marginBottom={".5rem"}>
                   Can not be empty
                 </FormErrorMessage>
-                <Input
-                  defaultValue={medicine.name}
-                  name={"name"}
-                  border={"none"}
-                  outline={"none"}
-                  fontSize={"2rem"}
-                  padding={"1.5rem"}
-                  background={"inherit"}
-                  type={"text"}
-                ></Input>
+                <Tooltip label={medicine.name} fontSize={"1.5rem"}>
+                  <Input
+                    defaultValue={medicine.name}
+                    name={"name"}
+                    border={"none"}
+                    outline={"none"}
+                    fontSize={"2rem"}
+                    padding={"1.5rem"}
+                    background={"inherit"}
+                    textOverflow={"ellipsis"}
+                    type={"text"}
+                  ></Input>
+                </Tooltip>
               </FormControl>
             </Td>
             <Td fontSize={"2rem"}>
@@ -51,16 +54,19 @@ function TableBody({
                 <FormErrorMessage fontSize={"1.3rem"} marginBottom={".5rem"}>
                   Can not be empty
                 </FormErrorMessage>
-                <Input
-                  defaultValue={medicine.description}
-                  name={"description"}
-                  border={"none"}
-                  outline={"none"}
-                  fontSize={"2rem"}
-                  padding={"1.5rem"}
-                  background={"inherit"}
-                  type={"text"}
-                ></Input>
+                <Tooltip label={medicine.description} fontSize={"1.5rem"}>
+                  <Input
+                    defaultValue={medicine.description}
+                    name={"description"}
+                    border={"none"}
+                    outline={"none"}
+                    fontSize={"2rem"}
+                    padding={"1.5rem"}
+                    background={"inherit"}
+                    type={"text"}
+                    textOverflow={"ellipsis"}
+                  ></Input>
+                </Tooltip>
               </FormControl>
             </Td>
             <Td fontSize={"2rem"}>
@@ -68,16 +74,19 @@ function TableBody({
                 <FormErrorMessage fontSize={"1.3rem"} marginBottom={".5rem"}>
                   Can not be empty
                 </FormErrorMessage>
-                <Input
-                  defaultValue={medicine.schemaOfTreatment}
-                  name={"schemaOfTreatment"}
-                  border={"none"}
-                  outline={"none"}
-                  fontSize={"2rem"}
-                  padding={"1.5rem"}
-                  background={"inherit"}
-                  type={"text"}
-                ></Input>
+                <Tooltip label={medicine.schemaOfTreatment} fontSize={"1.5rem"}>
+                  <Input
+                    defaultValue={medicine.schemaOfTreatment}
+                    name={"schemaOfTreatment"}
+                    border={"none"}
+                    outline={"none"}
+                    fontSize={"2rem"}
+                    padding={"1.5rem"}
+                    background={"inherit"}
+                    type={"text"}
+                    textOverflow={"ellipsis"}
+                  ></Input>
+                </Tooltip>
               </FormControl>
             </Td>
             <Td fontSize={"2rem"}>

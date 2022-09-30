@@ -22,7 +22,6 @@ function MedicinesComponent({
   dataLoading,
   addMedicineToCart,
 }) {
-  console.log(medicineData);
   var iconButtonEditableProps = {
     _hover: { background: "transparent" },
   };
